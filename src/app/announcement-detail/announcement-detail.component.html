@@ -1,5 +1,13 @@
-<img src="{{notice.image}}" alt="{{ad.title}}">
-<p><strong>{{ad.title}}</strong> за {{ad.clas}} клас</p>
-<p name="username">Публикувано от: <a [routerLink]="['/userdetail', ad.user]">{{ad.user}}</a></p>
-<p name="publisher">Издателство: {{ad.publisher}}</p>
-<p name="year">Година на издаване: {{ad.year}}</p>
+<div>
+    <h2>Продавам</h2>
+    <img src="{{(announcement$ | async)?.image}}" alt="{{(announcement$ | async)?.title}}">
+    <p><strong>{{(announcement$ | async)?.title}}</strong> за {{(announcement$ | async)?.clas}} клас</p>
+    <p name="discipline">Учебен предмет: {{(announcement$ | async)?.discipline}}</p>
+    <p name="autors">Автори: {{(announcement$ | async)?.autors}}</p>
+    <p name="publisher">Издателство: {{(announcement$ | async)?.publisher}}</p>
+    <p name="year">Година на издаване: {{(announcement$ | async)?.year}}</p>
+    <p name="price">Цена: {{(announcement$ | async)?.price | toBGNMoney}}</p>
+    <p name="description">Описание: {{(announcement$ | async)?.description}}</p>
+    <p name="condition">Състояние: {{(announcement$ | async)?.condition}}</p>
+    <!--<p name="username">Публикувано от: <a [routerLink]="['/userdetail', announcement.userid]"> {{((announcement$ | async)?.userid | getUser | async)?.name}}</a></p>-->
+</div>

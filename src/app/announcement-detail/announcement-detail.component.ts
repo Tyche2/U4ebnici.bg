@@ -1,17 +1,29 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AnnouncementService } from '../shared/model/announcement.service';
+import { Announcement } from '../shared/model/announcement';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-announcement-detail',
   templateUrl: './announcement-detail.component.html',
-  styleUrls: ['./announcement-detail.component.css']
+  styleUrls: ['./announcement-detail.component.css'],
+  providers: [AnnouncementService],
 })
+
 export class AnnouncementDetailComponent implements OnInit {
 
-  constructor() { }
+  announcement$: Observable<Announcement>;
+  announcementUrl: string;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private announcementService: AnnouncementService) { }
 
   ngOnInit() {
+    this.announcementUrl = this.route.snapshot.params['id'];
+    this.announcement$ = this.announcementService.findAnnouncementByUrl(this.announcementUrl);
   }
 
 }
