@@ -1,0 +1,79 @@
+[{
+        "username": "Maria",
+        "password": "123456",
+        "announcement": [{
+                "title": "География",
+                "category": "продавам",
+                "publisher": "Arhimed",
+                "year": "2012",
+                "price": "3.50",
+                "condition": "izpolzvan",
+                "description": "mnoho hubav",
+                "images": "u4ebnik.jpg",
+                "user": { "name": "Maria", "city": "Varna", "email": "ns@abv.bg", "skype": "mimito", "phone": "123456" },
+                "messages": [{
+                    "username": "Misho",
+                    "text": "zdrasti, shte mi go dadesh li za 2 lv?"
+                }]
+            },
+            {
+                "title": "Istoria",
+                "category": "продавам",
+                "publisher": "Arhimed",
+                "year": "2012",
+                "price": "3.50",
+                "condition": "izpolzvan",
+                "description": "mnogo hubav",
+                "images": "u4ebnik.jpg",
+                "user": { "name": "Maria", "city": "Varna", "email": "ns@abv.bg", "skype": "mimito", "phone": "123456" },
+                "messages": [{
+                    "username": "Mitko",
+                    "text": "zdrasti, shte mi go dadesh li za 2 lv?"
+                }]
+            }
+        ],
+        "usermessages": [{
+            "username": "Misho",
+            "text": "Messages without announcement"
+        }]
+    },
+    {
+        "username": "Stoian",
+        "password": "123456",
+        "announcement": [{
+                "title": "Matematika",
+                "category": "продавам",
+                "publisher": "Arhimed",
+                "year": "2012",
+                "price": "3.50",
+                "condition": "izpolzvan",
+                "description": "mnoho hubav",
+                "images": "u4ebnik.jpg",
+                "user": { "name": "Maria", "city": "Varna", "email": "ns@abv.bg", "skype": "mimito", "phone": "123456" },
+                "messages": [{
+                    "username": "Misho",
+                    "text": "zdrasti, shte mi go dadesh li za 2 lv?"
+                }]
+            },
+            {
+                "title": "Fizika",
+                "category": "продавам",
+                "publisher": "Arhimed",
+                "year": "2012",
+                "price": "3.50",
+                "condition": "izpolzvan",
+                "description": "mnogo hubav",
+                "images": "u4ebnik.jpg",
+                "user": { "name": "Maria", "city": "Varna", "email": "ns@abv.bg", "skype": "mimito", "phone": "123456" },
+                "messages": [{
+                    "username": "Mitko",
+                    "text": "zdrasti, shte mi go dadesh li za 2 lv?"
+                }]
+            }
+        ],
+        "usermessages": [{
+            "username": "Misho",
+            "text": "Messages without announcement"
+        }]
+    }
+]

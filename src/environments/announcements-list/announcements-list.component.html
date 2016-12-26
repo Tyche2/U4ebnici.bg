@@ -1,0 +1,12 @@
+<table class="text-center">
+    <tbody>
+        <div *ngFor="let ad of ads">
+                <tr *ngFor="let userads of ad.announcement">
+                    <td>{{ad.username}}
+                    <td>{{userads.title}}</td>
+                    <td>{{userads.publisher}}</td>
+                    <td>{{userads.year}}</td>
+                </tr>      
+        </div>
+    </tbody>
+</table>

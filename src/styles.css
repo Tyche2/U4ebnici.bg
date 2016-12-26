@@ -1,0 +1,28 @@
+body {
+    margin-top: 50px;
+    /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.full {
+    background: url('./images/department.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.white {
+    padding: 20px;
+    margin-top: 50px;
+    background-color: white;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 22px 3px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px 0px 22px 3px rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 22px 3px rgba(255, 255, 255, 1);
+    opacity: 0.80;
+    filter: alpha(opacity=80);
+    /* For IE8 and earlier */
+}
+.clearfix {
+    clear: both;
+}

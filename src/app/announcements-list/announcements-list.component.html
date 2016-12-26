@@ -1,0 +1,12 @@
+<div>
+    <h2>Последно добавени обяви</h2>
+    <div class="col-md-3" *ngFor="let ad of notices">
+        <img src="{{ad.image}}" alt="{{ad.title}}">
+        <p><strong>{{ad.title}}</strong> за {{ad.clas}} клас</p>
+        <p name="username">Публикувано от: <a [routerLink]="['/userdetail', ad.user]">{{ad.user}}</a></p>
+        <p name="publisher">Издателство: {{ad.publisher}}</p>
+        <p name="year">Година на издаване: {{ad.year}}</p>
+        <p><a class="btn btn-default" [routerLink]="['/detail', ad.$key]" role="button">Виж повече &raquo;</a></p>
+
+    </div>
+</div>
