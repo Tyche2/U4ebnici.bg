@@ -18,19 +18,13 @@ export class AnnouncementService {
             .map(Announcement.fromJsonArray);
     }
 
-    findAnnouncementByUrl(announcementUrl: string): Observable<Announcement> {
-        return this.db.list('announcements', {
-            query: {
-                orderByChild: 'url',
-                equalTo: announcementUrl
-            }
-        })
-        .map(results => results[0]);
+    findAnnouncementByKey(announcementKey: string): Observable<Announcement> {
+        return this.db.object(`announcements/${announcementKey}`).map(Announcement.fromJson);
     }
 
-    findMessagesKeysPerAnnouncementUrl(announcementUrl: string,
+    findMessagesKeysPerAnnouncementKey(announcementKey: string,
                                query: FirebaseListFactoryOpts = {}): Observable<string[]> {
-        return this.findAnnouncementByUrl(announcementUrl)
+        return this.findAnnouncementByKey(announcementKey)
             .do(val => console.log('announcement', val))
             .filter(announcement => !!announcement)
             .switchMap(announcement => this.db.list(`messagesPerAnnouncement/${announcement.$key}`, query))
@@ -45,7 +39,7 @@ export class AnnouncementService {
 
     }
 
-    findAllMessagesForAnnouncement(announcementUrl: string): Observable<Message[]> {
-        return this.findMessagesForMessageKeys(this.findMessagesKeysPerAnnouncementUrl(announcementUrl));
+    findAllMessagesForAnnouncement(announcementKey: string): Observable<Message[]> {
+        return this.findMessagesForMessageKeys(this.findMessagesKeysPerAnnouncementKey(announcementKey));
     }
 }

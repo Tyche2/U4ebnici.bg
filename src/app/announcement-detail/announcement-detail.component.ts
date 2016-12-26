@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Rx';
 export class AnnouncementDetailComponent implements OnInit {
 
   announcement$: Observable<Announcement>;
-  announcementUrl: string;
+  announcementKey: string;
 
   constructor(
     private router: Router,
@@ -22,8 +22,9 @@ export class AnnouncementDetailComponent implements OnInit {
     private announcementService: AnnouncementService) { }
 
   ngOnInit() {
-    this.announcementUrl = this.route.snapshot.params['id'];
-    this.announcement$ = this.announcementService.findAnnouncementByUrl(this.announcementUrl);
+    this.announcementKey = this.route.snapshot.params['id'];
+    console.log(this.announcementKey);
+    this.announcement$ = this.announcementService.findAnnouncementByKey(this.announcementKey);
   }
 
 }
