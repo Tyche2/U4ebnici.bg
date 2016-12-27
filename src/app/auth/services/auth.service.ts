@@ -1,5 +1,6 @@
 import { AlertService } from './../../_services/alert.service';
 import { firebaseConfig } from './../../environments/firebase.config';
+import { Http, Headers, Response } from '@angular/http';
 import {database, initializeApp} from "firebase";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
@@ -17,6 +18,7 @@ firebase.initializeApp(firebaseConfig);
 export class AuthService {
   loading = false;
   constructor(private router: Router, private alertService: AlertService) {}
+currentUser: any;
 
   signupUser(user: User) {
     this.loading = true;
@@ -34,7 +36,9 @@ export class AuthService {
   signinUser(user: User) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
     .then((data)=>{
+      this.currentUser = firebase.auth().currentUser;
         this.alertService.success('Registration successful', true);
+        this.router.navigate(['/']);
     })
       .catch((error)=> {
         this.alertService.error(error);
@@ -45,11 +49,11 @@ export class AuthService {
   logout() {
     firebase.auth().signOut()
     .then((data)=>{
-        this.alertService.success('Logout successful', true);
-    })
-    this.router.navigate(['/login']);
+    
+      this.alertService.success('Logout successful', true);
+this.router.navigate(['/login']);
+ });
   }
-
   isAuthenticated() {
     var user = firebase.auth().currentUser;
     if (user) {

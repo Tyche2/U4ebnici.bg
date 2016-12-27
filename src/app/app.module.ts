@@ -24,6 +24,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthService } from "./auth/services/auth.service";
 import { AuthGuard } from "./auth/guards/auth.guard";
 import {ReactiveFormsModule} from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     ToBGNMoneyPipe,
     SortPipe,
     TopPipe,
-    GetUserPipe
+    GetUserPipe,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,43 @@
-<form [formGroup]="myForm" (ngSubmit)="onSignup()">
-    <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input formControlName="email" type="email" id="email" #email class="form-control">
-        <span *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">Invalid mail address</span>
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input formControlName="password" type="password" id="password" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input formControlName="confirmPassword" type="password" id="confirm-password" #confirmPassword class="form-control">
-        <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Passwords do not match</span>
-    </div>
+<form (ngSubmit)="onSignup()">
+    <form [formGroup]="myDBForm">
+        <div class="form-group">
+            <label for="name">Име, фамилия</label>
+            <input formControlName="name" type="text" id="name" #name class="form-control">
+            <span *ngIf="!name.pristine && name.errors != null && name.errors['noName']">Nevalidno ime</span>
+        </div>
+        <div class="form-group">
+            <label for="city">Град</label>
+            <input formControlName="city" type="text" id="city" #city class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefon</label>
+            <input formControlName="phone" type="text" id="phone" #phone class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="skype">Skype</label>
+            <input formControlName="skype" type="text" id="skype" #skype class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input formControlName="email" type="email" id="email" class="form-control" [(value)]=email.value>
+
+        </div>
+    </form>
+    <form [formGroup]="myForm">
+        <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input formControlName="email" type="email" id="email" #email class="form-control">
+            <span *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">Invalid mail address</span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input formControlName="password" type="password" id="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input formControlName="confirmPassword" type="password" id="confirm-password" #confirmPassword class="form-control">
+            <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Passwords do not match</span>
+        </div>
+    </form>
     <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary">Sign Up</button>
 </form>

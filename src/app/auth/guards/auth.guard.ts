@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Rx";
 import { AuthService } from "../services/auth.service";
 
 @Injectable()
-
+//The auth guard is used to prevent unauthenticated users from accessing restricted routes
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService) {}
  

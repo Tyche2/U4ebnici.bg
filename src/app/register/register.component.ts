@@ -1,3 +1,4 @@
+import { UserService } from './../shared/model/users.service';
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { AuthService } from "../auth/services/auth.service";
@@ -9,12 +10,14 @@ import { AuthService } from "../auth/services/auth.service";
 })
 export class RegisterComponent implements OnInit {
     myForm: FormGroup;
+    myDBForm: FormGroup;
     error = false;
     errorMessage = '';
-    constructor(private fb: FormBuilder, private authService: AuthService) {}
+    constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) {}
 
     onSignup() {
       this.authService.signupUser(this.myForm.value);
+      this.userService.createNewUser(this.myDBForm.value);
     }
  
     ngOnInit(): any {
@@ -28,6 +31,14 @@ export class RegisterComponent implements OnInit {
                 Validators.required,
                 this.isEqualPassword.bind(this)
             ])],
+        });
+        this.myDBForm = this.fb.group({
+            uid:[''],
+            name: [''],
+            city: [''],
+            phone: [''],
+            skype: [''],
+            email: [''],
         });
     }
 
