@@ -6,9 +6,12 @@ export const firebaseConfig = {
     databaseURL: 'https://schoolbooks-e2fbb.firebaseio.com',
     storageBucket: 'schoolbooks-e2fbb.appspot.com',
     messagingSenderId: '935490816250'
+<<<<<<< HEAD
 };
 
 export const authConfig = {
     provider: AuthProviders.Password,
     method: AuthMethods.Password
+=======
+>>>>>>> eeb488a73a360b1b7d510f393e3171d5a261c300
 };
