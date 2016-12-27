@@ -1,3 +1,5 @@
+import { AlertComponent } from './_directives/alert.component';
+import { AlertService } from './_services/alert.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -26,6 +28,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     AnnouncementsListComponent,
     LoginComponent,
 	RegisterComponent,
@@ -45,7 +48,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig, authConfig) 
   ],
-  providers: [AuthGuard, AuthService, UserService],
+  providers: [AuthGuard, AuthService, UserService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

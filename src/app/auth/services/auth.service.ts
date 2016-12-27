@@ -1,3 +1,4 @@
+import { AlertService } from './../../_services/alert.service';
 import { firebaseConfig } from './../../environments/firebase.config';
 import {database, initializeApp} from "firebase";
 import { Injectable } from "@angular/core";
@@ -14,25 +15,39 @@ firebase.initializeApp(firebaseConfig);
 
 @Injectable()
 export class AuthService {
-  constructor(private router: Router) {}
+  loading = false;
+  constructor(private router: Router, private alertService: AlertService) {}
+
   signupUser(user: User) {
+    this.loading = true;
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-      .catch(function (error) {
-        console.log(error);
+      .then((data)=>{
+        this.alertService.success('Registration successful', true);
+        this.router.navigate(['/login']);
+      })
+      .catch((error)=> {
+        this.alertService.error(error);
+        this.loading = false;
       });
   }
 
   signinUser(user: User) {
-    console.log(user);
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-      .catch(function (error) {
-        console.log(error);
+    .then((data)=>{
+        this.alertService.success('Registration successful', true);
+    })
+      .catch((error)=> {
+        this.alertService.error(error);
+        this.loading = false;
       });
   }
 
   logout() {
-    firebase.auth().signOut();
-    this.router.navigate(['/signin']);
+    firebase.auth().signOut()
+    .then((data)=>{
+        this.alertService.success('Logout successful', true);
+    })
+    this.router.navigate(['/login']);
   }
 
   isAuthenticated() {
