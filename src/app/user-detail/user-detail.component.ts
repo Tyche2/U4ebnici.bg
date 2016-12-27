@@ -3,9 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 
-import { AnnouncementService } from '../announcement/announcement.service'
-import {DataModel} from '../announcement/data-model'
-
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -17,7 +14,6 @@ export class UserDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
   }
 
 }

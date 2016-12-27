@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AnnouncementService } from '../announcement/announcement.service'
-import { Notice } from '../shared/model/notice-model'
+import { AnnouncementService } from '../shared/model/announcement.service';
+import { Announcement } from '../shared/model/announcement';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-announcements-list',
@@ -8,14 +9,15 @@ import { Notice } from '../shared/model/notice-model'
   styleUrls: ['./announcements-list.component.css'],
   providers: [AnnouncementService],
 })
+
 export class AnnouncementsListComponent implements OnInit {
-  notices: Notice[];
+
+  announcements$: Observable<Announcement[]>;
+
   constructor(private announcementService: AnnouncementService) { }
 
   ngOnInit() {
-    this.announcementService.findAllNotices()
-    .subscribe(notices => this.notices = notices);
-    
+    this.announcements$ = this.announcementService.findAllAnnouncements();
   }
-  
+
 }
