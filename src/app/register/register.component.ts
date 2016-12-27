@@ -1,8 +1,9 @@
+import { database } from 'firebase';
 import { UserService } from './../shared/model/users.service';
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { AuthService } from "../auth/services/auth.service";
-
+var firebase = require('firebase');
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -17,7 +18,9 @@ export class RegisterComponent implements OnInit {
 
     onSignup() {
       this.authService.signupUser(this.myForm.value);
+      //let userUID = firebase.auth().currentUser.uid;
       this.userService.createNewUser(this.myDBForm.value);
+      
     }
  
     ngOnInit(): any {
@@ -33,13 +36,12 @@ export class RegisterComponent implements OnInit {
             ])],
         });
         this.myDBForm = this.fb.group({
-            uid:[''],
-            name: [''],
-            city: [''],
-            phone: [''],
-            skype: [''],
-            email: [''],
-        });
+            name: '',
+            city: '',
+            phone: '',
+            skype: '',
+            dbemail: ''
+        }); 
     }
 
     isEmail(control: FormControl): {[s: string]: boolean} {

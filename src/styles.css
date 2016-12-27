@@ -23,6 +23,11 @@ body {
     filter: alpha(opacity=80);
     /* For IE8 and earlier */
 }
+
 .clearfix {
     clear: both;
+}
+
+.hidden {
+    display: none;
 }

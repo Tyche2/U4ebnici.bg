@@ -24,7 +24,7 @@ currentUser: any;
     this.loading = true;
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
       .then((data)=>{
-        this.alertService.success('Registration successful', true);
+        this.alertService.success('Регистрацията е успешна', true);
         this.router.navigate(['/login']);
       })
       .catch((error)=> {
@@ -36,9 +36,8 @@ currentUser: any;
   signinUser(user: User) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
     .then((data)=>{
-      this.currentUser = firebase.auth().currentUser;
-        this.alertService.success('Registration successful', true);
-        this.router.navigate(['/']);
+        this.alertService.success('Успешен вход', true);
+        this.router.navigate(['/home']);
     })
       .catch((error)=> {
         this.alertService.error(error);
@@ -50,7 +49,7 @@ currentUser: any;
     firebase.auth().signOut()
     .then((data)=>{
     
-      this.alertService.success('Logout successful', true);
+      this.alertService.success('Успешен изход', true);
 this.router.navigate(['/login']);
  });
   }

@@ -17,9 +17,9 @@
             <label for="skype">Skype</label>
             <input formControlName="skype" type="text" id="skype" #skype class="form-control">
         </div>
-        <div class="form-group">
-            <label for="email">E-Mail</label>
-            <input formControlName="email" type="email" id="email" class="form-control" [(value)]=email.value>
+        <div class="form-group hidden">
+            <label for="dbemail">E-Mail</label>
+            <input formControlName="dbemail" type="email" id="dbemail" class="form-control" [(ngModel)]="email.value">
 
         </div>
     </form>
