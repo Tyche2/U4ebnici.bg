@@ -12,12 +12,9 @@ const routes: Routes = [
   { path: 'home',  component: HomeComponent },
   { path: 'userdetail/:user', component: UserDetailComponent },
   { path: 'detail/:id', component: AnnouncementDetailComponent },
-<<<<<<< HEAD
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
-=======
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent }
->>>>>>> eeb488a73a360b1b7d510f393e3171d5a261c300
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
