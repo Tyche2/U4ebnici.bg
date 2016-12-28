@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
  
 import { AlertService } from '../_services/alert.service';
  
 @Component({
     selector: 'alert',
-    templateUrl: './alert.component.html'
+    templateUrl: './alert.component.html',
+    styleUrls: ['./alert.component.css']
 })
  
 export class AlertComponent {

@@ -4,6 +4,9 @@ import { Http, Headers, Response } from '@angular/http';
 import {database, initializeApp} from "firebase";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import {Observable, Subject, BehaviorSubject} from "rxjs/Rx";
+import {FirebaseAuth, FirebaseAuthState} from "angularfire2/index";
+import {AuthInfo} from "../guards/auth-info";
 
 
 export interface User {
@@ -16,12 +19,15 @@ firebase.initializeApp(firebaseConfig);
 
 @Injectable()
 export class AuthService {
-  loading = false;
-  constructor(private router: Router, private alertService: AlertService) {}
+  static UNKNOWN_USER = new AuthInfo(null);
+  authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOWN_USER);
+
+  //loading = false;
+  constructor(private router: Router, private alertService: AlertService, private auth: FirebaseAuth) {}
 currentUser: any;
 
   signupUser(user: User) {
-    this.loading = true;
+    //this.loading = true;
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
       .then((data)=>{
         this.alertService.success('Регистрацията е успешна', true);
@@ -29,7 +35,7 @@ currentUser: any;
       })
       .catch((error)=> {
         this.alertService.error(error);
-        this.loading = false;
+        //this.loading = false;
       });
   }
 
@@ -37,28 +43,31 @@ currentUser: any;
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
     .then((data)=>{
         this.alertService.success('Успешен вход', true);
-        this.router.navigate(['/home']);
+        const authInfo = new AuthInfo(firebase.auth().currentUser);
+        this.authInfo$.next(authInfo);
+        this.router.navigate(['']);
     })
       .catch((error)=> {
         this.alertService.error(error);
-        this.loading = false;
+        //this.loading = false;
       });
   }
 
   logout() {
     firebase.auth().signOut()
     .then((data)=>{
-    
       this.alertService.success('Успешен изход', true);
-this.router.navigate(['/login']);
+      this.authInfo$.next(AuthService.UNKNOWN_USER);
+      this.router.navigate(['/home']);
  });
   }
   isAuthenticated() {
     var user = firebase.auth().currentUser;
     if (user) {
-      return true;
+      return user;
     } else {
       return false;
     }
   }
+ 
 }

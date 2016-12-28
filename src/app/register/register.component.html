@@ -1,43 +1,87 @@
-<form (ngSubmit)="onSignup()">
-    <form [formGroup]="myDBForm">
-        <div class="form-group">
-            <label for="name">Име, фамилия</label>
-            <input formControlName="name" type="text" id="name" #name class="form-control">
-            <span *ngIf="!name.pristine && name.errors != null && name.errors['noName']">Nevalidno ime</span>
-        </div>
-        <div class="form-group">
-            <label for="city">Град</label>
-            <input formControlName="city" type="text" id="city" #city class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="phone">Telefon</label>
-            <input formControlName="phone" type="text" id="phone" #phone class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="skype">Skype</label>
-            <input formControlName="skype" type="text" id="skype" #skype class="form-control">
-        </div>
-        <div class="form-group hidden">
-            <label for="dbemail">E-Mail</label>
-            <input formControlName="dbemail" type="email" id="dbemail" class="form-control" [(ngModel)]="email.value">
+<div class="panel-heading">
+    <div class="panel-title text-center">
+        <h1 class="title">Регистрация</h1>
+        <hr />
+    </div>
+</div>
+<div class="center col-md-6">
+    <form class="form-horizontal" (ngSubmit)="onSignup()">
+        <form [formGroup]="myDBForm">
+            <div class="form-group">
+                <label for="name">Име, фамилия</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <input formControlName="name" type="text" id="name" #name class="form-control">
+                        <span *ngIf="!name.pristine && name.errors != null && name.errors['noName']">Невалидно име</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="city">Град</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
+                        <input formControlName="city" type="text" id="city" #city class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                        <input formControlName="phone" type="text" id="phone" #phone class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="skype">Skype</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-skype" aria-hidden="true"></i></span>
+                        <input formControlName="skype" type="text" id="skype" #skype class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group hidden">
+                <label for="dbemail">E-Mail</label>
+                <input formControlName="dbemail" type="email" id="dbemail" class="form-control" [(ngModel)]="email.value">
 
+            </div>
+        </form>
+        <form [formGroup]="myForm">
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                        <input formControlName="email" type="email" id="email" #email class="form-control">
+                        <span *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">Невалиден e-mail адрес</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Парола</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                        <input formControlName="password" type="password" id="password" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Потвърди паролата</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <input formControlName="confirmPassword" type="password" id="confirm-password" #confirmPassword class="form-control">
+                    <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Паролите не съвпадат</span>
+                </div>
+            </div>
+
+        </form>
+        <div class="form-group ">
+            <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary btn-lg btn-block login-button">Регистрирай се</button>
         </div>
     </form>
-    <form [formGroup]="myForm">
-        <div class="form-group">
-            <label for="email">E-Mail</label>
-            <input formControlName="email" type="email" id="email" #email class="form-control">
-            <span *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">Invalid mail address</span>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input formControlName="password" type="password" id="password" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input formControlName="confirmPassword" type="password" id="confirm-password" #confirmPassword class="form-control">
-            <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Passwords do not match</span>
-        </div>
-    </form>
-    <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary">Sign Up</button>
-</form>
+</div>

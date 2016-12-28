@@ -1,14 +1,25 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs/Rx";
 import { AuthService } from "../services/auth.service";
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from "@angular/router";
 
 @Injectable()
 //The auth guard is used to prevent unauthenticated users from accessing restricted routes
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router:Router) {}
  
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    return this.authService.isAuthenticated();
-  }
+  canActivate(route:ActivatedRouteSnapshot,
+                state:RouterStateSnapshot):Observable<boolean> {
+
+
+        return this.authService.authInfo$
+            .map(authInfo => authInfo.isLoggedIn())
+            .take(1)
+            .do(allowed => {
+                if(!allowed) {
+                    this.router.navigate(['/login']);
+                }
+            });
+    }
+
 }
