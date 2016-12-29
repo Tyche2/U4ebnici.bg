@@ -1,5 +1,3 @@
-import { AlertComponent } from './_directives/alert.component';
-import { AlertService } from './_services/alert.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,30 +8,27 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 import { firebaseConfig, authConfig } from './environments/firebase.config';
 import { AngularFireModule } from 'angularfire2/index';
 import { AnnouncementsListComponent } from './announcements-list/announcements-list.component';
 import { LoginComponent } from './login/login.component';
-import { AppRoutingModule }   from './routing/app-routing.module';
+import { AppRoutingModule } from './routing/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
 import { ToBGNMoneyPipe, SortPipe, TopPipe, GetUserPipe } from './pipes';
 import { UserService } from './shared/model/users.service';
 import { RegisterComponent } from './register/register.component';
-import { AuthService } from "./auth/services/auth.service";
-import { AuthGuard } from "./auth/guards/auth.guard";
-import {ReactiveFormsModule} from '@angular/forms';
-import { NavbarComponent } from './navbar/navbar.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertComponent,
     AnnouncementsListComponent,
     LoginComponent,
-	RegisterComponent,
+    RegisterComponent,
     HomeComponent,
     UserDetailComponent,
     AnnouncementDetailComponent,
@@ -41,18 +36,18 @@ import { NewAnnouncementComponent } from './new-announcement/new-announcement.co
     SortPipe,
     TopPipe,
     GetUserPipe,
-    NavbarComponent,
     NewAnnouncementComponent
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(firebaseConfig, authConfig) 
+    AngularFireModule.initializeApp(firebaseConfig, authConfig)
   ],
-  providers: [AuthGuard, AuthService, UserService, AlertService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

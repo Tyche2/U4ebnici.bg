@@ -1,5 +1,4 @@
 import { NewAnnouncementComponent } from './../new-announcement/new-announcement.component';
-import { AuthGuard } from './../auth/guards/auth.guard';
 import { RegisterComponent } from './../register/register.component';
 import { AnnouncementDetailComponent } from './../announcement-detail/announcement-detail.component';
 import { NgModule }             from '@angular/core';
@@ -29,7 +28,6 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ],
-  providers: [AuthGuard]
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

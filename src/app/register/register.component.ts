@@ -1,8 +1,8 @@
 import { database } from 'firebase';
 import { UserService } from './../shared/model/users.service';
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
-import { AuthService } from "../auth/services/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { AuthService } from '../core/auth/services/auth.service';
 var firebase = require('firebase');
 @Component({
   selector: 'app-register',

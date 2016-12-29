@@ -1,18 +1,18 @@
-import { AlertService } from './../../_services/alert.service';
-import { firebaseConfig } from './../../environments/firebase.config';
+import { AlertService } from '../../alert/alert.service';
+import { firebaseConfig } from './../../../environments/firebase.config';
 import { Http, Headers, Response } from '@angular/http';
-import {database, initializeApp} from "firebase";
+import { database, initializeApp } from "firebase";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import {Observable, Subject, BehaviorSubject} from "rxjs/Rx";
-import {FirebaseAuth, FirebaseAuthState} from "angularfire2/index";
-import {AuthInfo} from "../guards/auth-info";
+import { Observable, Subject, BehaviorSubject } from "rxjs/Rx";
+import { FirebaseAuth, FirebaseAuthState } from "angularfire2/index";
+import { AuthInfo } from "../guards/auth-info";
 
 
 export interface User {
-    email: string;
-    password: string;
-    confirmPassword?: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
 }
 var firebase = require('firebase');
 firebase.initializeApp(firebaseConfig);
@@ -20,23 +20,23 @@ firebase.initializeApp(firebaseConfig);
 @Injectable()
 export class AuthService {
   static UNKNOWN_USER = new AuthInfo(null);
-static USER_DATA;
+  static USER_DATA;
   authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOWN_USER);
-  userData$: BehaviorSubject<any>= new BehaviorSubject<any>(AuthService.USER_DATA);
+  userData$: BehaviorSubject<any> = new BehaviorSubject<any>(AuthService.USER_DATA);
   //loading = false;
-  constructor(private router: Router, private alertService: AlertService, private auth: FirebaseAuth) {}
-currentUser: any;
+  constructor(private router: Router, private alertService: AlertService, private auth: FirebaseAuth) { }
+  currentUser: any;
 
   signupUser(user: User) {
     //this.loading = true;
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-      .then((data)=>{
+      .then((data) => {
         const userData = new BehaviorSubject(data);
         this.userData$.next(data);
         this.alertService.success('Регистрацията е успешна', true);
         this.router.navigate(['/login']);
       })
-      .catch((error)=> {
+      .catch((error) => {
         this.alertService.error(error);
         //this.loading = false;
       });
@@ -44,13 +44,13 @@ currentUser: any;
 
   signinUser(user: User) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-    .then((data)=>{
+      .then((data) => {
         this.alertService.success('Успешен вход', true);
         const authInfo = new AuthInfo(firebase.auth().currentUser);
         this.authInfo$.next(authInfo);
         this.router.navigate(['/home']);
-    })
-      .catch((error)=> {
+      })
+      .catch((error) => {
         this.alertService.error(error);
         //this.loading = false;
       });
@@ -58,11 +58,11 @@ currentUser: any;
 
   logout() {
     firebase.auth().signOut()
-    .then((data)=>{
-      this.alertService.success('Успешен изход', true);
-      this.authInfo$.next(AuthService.UNKNOWN_USER);
-      this.router.navigate(['/home']);
- });
+      .then((data) => {
+        this.alertService.success('Успешен изход', true);
+        this.authInfo$.next(AuthService.UNKNOWN_USER);
+        this.router.navigate(['/home']);
+      });
   }
   isAuthenticated() {
     var user = firebase.auth().currentUser;
@@ -72,5 +72,5 @@ currentUser: any;
       return false;
     }
   }
- 
+
 }
