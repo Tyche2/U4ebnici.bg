@@ -48,12 +48,12 @@ export class UserService {
     }
     
     getUserByUID(uid:string): Observable<User[]> {
-    //   console.log(uid);
+       console.log(uid);
     //   function isEqualTo(obj) {
     //       return (obj.uid).toString == uid;
     //   }
 //
-    //    return this.db.list('users')
+        return this.db.list('users');
     //    .map(User.fromJsonList)
     //    .filter(isEqualTo)
     //    .switchMap(user => this.db.object(`users/${user.$key}/${uid}`));
