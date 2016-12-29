@@ -3,6 +3,7 @@ import { AnnouncementService } from '../shared/model/announcement.service';
 import { Announcement } from '../shared/model/announcement';
 import { Observable } from 'rxjs/Rx';
 
+
 @Component({
   selector: 'app-announcements-list',
   templateUrl: './announcements-list.component.html',

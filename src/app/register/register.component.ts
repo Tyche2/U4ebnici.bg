@@ -14,11 +14,16 @@ export class RegisterComponent implements OnInit {
     myDBForm: FormGroup;
     error = false;
     errorMessage = '';
+    public userUID: any;
     constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) {}
 
     onSignup() {
       this.authService.signupUser(this.myForm.value);
-      //let userUID = firebase.auth().currentUser.uid;
+      this.userUID = firebase.auth().currentUser.uid;
+      console.log(this.userUID);
+      this.myDBForm.patchValue({
+          uid: this.userUID
+      });
       this.userService.createNewUser(this.myDBForm.value);
       
     }
@@ -40,8 +45,10 @@ export class RegisterComponent implements OnInit {
             city: '',
             phone: '',
             skype: '',
-            dbemail: ''
+            dbemail: '',
+            uid: ''
         }); 
+        
     }
 
     isEmail(control: FormControl): {[s: string]: boolean} {

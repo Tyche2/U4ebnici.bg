@@ -45,7 +45,7 @@ currentUser: any;
         this.alertService.success('Успешен вход', true);
         const authInfo = new AuthInfo(firebase.auth().currentUser);
         this.authInfo$.next(authInfo);
-        this.router.navigate(['']);
+        this.router.navigate(['/home']);
     })
       .catch((error)=> {
         this.alertService.error(error);

@@ -43,7 +43,8 @@ export class UserService {
        return subject.asObservable();
    }
 
-    getUserByKey(key: string): Observable<any> {
-        return this.db.object(`users/${key}`).map(User.fromJson);
+    getUserByKey(userKey: string): Observable<User> {
+        return this.db.object(`users/${userKey}`).map(User.fromJson);
     }
+    
 }
