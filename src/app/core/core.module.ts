@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -7,6 +7,7 @@ import { AuthService } from './auth/services/auth.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { throwIfAlreadyLoaded } from './module-import-guard';
 
 @NgModule({
     imports: [
@@ -27,4 +28,8 @@ import { NavbarComponent } from './navbar/navbar.component';
         AlertService
     ]
 })
-export class CoreModule { }
+export class CoreModule {
+    constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+        throwIfAlreadyLoaded(parentModule, 'CoreModule');
+    }
+}
