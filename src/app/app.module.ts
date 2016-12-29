@@ -9,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { firebaseConfig, authConfig } from './environments/firebase.config';
 import { AngularFireModule } from 'angularfire2/index';
 import { AnnouncementsListComponent } from './announcements-list/announcements-list.component';
@@ -17,7 +18,6 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
-import { ToBGNMoneyPipe, SortPipe, TopPipe, GetUserPipe } from './pipes';
 import { UserService } from './shared/model/users.service';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -32,10 +32,6 @@ import { NewAnnouncementComponent } from './new-announcement/new-announcement.co
     HomeComponent,
     UserDetailComponent,
     AnnouncementDetailComponent,
-    ToBGNMoneyPipe,
-    SortPipe,
-    TopPipe,
-    GetUserPipe,
     NewAnnouncementComponent
   ],
   imports: [
@@ -45,6 +41,7 @@ import { NewAnnouncementComponent } from './new-announcement/new-announcement.co
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    SharedModule,
     AngularFireModule.initializeApp(firebaseConfig, authConfig)
   ],
   providers: [UserService],

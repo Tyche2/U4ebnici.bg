@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UserService } from '../shared/model/users.service';
+
+import { UserService } from '../model/users.service';
 import { Observable } from 'rxjs/Rx';
-import { User } from '../shared/model/user';
+import { User } from '../model/user';
 
 @Pipe({
     name: 'getUser'
