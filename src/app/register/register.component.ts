@@ -14,13 +14,21 @@ export class RegisterComponent implements OnInit {
     myDBForm: FormGroup;
     error = false;
     errorMessage = '';
+    public userUID: any;
     constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) {}
 
     onSignup() {
-      this.authService.signupUser(this.myForm.value);
-      //let userUID = firebase.auth().currentUser.uid;
+      this.authService.signupUser(this.myForm.value)
+      this.authService.userData$.subscribe((val) => {
+      if (val === undefined) {
+          console.log(val);
+      } else {
+          this.myDBForm.patchValue({
+          uid: val.uid
+      });
       this.userService.createNewUser(this.myDBForm.value);
-      
+      }
+    });
     }
  
     ngOnInit(): any {
@@ -40,8 +48,10 @@ export class RegisterComponent implements OnInit {
             city: '',
             phone: '',
             skype: '',
-            dbemail: ''
+            dbemail: '',
+            uid: ''
         }); 
+        
     }
 
     isEmail(control: FormControl): {[s: string]: boolean} {

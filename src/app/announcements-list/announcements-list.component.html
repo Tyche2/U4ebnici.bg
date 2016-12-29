@@ -1,6 +1,6 @@
 <div>
     <h2>Последно добавени обяви</h2>
-    <div class="col-md-3" *ngFor="let ad of (announcements$ | async | sort:'-$key' | top:4)">
+    <div class="col-md-3" *ngFor="let ad of (announcements$ | async | sort:'-$key' | top:12)">
         <img src="{{ad.image}}" alt="{{ad.title}}">
         <p><strong>{{ad.title}}</strong> за {{ad.clas}} клас</p>
         <p name="username">Публикувано от: <a [routerLink]="['/userdetail', ad.userid]"> {{(ad.userid | getUser | async)?.name}}</a></p>

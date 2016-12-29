@@ -43,7 +43,19 @@ export class UserService {
        return subject.asObservable();
    }
 
-    getUserByKey(key: string): Observable<any> {
-        return this.db.object(`users/${key}`).map(User.fromJson);
+    getUserByKey(userKey: string): Observable<User> {
+        return this.db.object(`users/${userKey}`).map(User.fromJson);
+    }
+    
+    getUserByUID(uid:string): Observable<User[]> {
+       console.log(uid);
+    //   function isEqualTo(obj) {
+    //       return (obj.uid).toString == uid;
+    //   }
+//
+        return this.db.list('users');
+    //    .map(User.fromJsonList)
+    //    .filter(isEqualTo)
+    //    .switchMap(user => this.db.object(`users/${user.$key}/${uid}`));
     }
 }

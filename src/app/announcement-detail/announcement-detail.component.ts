@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
   selector: 'app-announcement-detail',
   templateUrl: './announcement-detail.component.html',
   styleUrls: ['./announcement-detail.component.css'],
+  
   providers: [AnnouncementService],
 })
 

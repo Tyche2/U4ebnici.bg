@@ -25,6 +25,7 @@ import { AuthService } from "./auth/services/auth.service";
 import { AuthGuard } from "./auth/guards/auth.guard";
 import {ReactiveFormsModule} from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     SortPipe,
     TopPipe,
     GetUserPipe,
-    NavbarComponent
+    NavbarComponent,
+    NewAnnouncementComponent
   ],
   imports: [
     BrowserModule,
