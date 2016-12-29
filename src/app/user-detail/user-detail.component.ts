@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Rx';
 })
 export class UserDetailComponent implements OnInit {
 
-  user$: Observable<User>;
+  user$: Observable<User[]>;
   userKey: string;
 
   constructor(
@@ -22,7 +22,8 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.userKey = this.route.snapshot.params['id'];
-    //console.log(this.userKey);
-    this.user$ = this.userService.getUserByKey(this.userKey);
+    console.log(this.userKey);
+   
+    this.user$ = this.userService.getUserByUID(this.userKey);
   }
 }

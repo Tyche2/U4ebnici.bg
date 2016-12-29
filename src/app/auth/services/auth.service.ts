@@ -20,8 +20,9 @@ firebase.initializeApp(firebaseConfig);
 @Injectable()
 export class AuthService {
   static UNKNOWN_USER = new AuthInfo(null);
+static USER_DATA;
   authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOWN_USER);
-
+  userData$: BehaviorSubject<any>= new BehaviorSubject<any>(AuthService.USER_DATA);
   //loading = false;
   constructor(private router: Router, private alertService: AlertService, private auth: FirebaseAuth) {}
 currentUser: any;
@@ -30,6 +31,8 @@ currentUser: any;
     //this.loading = true;
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
       .then((data)=>{
+        const userData = new BehaviorSubject(data);
+        this.userData$.next(data);
         this.alertService.success('Регистрацията е успешна', true);
         this.router.navigate(['/login']);
       })

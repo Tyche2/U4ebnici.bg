@@ -18,14 +18,17 @@ export class RegisterComponent implements OnInit {
     constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) {}
 
     onSignup() {
-      this.authService.signupUser(this.myForm.value);
-      this.userUID = firebase.auth().currentUser.uid;
-      console.log(this.userUID);
-      this.myDBForm.patchValue({
-          uid: this.userUID
+      this.authService.signupUser(this.myForm.value)
+      this.authService.userData$.subscribe((val) => {
+      if (val === undefined) {
+          console.log(val);
+      } else {
+          this.myDBForm.patchValue({
+          uid: val.uid
       });
       this.userService.createNewUser(this.myDBForm.value);
-      
+      }
+    });
     }
  
     ngOnInit(): any {
