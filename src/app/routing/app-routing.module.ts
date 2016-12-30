@@ -1,3 +1,4 @@
+import { AuthGuard } from './../core/auth/guards/auth.guard';
 import { NewAnnouncementComponent } from './../new-announcement/new-announcement.component';
 import { RegisterComponent } from './../register/register.component';
 import { AnnouncementDetailComponent } from './../announcement-detail/announcement-detail.component';
@@ -16,7 +17,8 @@ const routes: Routes = [
       {
         path: ':id',
         children: [
-          { path: '', component: UserDetailComponent },
+          { path: '', component: UserDetailComponent},//, canActivate: [AuthGuard] // },
+          //{ path: '/:uid', component: UserSettingsComponent }
           { path: 'new', component: NewAnnouncementComponent }
         ]
       }

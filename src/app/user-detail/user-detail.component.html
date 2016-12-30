@@ -1,1 +1,35 @@
-<h2>{{(user$ | async)?.name}}</h2>
+<div [@routerTransition] class="container" id="container">
+    <div class="row">
+        <div>
+            <h2>Свържи се с {{(user$ | async)?.name}} от град {{(user$ | async)?.city}}</h2>
+            <div>
+                <h4 name="phone">Телефон: {{(user$ | async)?.phone}}</h4>
+                <h4 name="skype">Skype: {{(user$ | async)?.skype}}</h4>
+                <h4 name="email">E-mail: {{(user$ | async)?.dbemail}}</h4>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title">Изпрати съобщение</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-12" for="inputBody">Съобщение</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="inputBody" rows="8" placeholder="Твоето съобщение...">
+                                    </textarea>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="panel-footer clearfix">
+                    <button class="btn btn-primary btn-lg btn-block login-button" type="submit">Изпрати</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

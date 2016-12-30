@@ -1,12 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../core/auth/services/auth.service';
+import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
     myForm: FormGroup;
     error = false;

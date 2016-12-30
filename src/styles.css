@@ -12,6 +12,7 @@ body {
 }
 
 .white {
+    min-height: 590px;
     padding: 20px;
     margin-top: 50px;
     background-color: white;
@@ -22,10 +23,6 @@ body {
     opacity: 0.80;
     filter: alpha(opacity=80);
     /* For IE8 and earlier */
-}
-
-.clearfix {
-    clear: both;
 }
 
 .hidden {

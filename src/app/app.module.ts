@@ -22,6 +22,7 @@ import { UserService } from './shared/model/users.service';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NewAnnouncementComponent } from './new-announcement/new-announcement.co
     HomeComponent,
     UserDetailComponent,
     AnnouncementDetailComponent,
-    NewAnnouncementComponent
+    NewAnnouncementComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
