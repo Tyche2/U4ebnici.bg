@@ -3,7 +3,7 @@
     <div class="col-md-3" *ngFor="let ad of (announcements$ | async | sort:'-$key' | top:12)">
         <img src="{{ad.image}}" alt="{{ad.title}}">
         <p><strong>{{ad.title}}</strong> за {{ad.clas}} клас</p>
-        <p name="username">Свържи се с: <a [routerLink]="['/userdetail', ad.userid]"> {{(ad.userid | getUser | async)?.name}}</a></p>
+        <p name="username">Свържи се с: <a [routerLink]="['/detail', ad.$key, ad.userid]"> {{(ad.userid | getUser | async)?.name}}</a></p>
         <p name="publisher">Издателство: {{ad.publisher}}</p>
         <p name="year">Година на издаване: {{ad.year}}</p>
         <p name="price">Цена: {{ad.price | toBGNMoney}}</p>

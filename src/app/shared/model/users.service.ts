@@ -15,7 +15,7 @@ export class UserService {
 
     createNewUser(user: any): Observable<any> {
         const userToSave = Object.assign({}, user);
-        const newUserKey = this.sdkDb.child('users').push().key;
+        const newUserKey = user.uid;//this.sdkDb.child('users').push().key;
 
         let dataToSave = {};
 
@@ -47,15 +47,4 @@ export class UserService {
         return this.db.object(`users/${userKey}`).map(User.fromJson);
     }
 
-    getUserByUID(uid: string): Observable<User[]> {
-        console.log(uid);
-        //   function isEqualTo(obj) {
-        //       return (obj.uid).toString == uid;
-        //   }
-        //
-        return this.db.list('users');
-        //    .map(User.fromJsonList)
-        //    .filter(isEqualTo)
-        //    .switchMap(user => this.db.object(`users/${user.$key}/${uid}`));
-    }
 }

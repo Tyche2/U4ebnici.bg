@@ -1,6 +1,23 @@
-<div [@routerTransition] class="container" id="container">
-    <div class="row">
-        <div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-sm-6">
+            <h2>{{(announcement$ | async)?.title}} за {{(announcement$ | async)?.clas}} клас</h2>
+            <div class="detail ">
+                <div class="col-sm-6">
+                    <img src="{{(announcement$ | async)?.image}}" alt="{{(announcement$ | async)?.title}}">
+                </div>
+                <div class="col-sm-6">
+                    <p name="discipline">Учебен предмет: {{(announcement$ | async)?.discipline}}</p>
+                    <p name="autors">Автори: {{(announcement$ | async)?.autors}}</p>
+                    <p name="publisher">Издателство: {{(announcement$ | async)?.publisher}}</p>
+                    <p name="year">Година на издаване: {{(announcement$ | async)?.year}}</p>
+                    <p name="price">Цена: {{(announcement$ | async)?.price | toBGNMoney}}</p>
+                    <p name="description">Описание: {{(announcement$ | async)?.description}}</p>
+                    <p name="condition">Състояние: {{(announcement$ | async)?.condition}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
             <h2>Свържи се с {{(user$ | async)?.name}} от град {{(user$ | async)?.city}}</h2>
             <div>
                 <h4 name="phone">Телефон: {{(user$ | async)?.phone}}</h4>
@@ -19,11 +36,9 @@
                                 <textarea class="form-control" id="inputBody" rows="8" placeholder="Твоето съобщение...">
                                     </textarea>
                                 <div>
-
                                 </div>
                             </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="panel-footer clearfix">
