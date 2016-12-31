@@ -1,3 +1,63 @@
-<p>
-  user-settings works!
-</p>
+<div class="panel-heading">
+    <div class="panel-title text-center">
+        <h1 class="title">Редакция на профил {{(user$ | async)?.name}}</h1>
+        <hr />
+    </div>
+</div>
+<div class="center col-md-6">
+    <form [formGroup]="myUpdateForm" (ngSubmit)="onUpdate()">
+        <div class="form-group">
+            <label for="name">Име, фамилия</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    <input formControlName="name" type="text" id="name" #name class="form-control" [ngModel]="(user$ | async)?.name" (ngModelChange)="user$.name = $event">
+                    <span *ngIf="!name.pristine && name.errors != null && name.errors['noName']">Невалидно име</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="city">Град</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
+                    <input formControlName="city" [ngModel]="(user$ | async)?.city" (ngModelChange)="user$.city = $event" type="text" id="city" #city class="form-control ">
+                </div>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="phone ">Телефон</label>
+            <div class="cols-sm-10 ">
+                <div class="input-group ">
+                    <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                    <input formControlName="phone" [ngModel]="(user$ | async)?.phone" (ngModelChange)="user$.phone = $event" type="text" id="phone" #phone class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="skype">Skype</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-skype" aria-hidden="true"></i></span>
+                    <input formControlName="skype" [ngModel]="(user$ | async)?.skype" (ngModelChange)="user$.skype = $event" type=" text " id="skype " #skype class="form-control ">
+                </div>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="dbemail ">E-mail за контакт</label>
+            <div class="cols-sm-10 ">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope fa " aria-hidden="true "></i></span>
+                    <input formControlName="dbemail" [ngModel]="(user$ | async)?.dbemail" (ngModelChange)="user$.dbemail = $event" type="email" id="dbemail" class="form-control">
+                </div>
+            </div>
+            <div class="form-group hidden">
+                <label for="uid">uid</label>
+                <input formControlName="uid" type="text" id="uid" class="form-control" [ngModel]="(user$ | async)?.uid" (ngModelChange)="user$.uid = $event">
+            </div>
+        </div>
+        <div class="form-group ">
+            <button type="submit" [disabled]="!myUpdateForm.valid" class="btn btn-primary btn-lg btn-block login-button">Запази</button>
+        </div>
+    </form>
+</div>

@@ -6,3 +6,7 @@ img {
     max-height: 300px;
     max-width: 200px;
 }
+
+.message-panel {
+    max-width: 600px;
+}
