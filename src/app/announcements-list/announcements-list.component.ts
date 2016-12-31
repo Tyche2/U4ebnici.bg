@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { AnnouncementService } from '../shared/model/announcement.service';
+import {
+  Component,
+  OnInit,
+  Input
+} from '@angular/core';
 import { Announcement } from '../shared/model/announcement';
 import { Observable } from 'rxjs/Rx';
-
 
 @Component({
   selector: 'app-announcements-list',
   templateUrl: './announcements-list.component.html',
-  styleUrls: ['./announcements-list.component.css'],
-  providers: [AnnouncementService],
+  styleUrls: ['./announcements-list.component.css']
 })
 
 export class AnnouncementsListComponent implements OnInit {
 
-  announcements$: Observable<Announcement[]>;
+  @Input() announcements: Observable<Announcement[]>;
 
-  constructor(private announcementService: AnnouncementService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.announcements$ = this.announcementService.findAllAnnouncements();
   }
 
 }

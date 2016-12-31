@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { GetUserPipe, SortPipe, ToBGNMoneyPipe, TopPipe } from './pipes';
+import { GetUserPipe, SortPipe, ToBGNMoneyPipe, TopPipe, AnnouncementFilterByPipe } from './pipes';
 
 @NgModule({
     imports: [],
@@ -8,13 +8,15 @@ import { GetUserPipe, SortPipe, ToBGNMoneyPipe, TopPipe } from './pipes';
         GetUserPipe,
         SortPipe,
         ToBGNMoneyPipe,
-        TopPipe
+        TopPipe,
+        AnnouncementFilterByPipe
     ],
     exports: [
         GetUserPipe,
         SortPipe,
         ToBGNMoneyPipe,
-        TopPipe
+        TopPipe,
+        AnnouncementFilterByPipe
     ]
 })
 export class SharedModule { }

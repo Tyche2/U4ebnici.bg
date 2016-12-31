@@ -4,34 +4,24 @@
             <h4>Намери учебник</h4>
         </div>
         <div class="col-xs-6 col-sm-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Въведи предмет...">
-            </div>
+            <input type="text" class="form-control" name="title" placeholder="Въведи име или предмет..." (input)="onInput($event)">
         </div>
-        <div class="col-xs-6 col-sm-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Въведи клас...">
-            </div>
+        <div class="col-xs-6 col-sm-2">
+            <input type="text" class="form-control" name="clas" placeholder="Въведи клас..." (input)="onInput($event)">
         </div>
-        <button type="button" class="btn btn-secondary">Намери</button>
+        <div class="col-xs-6 col-sm-2">
+            <input type="text" class="form-control" name="author" placeholder="Въведи автор..." (input)="onInput($event)">
+        </div>
+        <button type="button" class="btn btn-secondary" (click)="findRecords()">Намери</button>
     </div>
+</div>
 
-</div>
-<div class="row">
-    <div class="col-xs-6 col-sm-3">
-        <label for="sort">Сортирай по:</label>
-        <select class="form-control" name="sort">
-        <option>Азбучен ред</option>
-        <option>Цена</option>
-        <option>Година на издаване</option>
-    </select>
-    </div>
-    <div class="col-xs-6 col-sm-3">
-        <label for="order">Подреди:</label>
-        <select class="form-control" name="order">
-        <option>Възходящо</option>
-        <option>Низходящо</option>
-    </select>
-    </div>
-</div>
-<app-announcements-list></app-announcements-list>
+<app-announcements-list *ngIf="!isFiltered" 
+    [announcements] = "announcements">
+</app-announcements-list>
+<app-foundannouncements-list *ngIf="isFiltered" 
+    [announcements] = "announcements" 
+    [searchText] = "searchText" 
+    [searchClas] = "searchClas" 
+    [searchAuthor] = "searchAuthor">
+</app-foundannouncements-list> 

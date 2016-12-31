@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { FoundannouncementsListComponent } from './foundannouncements-list/foundannouncements-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
     AnnouncementDetailComponent,
     NewAnnouncementComponent,
     FooterComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    FoundannouncementsListComponent
   ],
   imports: [
     BrowserModule,
