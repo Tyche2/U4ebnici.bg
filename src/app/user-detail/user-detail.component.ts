@@ -43,8 +43,8 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.userKey = this.route.snapshot.params['id'];
     this.adKey = this.route.snapshot.params['adId'];
-    console.log(this.userKey);
-    console.log(this.adKey);
+    //console.log(this.userKey);
+    //console.log(this.adKey);
     this.user$ = this.userService.getUserByKey(this.userKey);
     this.announcement$ = this.announcementService.findAnnouncementByKey(this.adKey);
     
