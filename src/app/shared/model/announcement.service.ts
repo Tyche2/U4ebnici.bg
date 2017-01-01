@@ -11,9 +11,38 @@ import { database } from 'firebase';
 @Injectable()
 export class AnnouncementService {
     sdkDb: any;
+
     constructor(private db: AngularFireDatabase, @Inject(FirebaseRef) fb,
         private http: Http) {
         this.sdkDb = fb.database().ref();
+    }
+
+    private findAnnouncmentsKeysByUserKey(userKey: string): Observable<string[]> {
+        return this.db.list(`announcementsPerUser/${userKey}`)
+            .map(keys => keys.map(keyObj => keyObj.$key));
+    }
+
+    private findAnnouncmentsByKeys(announcementsKeys$: Observable<string[]>): Observable<Announcement[]> {
+        return announcementsKeys$
+            .map(keys => keys.map(key => this.findAnnouncementByKey(key)))
+            .flatMap(fbojs => Observable.combineLatest(fbojs));
+    }
+
+    private findMessagesKeysPerAnnouncementKey(announcementKey: string,
+                               query: FirebaseListFactoryOpts = {}): Observable<string[]> {
+        return this.findAnnouncementByKey(announcementKey)
+            .do(val => console.log('announcement', val))
+            .filter(announcement => !!announcement)
+            .switchMap(announcement => this.db.list(`messagesPerAnnouncement/${announcement.$key}`, query))
+            .map( mspa => mspa.map(mpc => mpc.$key) );
+    }
+
+
+    private findMessagesForMessageKeys(messageKeys$: Observable<string[]>): Observable<Message[]> {
+        return messageKeys$
+            .map(mspa => mspa.map(messageKey => this.db.object('messages/' + messageKey)) )
+            .flatMap(fbojs => Observable.combineLatest(fbojs) );
+
     }
 
     createAnnouncement(announcement: Announcement) {
@@ -53,21 +82,8 @@ export class AnnouncementService {
         return this.db.object(`announcements/${announcementKey}`).map(Announcement.fromJson);
     }
 
-    findMessagesKeysPerAnnouncementKey(announcementKey: string,
-                               query: FirebaseListFactoryOpts = {}): Observable<string[]> {
-        return this.findAnnouncementByKey(announcementKey)
-            .do(val => console.log('announcement', val))
-            .filter(announcement => !!announcement)
-            .switchMap(announcement => this.db.list(`messagesPerAnnouncement/${announcement.$key}`, query))
-            .map( mspa => mspa.map(mpc => mpc.$key) );
-    }
-
-
-    findMessagesForMessageKeys(messageKeys$: Observable<string[]>): Observable<Message[]> {
-        return messageKeys$
-            .map(mspa => mspa.map(messageKey => this.db.object('messages/' + messageKey)) )
-            .flatMap(fbojs => Observable.combineLatest(fbojs) );
-
+    findAnnouncmentsByUserKey(userKey: string): Observable<Announcement[]> {
+        return this.findAnnouncmentsByKeys(this.findAnnouncmentsKeysByUserKey(userKey));
     }
 
     findAllMessagesForAnnouncement(announcementKey: string): Observable<Message[]> {
