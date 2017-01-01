@@ -1,19 +1,19 @@
 import { UserSettingsComponent } from './../user-settings/user-settings.component';
 import { AuthGuard } from './../core/auth/guards/auth.guard';
-import { NewAnnouncementComponent } from './../new-announcement/new-announcement.component';
+import { NewAnnouncementComponent } from '../announcements/new-announcement/new-announcement.component';
 import { RegisterComponent } from './../register/register.component';
-import { AnnouncementDetailComponent } from './../announcement-detail/announcement-detail.component';
+import { AnnouncementDetailComponent } from '../announcements/announcement-detail/announcement-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
-import { HomeComponent } from '../home/home.component';
+import { AnnouncementsComponent } from '../announcements/announcements.component';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
-import { UserAnnouncementsComponent } from '../user-announcements/user-announcements.component';
+import { UserAnnouncementsComponent } from '../announcements/user-announcements/user-announcements.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: AnnouncementsComponent },
   { path: 'user-announcements', component: UserAnnouncementsComponent },
   { path: 'userdetail/:id', component: UserSettingsComponent },//, canActivate: [AuthGuard] },
   { path: 'detail/new', component: NewAnnouncementComponent },

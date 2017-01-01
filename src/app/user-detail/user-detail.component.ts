@@ -1,8 +1,8 @@
 import { AlertService } from './../core/alert/alert.service';
 import { MessagesService } from './../shared/model/messages.service';
 import { Message } from './../shared/model/message';
-import { Announcement } from './../shared/model/announcement';
-import { AnnouncementService } from './../shared/model/announcement.service';
+import { Announcement } from '../announcements/shared/announcement.model';
+import { AnnouncementService } from '../announcements/shared/announcement.service';
 import { database, initializeApp } from "firebase";
 import { UserService } from './../shared/model/users.service';
 import { ActivatedRoute, Router } from '@angular/router';

@@ -3,22 +3,19 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { AnnouncementService } from '../shared/model/announcement.service';
-import { Announcement } from '../shared/model/announcement';
+
 import { Observable } from 'rxjs/Rx';
-import { ConstantService } from  '../shared/constant.service';
+
+import { AnnouncementService } from './shared/announcement.service';
+import { Announcement } from './shared/announcement.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  providers: [
-    AnnouncementService,
-    ConstantService
-  ]
+  selector: 'app-announcements',
+  templateUrl: './announcements.component.html',
+  styleUrls: ['./announcements.component.css']
 })
 
-export class HomeComponent implements OnInit {
+export class AnnouncementsComponent implements OnInit {
   announcements: Observable<Announcement[]>;
   isFiltered: boolean;
   @Output() searchText: string;

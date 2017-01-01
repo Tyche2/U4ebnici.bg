@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AnnouncementService } from '../shared/model/announcement.service';
-import { Announcement } from '../shared/model/announcement';
+
 import { Observable } from 'rxjs/Rx';
+
+import { AnnouncementService } from '../shared/announcement.service';
+import { Announcement } from '../shared/announcement.model';
 
 @Component({
   selector: 'app-announcement-detail',
   templateUrl: './announcement-detail.component.html',
-  styleUrls: ['./announcement-detail.component.css'],
-  
-  providers: [AnnouncementService],
+  styleUrls: ['./announcement-detail.component.css']
 })
 
 export class AnnouncementDetailComponent implements OnInit {
@@ -27,5 +27,4 @@ export class AnnouncementDetailComponent implements OnInit {
     console.log(this.announcementKey);
     this.announcement$ = this.announcementService.findAnnouncementByKey(this.announcementKey);
   }
-
 }

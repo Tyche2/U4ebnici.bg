@@ -1,4 +1,4 @@
-import { Announcement } from '../model/announcement';
+import { Announcement } from '../../announcements/shared/announcement.model';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { AnnouncementService } from '../shared/model/announcement.service';
-import { Announcement } from '../shared/model/announcement';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { AnnouncementService } from '../shared/announcement.service';
+import { Announcement } from '../shared/announcement.model';
 
 @Component({
   selector: 'app-new-announcement',
   templateUrl: './new-announcement.component.html',
   styleUrls: ['./new-announcement.component.css'],
-  providers: [ AnnouncementService ]
+
 })
 export class NewAnnouncementComponent implements OnInit {
   myForm: FormGroup;

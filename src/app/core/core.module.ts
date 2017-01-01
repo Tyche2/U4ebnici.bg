@@ -6,6 +6,7 @@ import { AuthGuard } from './auth/guards/auth.guard';
 import { AuthService } from './auth/services/auth.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
+import { ConstantService } from './constant.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
@@ -25,7 +26,8 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
     providers: [
         AuthGuard,
         AuthService,
-        AlertService
+        AlertService,
+        ConstantService
     ]
 })
 export class CoreModule {

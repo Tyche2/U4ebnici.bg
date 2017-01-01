@@ -75,7 +75,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <textarea formControlName="description" rows="5" id="description" #description class="form-control" ></textarea>
+                        <textarea formControlName="description" rows="5" id="description" #description class="form-control"></textarea>
                     </div>
                 </div>
             </div>
@@ -84,12 +84,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <select 
-                            formControlName="condition"
-                            class="form-control" 
-                            id="condition"
-                            #condition
-                            (change)="onConditionChange($event)">
+                        <select formControlName="condition" class="form-control" id="condition" #condition (change)="onConditionChange($event)">
                             <option>Използван</option>
                             <option>Нов</option>
                         </select>
@@ -107,7 +102,7 @@
             </div>
         </form>
         <div class="form-group ">
-            <!--<button type="submit" [disabled]="!myForm.valid" class="btn btn-primary btn-block">Добави</button>-->
+            <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary btn-block">Добави</button>-->
             <button type="submit" class="btn btn-primary btn-block">Добави</button>
         </div>
     </form>

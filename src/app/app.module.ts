@@ -10,39 +10,29 @@ import 'rxjs/add/operator/switchMap';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { AnnouncementsModule } from './announcements/announcements.module';
 import { firebaseConfig, authConfig } from './environments/firebase.config';
 import { AngularFireModule } from 'angularfire2/index';
-import { AnnouncementsListComponent } from './announcements-list/announcements-list.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './routing/app-routing.module';
-import { HomeComponent } from './home/home.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
 import { UserService } from './shared/model/users.service';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
-import { FoundannouncementsListComponent } from './foundannouncements-list/foundannouncements-list.component';
-import { UserAnnouncementsComponent } from './user-announcements/user-announcements.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnnouncementsListComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     UserDetailComponent,
-    AnnouncementDetailComponent,
-    NewAnnouncementComponent,
     FooterComponent,
     UserSettingsComponent,
-    FoundannouncementsListComponent,
-    UserAnnouncementsComponent
   ],
   imports: [
+    AnnouncementsModule,
     BrowserModule,
     CoreModule,
     FormsModule,

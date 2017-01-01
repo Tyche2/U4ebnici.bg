@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2';
 import { Observable } from 'rxjs/Rx';
-import { Announcement } from './announcement';
-import { Message } from './message';
+import { Announcement } from './announcement.model';
+import { Message } from '../../shared/model/message';
 import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
 import { Http } from '@angular/http';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseRef } from 'angularfire2';

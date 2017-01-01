@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Announcement } from '../shared/model/announcement';
-import { AnnouncementService } from '../shared/model/announcement.service';
-import { ConstantService } from '../shared/constant.service';
+import { Announcement } from '../shared/announcement.model';
+import { AnnouncementService } from '../shared/announcement.service';
+import { ConstantService } from '../../core/constant.service';
 
 @Component({
   selector: 'app-user-announcements',
