@@ -4,12 +4,43 @@ import { Observable } from 'rxjs/Rx';
 import { Announcement } from './announcement';
 import { Message } from './message';
 import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { Http } from '@angular/http';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseRef } from 'angularfire2';
+import { database } from 'firebase';
 
 @Injectable()
 export class AnnouncementService {
+    sdkDb: any;
+    constructor(private db: AngularFireDatabase, @Inject(FirebaseRef) fb,
+        private http: Http) {
+        this.sdkDb = fb.database().ref();
+    }
 
-    constructor(private db: AngularFireDatabase) {
+    createAnnouncement(announcement: Announcement) {
+        // Set user, added on and active
+        let firebase = require('firebase');
+        let currentdate = new Date();
+        let datetime = 'Last Sync: ' + currentdate.getDate() + '/'
+                + (currentdate.getMonth() + 1) + '/'
+                + currentdate.getFullYear() + ' @ '
+                + currentdate.getHours() + ':'
+                + currentdate.getMinutes() + ':'
+                + currentdate.getSeconds();
+
+        announcement.userid = firebase.auth().currentUser.uid;
+        announcement.added = datetime;
+        announcement.active = true;
+
+        return new Promise((resolve, reject) => {
+            let newRef = this.sdkDb
+                .child('announcements')
+                .push(announcement);
+            if (newRef) {
+                resolve(newRef.key());
+            } else {
+                reject('Announcement is not added');
+            }
+        });
     }
 
     findAllAnnouncements(): Observable<Announcement[]> {

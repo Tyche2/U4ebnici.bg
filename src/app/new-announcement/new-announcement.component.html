@@ -1,3 +1,100 @@
-<p>
-  new-announcement works!
-</p>
+<div class="panel-heading">
+    <div class="panel-title text-center">
+        <h1 class="title">Добавяне на обява</h1>
+        <hr />
+    </div>
+</div>
+<div class="center col-md-6">
+    <form class="form-horizontal" (ngSubmit)="CreateAnnouncement()">
+        <form [formGroup]="myDBForm">
+            <div class="form-group">
+                <label for="title">Заглавие</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <input formControlName="title" type="text" id="title" #title class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="discipline">Предмет</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <input formControlName="discipline" type="text" id="discipline" #discipline class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="clas">Клас</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <input formControlName="clas" type="text" id="clas" #clas class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="image">Добави снимка</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <input formControlName="image" type="file" id="image" #image class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="publisher">Издателство</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <input formControlName="publisher" type="text" id="publisher" #publisher class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="authors">Автори</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <input formControlName="authors" type="text" id="authors" #authors class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="year">Година на издаване</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <input formControlName="year" type="text" id="year" #year class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Описание</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <textarea formControlName="description" rows="5" id="description" #description class="form-control" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="condition">Състояние</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <select 
+                            class="form-control" 
+                            id="condition">
+                            <option [selected]="condition === 'used'">Използван</option>
+                            <option [selected]="condition === 'new'">Нов</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price">Цена</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <input formControlName="price" type="text" id="price" #price class="form-control">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="form-group ">
+            <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary btn-block" (click)="AddAnnouncement()">Добави</button>
+        </div>
+    </form>
+</div>

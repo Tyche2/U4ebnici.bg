@@ -3,17 +3,19 @@ import {Observable} from 'rxjs/Rx';
 export class Announcement {
     constructor(
         public $key: string,
-        public title: string,
-        public discipline: string,
+        public active: boolean,
+        public added: string,
         public authors: string,
-        public publisher: string,
-        public year: number,
         public clas: number,
-        public price: number,
         public condition: string,
         public description: string,
+        public discipline: string,
         public image: string,
-        public userid: string) { }
+        public price: number,
+        public publisher: string,
+        public title: string,
+        public userid: string,
+        public year: number) { }
 
     static fromJsonList(array): Announcement[] {
         return array.map(Announcement.fromJson);
@@ -23,20 +25,22 @@ export class Announcement {
         return json.map(Announcement.fromJson);
     }
 
-    static fromJson({$key, title, discipline, authors, publisher, year, clas, price, condition, description,
-        image, userid}): Announcement {
+    static fromJson({$key, active, added, authors, clas, condition, description, discipline, image, price, publisher, title,
+        userid, year}): Announcement {
         return new Announcement(
             $key,
-            title,
-            discipline,
+            active,
+            added,
             authors,
-            publisher,
-            year,
             clas,
-            price,
             condition,
             description,
+            discipline,
             image,
-            userid);
+            price,
+            publisher,
+            title,
+            userid,
+            year);
     }
 }
