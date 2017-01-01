@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
     myDBForm: FormGroup;
     error = false;
     errorMessage = '';
-    public userUID: any;
+    
     constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) {}
 
     onSignup() {

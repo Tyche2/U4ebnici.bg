@@ -16,12 +16,10 @@ export class LoginComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private authService: AuthService) {}
     onSignin(user) {
-      this.authService.signinUser(this.myForm.value);
-      
+      this.authService.signinUser(this.myForm.value);   
     } 
 
     ngOnInit():any {
-
         this.myForm = this.fb.group({
             email: ['', Validators.required],
             password: ['', Validators.required],
