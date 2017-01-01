@@ -26,9 +26,7 @@
                         <li><a (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Изход</a></li>
                     </ul>
                 </li>
-                </li>
             </ul>
-            <!-- <p *ngIf="authInfo?.isLoggedIn()">{{authInfo?.isLoggedIn().email}}</p>-->
             <ul class="nav navbar-nav navbar-right">
                 <li *ngIf="!isAuth()">
                     <a routerLink="/login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Вход</a>
