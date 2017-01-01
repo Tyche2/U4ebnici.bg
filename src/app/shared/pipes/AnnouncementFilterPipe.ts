@@ -14,12 +14,6 @@ export class AnnouncementFilterByPipe implements PipeTransform {
             filterByTitle = filterByTitle || '';
             filterByClas = filterByClas || '';
             filterByAuthor = filterByAuthor || '';
-            console.log(filterByTitle);
-            console.log(filterByClas);
-            console.log(filterByAuthor);
-
-            console.log(announcements);
-
 
             return announcements.filter(ad => (ad.title.toLowerCase().indexOf(filterByTitle.toLowerCase()) >= 0
             || ad.discipline.toLowerCase().indexOf(filterByTitle.toLowerCase()) >= 0)

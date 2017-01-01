@@ -5,12 +5,13 @@
     </div>
 </div>
 <div class="center col-md-6">
-    <form class="form-horizontal" (ngSubmit)="CreateAnnouncement()">
+    <form class="form-horizontal" #announcementForm="ngForm" (ngSubmit)="CreateAnnouncement(); announcementForm.reset()">
         <form [formGroup]="myDBForm">
             <div class="form-group">
                 <label for="title">Заглавие</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
+                        <span class="input-group-addon"></span>
                         <input formControlName="title" type="text" id="title" #title class="form-control">
                     </div>
                 </div>
@@ -19,6 +20,7 @@
                 <label for="discipline">Предмет</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
+                        <span class="input-group-addon"></span>
                         <input formControlName="discipline" type="text" id="discipline" #discipline class="form-control">
                     </div>
                 </div>
@@ -27,6 +29,7 @@
                 <label for="clas">Клас</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
+                        <span class="input-group-addon"></span>
                         <input formControlName="clas" type="text" id="clas" #clas class="form-control">
                     </div>
                 </div>
@@ -35,7 +38,8 @@
                 <label for="image">Добави снимка</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <input formControlName="image" type="file" id="image" #image class="form-control">
+                        <span class="input-group-addon"></span>
+                        <input formControlName="image" type="file" id="image" #image class="form-control" accept="image/*" (change)="onImageSelected($event)">
                     </div>
                 </div>
             </div>
@@ -43,6 +47,7 @@
                 <label for="publisher">Издателство</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
+                        <span class="input-group-addon"></span>
                         <input formControlName="publisher" type="text" id="publisher" #publisher class="form-control">
                     </div>
                 </div>
@@ -51,6 +56,7 @@
                 <label for="authors">Автори</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
+                        <span class="input-group-addon"></span>
                         <input formControlName="authors" type="text" id="authors" #authors class="form-control">
                     </div>
                 </div>
@@ -59,6 +65,7 @@
                 <label for="year">Година на издаване</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
+                        <span class="input-group-addon"></span>
                         <input formControlName="year" type="text" id="year" #year class="form-control">
                     </div>
                 </div>
@@ -67,6 +74,7 @@
                 <label for="description">Описание</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
+                        <span class="input-group-addon"></span>
                         <textarea formControlName="description" rows="5" id="description" #description class="form-control" ></textarea>
                     </div>
                 </div>
@@ -75,11 +83,15 @@
                 <label for="condition">Състояние</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
+                        <span class="input-group-addon"></span>
                         <select 
+                            formControlName="condition"
                             class="form-control" 
-                            id="condition">
-                            <option [selected]="condition === 'used'">Използван</option>
-                            <option [selected]="condition === 'new'">Нов</option>
+                            id="condition"
+                            #condition
+                            (change)="onConditionChange($event)">
+                            <option>Използван</option>
+                            <option>Нов</option>
                         </select>
                     </div>
                 </div>
@@ -88,13 +100,15 @@
                 <label for="price">Цена</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
+                        <span class="input-group-addon"></span>
                         <input formControlName="price" type="text" id="price" #price class="form-control">
                     </div>
                 </div>
             </div>
         </form>
         <div class="form-group ">
-            <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary btn-block" (click)="AddAnnouncement()">Добави</button>
+            <!--<button type="submit" [disabled]="!myForm.valid" class="btn btn-primary btn-block">Добави</button>-->
+            <button type="submit" class="btn btn-primary btn-block">Добави</button>
         </div>
     </form>
 </div>
