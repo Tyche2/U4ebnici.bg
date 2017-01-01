@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Ng2PaginationModule } from 'ng2-pagination';
 
 import { AnnouncementsComponent } from './announcements.component';
 import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
@@ -19,7 +20,8 @@ import { UserAnnouncementsComponent } from './user-announcements/user-announceme
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    Ng2PaginationModule
   ],
   declarations: [
     AnnouncementsComponent,

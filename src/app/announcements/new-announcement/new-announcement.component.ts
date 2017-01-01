@@ -64,9 +64,11 @@ export class NewAnnouncementComponent implements OnInit {
         .then(snapshot => {
             this.myDBForm.value.image = snapshot.downloadURL;
             this.announcementService.createAnnouncement(this.myDBForm.value);
+            this.myDBForm.reset();
           });
     } else {
       this.announcementService.createAnnouncement(this.myDBForm.value);
+      this.myDBForm.reset();
     }
   }
 }

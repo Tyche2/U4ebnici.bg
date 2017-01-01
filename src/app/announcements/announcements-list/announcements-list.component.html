@@ -36,7 +36,14 @@
         </div>
     </div>
     <div *ngIf="isFiltred">
-        <div class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | filterBy: searchText:searchClas:searchAuthor | sort: sortByKey)">
+        <div class="row">
+            <pagination-controls (pageChange)="page = $event" id="1"
+                maxSize="5"
+                directionLinks="true"
+                autoHide="true">
+            </pagination-controls>
+        </div>
+        <div class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | filterBy: searchText:searchClas:searchAuthor | sort: sortByKey | paginate: {itemsPerPage: 5, currentPage:page, id: '1'})">
             <div class="col-md-1">
                 <img src="{{ad.image}}" alt="{{ad.title}}">
             </div>
