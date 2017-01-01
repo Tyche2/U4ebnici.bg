@@ -3,11 +3,9 @@ import { firebaseConfig } from './../../../environments/firebase.config';
 import { Http, Headers, Response } from '@angular/http';
 import { database, initializeApp } from "firebase";
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { Observable, Subject, BehaviorSubject } from "rxjs/Rx";
 import { FirebaseAuth, FirebaseAuthState } from "angularfire2/index";
 import { AuthInfo } from "../guards/auth-info";
-
 
 export interface User {
   email: string;
@@ -24,7 +22,7 @@ export class AuthService {
   authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOWN_USER);
   userData$: BehaviorSubject<any> = new BehaviorSubject<any>(AuthService.USER_DATA);
   //loading = false;
-  constructor(private router: Router, private alertService: AlertService, private auth: FirebaseAuth) { }
+  constructor(private alertService: AlertService, private auth: FirebaseAuth) { }
   currentUser: any;
 
   signupUser(user: User) {
@@ -33,8 +31,6 @@ export class AuthService {
       .then((data) => {
         const userData = new BehaviorSubject(data);
         this.userData$.next(data);
-        this.alertService.success('Регистрацията е успешна', true);
-        this.router.navigate(['/login']);
       })
       .catch((error) => {
         this.alertService.error(error);
@@ -45,7 +41,6 @@ export class AuthService {
   signinUser(user: User) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
       .then((data) => {
-        this.alertService.success('Успешен вход', true);
         const authInfo = new AuthInfo(firebase.auth().currentUser);
         this.authInfo$.next(authInfo);
         //localStorage.setItem('username', user.email);
@@ -60,9 +55,7 @@ export class AuthService {
   logout() {
     firebase.auth().signOut()
       .then((data) => {
-        this.alertService.success('Успешен изход', true);
         this.authInfo$.next(AuthService.UNKNOWN_USER);
-        this.router.navigate(['home']);
       });
   }
   isAuthenticated() {

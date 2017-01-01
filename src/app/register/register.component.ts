@@ -1,8 +1,10 @@
+import { AlertService } from './../core/alert/alert.service';
 import { database } from 'firebase';
 import { UserService } from './../shared/model/users.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../core/auth/services/auth.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -15,13 +17,17 @@ export class RegisterComponent implements OnInit {
     error = false;
     errorMessage = '';
     
-    constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) {}
+    constructor(private fb: FormBuilder, 
+    private authService: AuthService, 
+    private userService: UserService,
+    private alertService: AlertService,
+    private router: Router) {}
 
     onSignup() {
       this.authService.signupUser(this.myForm.value)
       this.authService.userData$.subscribe((val) => {
       if (val === undefined) {
-          console.log(val);
+        //  console.log(val);
       } else {
           this.myDBForm.patchValue({
           uid: val.uid
@@ -29,6 +35,8 @@ export class RegisterComponent implements OnInit {
       this.userService.createNewUser(this.myDBForm.value);
       }
     });
+    this.alertService.success('Регистрацията е успешна', true);
+        this.router.navigate(['/login']);
     }
  
     ngOnInit(): any {

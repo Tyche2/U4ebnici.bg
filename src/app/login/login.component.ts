@@ -1,3 +1,4 @@
+import { AlertService } from './../core/alert/alert.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../core/auth/services/auth.service';
 import { Component, OnInit} from '@angular/core';
@@ -20,9 +21,11 @@ export class LoginComponent implements OnInit {
         private authService: AuthService,
         private route: ActivatedRoute,
         private router: Router,
+        private alertService: AlertService
         ) {}
     onSignin(user) {
       this.authService.signinUser(this.myForm.value);   
+      this.alertService.success('Успешен вход', true);
       this.router.navigate([this.returnUrl]);
     } 
 
