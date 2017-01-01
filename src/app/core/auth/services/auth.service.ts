@@ -4,7 +4,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { database, initializeApp } from "firebase";
 import { Injectable } from "@angular/core";
 import { Observable, Subject, BehaviorSubject } from "rxjs/Rx";
-import { FirebaseAuth, FirebaseAuthState } from "angularfire2/index";
+import { AuthProviders, AuthMethods, FirebaseAuth, FirebaseAuthState } from "angularfire2";
 import { AuthInfo } from "../guards/auth-info";
 
 export interface User {
@@ -17,16 +17,27 @@ firebase.initializeApp(firebaseConfig);
 
 @Injectable()
 export class AuthService {
+  private authState: FirebaseAuthState = null;
   static UNKNOWN_USER = new AuthInfo(null);
   static USER_DATA;
   authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOWN_USER);
   userData$: BehaviorSubject<any> = new BehaviorSubject<any>(AuthService.USER_DATA);
   //loading = false;
-  constructor(private alertService: AlertService, private auth: FirebaseAuth) { }
+  constructor(private alertService: AlertService, public auth: FirebaseAuth) {
+    auth.subscribe((state: FirebaseAuthState) => {
+      this.authState = state;
+    })
+  }
   currentUser: any;
+  get authenticated(): boolean {
+    return this.authState !== null;
+  }
 
+  get id(): string {
+    return this.authenticated ? this.authState.uid : '';
+  }
   signupUser(user: User) {
-    //this.loading = true;
+
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
       .then((data) => {
         const userData = new BehaviorSubject(data);
@@ -34,7 +45,6 @@ export class AuthService {
       })
       .catch((error) => {
         this.alertService.error(error);
-        //this.loading = false;
       });
   }
 
@@ -43,12 +53,9 @@ export class AuthService {
       .then((data) => {
         const authInfo = new AuthInfo(firebase.auth().currentUser);
         this.authInfo$.next(authInfo);
-        //localStorage.setItem('username', user.email);
-        //this.router.navigate(['home']);
       })
       .catch((error) => {
         this.alertService.error(error);
-        //this.loading = false;
       });
   }
 
@@ -57,14 +64,6 @@ export class AuthService {
       .then((data) => {
         this.authInfo$.next(AuthService.UNKNOWN_USER);
       });
-  }
-  isAuthenticated() {
-    var user = firebase.auth().currentUser;
-    if (user) {
-      return user;
-    } else {
-      return false;
-    }
   }
 
 }
