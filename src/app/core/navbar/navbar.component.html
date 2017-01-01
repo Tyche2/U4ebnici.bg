@@ -26,6 +26,9 @@
                         <li><a (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Изход</a></li>
                     </ul>
                 </li>
+				<li *ngIf="isAuth()">
+                 <a routerLink="detail/new"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добави обява</a>
+                  </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li *ngIf="!isAuth()">
