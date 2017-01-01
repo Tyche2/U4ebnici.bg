@@ -48,7 +48,8 @@ export class AuthService {
         this.alertService.success('Успешен вход', true);
         const authInfo = new AuthInfo(firebase.auth().currentUser);
         this.authInfo$.next(authInfo);
-        this.router.navigate(['/home']);
+        //localStorage.setItem('username', user.email);
+        //this.router.navigate(['home']);
       })
       .catch((error) => {
         this.alertService.error(error);
@@ -61,7 +62,7 @@ export class AuthService {
       .then((data) => {
         this.alertService.success('Успешен изход', true);
         this.authInfo$.next(AuthService.UNKNOWN_USER);
-        this.router.navigate(['/home']);
+        this.router.navigate(['home']);
       });
   }
   isAuthenticated() {
