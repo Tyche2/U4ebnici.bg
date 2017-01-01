@@ -13,10 +13,10 @@ import { UserDetailComponent } from '../user-detail/user-detail.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home',  component: HomeComponent },
-  { path: 'userdetail/:id', component: UserSettingsComponent},//, canActivate: [AuthGuard] // }, },
+  { path: 'userdetail/:id', component: UserSettingsComponent},//, canActivate: [AuthGuard] },
   { path: 'detail/:id', component: AnnouncementDetailComponent},
   //{ path: 'detail/new', component: NewAnnouncementComponent },
-  { path: 'detail/:adId/:id', component: UserDetailComponent },
+  { path: 'detail/:adId/:id', component: UserDetailComponent},//, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent }
 ];

@@ -28,22 +28,39 @@
                 <div class="panel-heading clearfix">
                     <h3 class="panel-title">Изпрати съобщение</h3>
                 </div>
-                <div class="panel-body">
-                    <form role="form" class="form-horizontal">
+                <form [formGroup]="myMessageForm" (ngSubmit)="onSent()">
+                    <div class="form-group hidden">
+                        <input formControlName="announcementid" #announcementid [ngModel]="(announcement$ | async)?.$key" (ngModelChange)="announcement$.$key = $event" type="text" id="announcementid" class="form-control">
+                    </div>
+                    <div class="form-group hidden">
+                        <input formControlName="touserid" #touserid type="text" id="touserid" class="form-control" [ngModel]="(user$ | async)?.uid" (ngModelChange)="user$.uid = $event">
+                    </div>
+                    <div class="form-group hidden">
+                        <input formControlName="answered" #answered type="text" id="answered" class="form-control">
+                    </div>
+                    <div class="form-group hidden">
+                        <input formControlName="fromuserid" #fromuserid type="text" id="fromuserid" class="form-control">
+                    </div>
+                    <div class="form-group hidden">
+                        <input formControlName="read" type="text" #read id="read" class="form-control">
+                    </div>
+                    <div class="form-group hidden">
+                        <input formControlName="sent" type="text" #sent id="sent" class="form-control">
+                    </div>
+                    <div class="panel-body">
                         <div class="form-group">
                             <label class="col-sm-12" for="inputBody">Съобщение</label>
                             <div class="col-sm-12">
-                                <textarea class="form-control" id="inputBody" rows="8" placeholder="Твоето съобщение...">
-                                    </textarea>
-                                <div>
-                                </div>
+                                <textarea formControlName="msgText" #msgText class="form-control" id="inputBody" rows="8" placeholder="Твоето съобщение..."></textarea>    
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="panel-footer clearfix">
-                    <button class="btn btn-primary btn-lg btn-block login-button" type="submit">Изпрати</button>
-                </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <div class="form-group ">
+                            <button class="btn btn-primary btn-lg btn-block login-button" type="submit">Изпрати</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

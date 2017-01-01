@@ -1,6 +1,8 @@
+import { AlertService } from './../core/alert/alert.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../core/auth/services/auth.service';
 import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,19 +14,26 @@ export class LoginComponent implements OnInit {
     myForm: FormGroup;
     error = false;
     errorMessage = '';
+    returnUrl:string;
 
-
-    constructor(private fb: FormBuilder, private authService: AuthService) {}
+    constructor(
+        private fb: FormBuilder, 
+        private authService: AuthService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private alertService: AlertService
+        ) {}
     onSignin(user) {
-      this.authService.signinUser(this.myForm.value);
-      
+      this.authService.signinUser(this.myForm.value);   
+      this.alertService.success('Успешен вход', true);
+      this.router.navigate([this.returnUrl]);
     } 
 
     ngOnInit():any {
-
         this.myForm = this.fb.group({
             email: ['', Validators.required],
             password: ['', Validators.required],
         });
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 }

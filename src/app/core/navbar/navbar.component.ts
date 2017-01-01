@@ -1,5 +1,6 @@
+import { AlertService } from './../alert/alert.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
 import { AuthInfo } from '../auth/guards/auth-info';
 import { AuthService } from '../auth/services/auth.service';
 
@@ -14,7 +15,9 @@ export class NavbarComponent implements OnInit {
 
   authInfo: AuthInfo;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+  private router: Router,
+  private alertService: AlertService) {
 
   }
   ngOnInit() {
@@ -23,6 +26,8 @@ export class NavbarComponent implements OnInit {
   }
   logout() {
     this.authService.logout();
+            this.alertService.success('Успешен изход', true);
+            this.router.navigate(['home']);
   }
 
 }
