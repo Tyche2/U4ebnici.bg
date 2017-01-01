@@ -49,7 +49,7 @@ export class AnnouncementService {
         // Set user, added on and active
         let firebase = require('firebase');
         let currentdate = new Date();
-        let datetime = 'Last Sync: ' + currentdate.getDate() + '/'
+        let datetime = currentdate.getDate() + '/'
                 + (currentdate.getMonth() + 1) + '/'
                 + currentdate.getFullYear() + ' @ '
                 + currentdate.getHours() + ':'
@@ -65,7 +65,7 @@ export class AnnouncementService {
                 .child('announcements')
                 .push(announcement);
             if (newRef) {
-                resolve(newRef.key());
+                resolve(newRef);
             } else {
                 reject('Announcement is not added');
             }
