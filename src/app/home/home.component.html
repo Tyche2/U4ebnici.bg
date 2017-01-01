@@ -16,12 +16,20 @@
     </div>
 </div>
 
-<app-announcements-list *ngIf="!isFiltered" 
+<!--<app-announcements-list *ngIf="!isFiltered" 
     [announcements] = "announcements">
-</app-announcements-list>
-<app-foundannouncements-list *ngIf="isFiltered" 
-    [announcements] = "announcements" 
-    [searchText] = "searchText" 
-    [searchClas] = "searchClas" 
-    [searchAuthor] = "searchAuthor">
-</app-foundannouncements-list> 
+</app-announcements-list>-->
+<div *ngIf="!isFiltered">
+    <h2>Последно добавени обяви</h2>
+    <div class="col-md-3" *ngFor="let ad of (announcements | async | sort:'-$key' | top:12)">
+        <img src="{{ad.image}}" alt="{{ad.title}}">
+        <p><strong>{{ad.title}}</strong> за {{ad.clas}} клас</p>
+        <p name="username">Свържи се с: <a [routerLink]="['/detail', ad.$key, ad.userid]"> {{(ad.userid | getUser | async)?.name}}</a></p>
+        <p name="publisher">Издателство: {{ad.publisher}}</p>
+        <p name="year">Година на издаване: {{ad.year}}</p>
+        <p name="price">Цена: {{ad.price | toBGNMoney}}</p>
+        <p><a class="btn btn-default" [routerLink]="['/detail', ad.$key]" role="button">Виж повече &raquo;</a></p>
+    </div>
+</div>
+<app-foundannouncements-list *ngIf="isFiltered" [announcements]="announcements" [searchText]="searchText" [searchClas]="searchClas" [searchAuthor]="searchAuthor">
+</app-foundannouncements-list>

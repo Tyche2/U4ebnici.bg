@@ -1,28 +1,22 @@
-<div class = "container">
-    <div class="row"> 
+<div class="container">
+    <div class="row">
         <div class="col-xs-6 col-sm-5">
-          <h2>Намерени учебници</h2>
+            <h2>Намерени учебници</h2>
         </div>
         <div class="col-xs-6 col-sm-4">
-          <div class="row" style="padding-top: 20px">
-            <div class="col-xs-6 col-sm-4">
-              <label for="sortBy">Сортирай по:</label>
-            </div>
-            <div class="col-xs-6 col-sm-8">
-              <select 
-                  class="form-control" 
-                  id="sortBy" 
-                  (change)="onSortByChange($event)">
+            <div class="row" style="padding-top: 20px">
+                <div class="col-xs-6 col-sm-4">
+                    <label for="sortBy">Сортирай по:</label>
+                </div>
+                <div class="col-xs-6 col-sm-8">
+                    <select class="form-control" id="sortBy" (change)="onSortByChange($event)">
                   <option *ngFor="let sortBy of sortByOptions" [selected]="sortByOptions === sortBy" value="{{sortBy}}">{{sortBy}}</option>
               </select>
-            </div>  
-          </div>
+                </div>
+            </div>
         </div>
         <div class="col-xs-6 col-sm-2" style="padding-top: 20px">
-            <select 
-                class="form-control" 
-                id="order"
-                (change)="onOrderChange($event)">
+            <select class="form-control" id="order" (change)="onOrderChange($event)">
                 <option [selected]="order === 'asc'">Възходящо</option>
                 <option [selected]="order === 'desc'">Низходящо</option>
             </select>
@@ -32,7 +26,7 @@
         <div class="col-md-1">
             <img src="{{ad.image}}" alt="{{ad.title}}">
         </div>
-        <div class="col-md-10"> 
+        <div class="col-md-10">
             <p><strong>{{ad.title}} за {{ad.clas}} клас</strong></p>
             <p name="publisher"><strong>Издателство:</strong> {{ad.publisher}}</p>
             <p name="authors"><strong>Автори:</strong> {{ad.authors}}</p>

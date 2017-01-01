@@ -25,6 +25,7 @@ import { NewAnnouncementComponent } from './new-announcement/new-announcement.co
 import { FooterComponent } from './footer/footer.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { FoundannouncementsListComponent } from './foundannouncements-list/foundannouncements-list.component';
+import { UserAnnouncementsComponent } from './user-announcements/user-announcements.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FoundannouncementsListComponent } from './foundannouncements-list/found
     NewAnnouncementComponent,
     FooterComponent,
     UserSettingsComponent,
-    FoundannouncementsListComponent
+    FoundannouncementsListComponent,
+    UserAnnouncementsComponent
   ],
   imports: [
     BrowserModule,

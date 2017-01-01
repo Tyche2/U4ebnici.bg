@@ -1,24 +1,18 @@
-import {
-  Component,
-  OnInit,
-  Input
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { Announcement } from '../shared/model/announcement';
-import { Observable } from 'rxjs/Rx';
+import { AnnouncementService } from '../shared/model/announcement.service';
 import { ConstantService } from '../shared/constant.service';
 
 @Component({
-  selector: 'app-foundannouncements-list',
-  templateUrl: './foundannouncements-list.component.html',
-  styleUrls: ['./foundannouncements-list.component.css'],
-  providers: [ConstantService]
+  selector: 'app-user-announcements',
+  templateUrl: './user-announcements.component.html',
+  styleUrls: ['./user-announcements.component.css'],
+  providers: [AnnouncementService, ConstantService]
 })
-
-export class FoundannouncementsListComponent implements OnInit {
-  @Input() announcements: Observable<Announcement[]>;
-  @Input() searchText: string = 'Book';
-  @Input() searchClas: string;
-  @Input() searchAuthor: string;
+export class UserAnnouncementsComponent implements OnInit {
+  announcements: Observable<Announcement[]>;
   sortBy: string;
   sortByKey: string;
   sortByOptions: string[];
@@ -26,18 +20,20 @@ export class FoundannouncementsListComponent implements OnInit {
   sortByField: string;
   isFiltred: boolean;
 
-  constructor(private constantService: ConstantService) {
-  }
+  constructor(
+    private announcementService: AnnouncementService,
+    private constantService: ConstantService
+  ) { }
 
   ngOnInit() {
+    this.announcements = this.announcementService.findAnnouncmentsByUserKey('wnsuJuKI0DNdXbVcPN9wYlMzmfZ2');
     this.sortByOptions = [this.constantService.LAST_ADDED, this.constantService.ALPHABETIC_ORDER,
-                    this.constantService.CLASS, this.constantService.PRICE];
+    this.constantService.CLASS, this.constantService.PRICE];
     this.sortBy = this.constantService.LAST_ADDED;
     this.sortByField = '$key';
     this.sortByKey = '-$key';
     this.order = 'desc';
-    this.isFiltred = true;
-    console.log(this.searchText);
+    this.isFiltred = false;
   }
 
   onSortByChange(e: any) {
@@ -66,5 +62,4 @@ export class FoundannouncementsListComponent implements OnInit {
     }
   }
 
-  get searchtext(): string { return this.searchText; }
 }
