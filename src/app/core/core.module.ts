@@ -10,21 +10,26 @@ import { ConstantService } from './constant.service';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { throwIfAlreadyLoaded } from './module-import-guard';
+import { ContactComponent } from './contact/contact.component';
+import { SharedModule } from './../shared/shared.module';
 
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        SharedModule
     ],
     exports: [
         AlertComponent,
         FooterComponent,
-        NavbarComponent
+        NavbarComponent,
+        ContactComponent
     ],
     declarations: [
         AlertComponent,
         FooterComponent,
-        NavbarComponent
+        NavbarComponent,
+        ContactComponent
     ],
     providers: [
         AuthGuard,
