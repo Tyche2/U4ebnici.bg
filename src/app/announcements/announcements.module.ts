@@ -8,13 +8,14 @@ import { Ng2PaginationModule } from 'ng2-pagination';
 import { AnnouncementService } from './shared/announcement.service';
 import { AnnouncementsComponent } from './announcements.component';
 import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
-import { AnnouncementsListComponent } from './announcements-list/announcements-list.component';
+import { AnnouncementsListComponent } from './shared/announcements-list/announcements-list.component';
 import { AnnouncementsRoutingModule } from './announcements-routing.module';
 import { FoundAnnouncementsListComponent } from './found-announcements/found-announcements.component';
 import { LatestAnnouncementsComponent } from './latest-announcements/latest-announcements.component';
 import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';
 import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
 import { SharedModule } from '../shared/shared.module';
+import { SearchAnnouncementsComponent } from './shared/search-announcements/search-announcements.component';
 import { UserAnnouncementsComponent } from './user-announcements/user-announcements.component';
 
 
@@ -36,7 +37,8 @@ import { UserAnnouncementsComponent } from './user-announcements/user-announceme
     LatestAnnouncementsComponent,
     NewAnnouncementComponent,
     EditAnnouncementComponent,
-    UserAnnouncementsComponent
+    UserAnnouncementsComponent,
+    SearchAnnouncementsComponent
   ],
   providers: [AnnouncementService]
 })

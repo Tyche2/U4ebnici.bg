@@ -6,8 +6,8 @@ import {
 
 import { Observable } from 'rxjs/Rx';
 
-import { Announcement } from '../shared/announcement.model';
-import { ConstantService } from '../../core/constant.service';
+import { Announcement } from '../announcement.model';
+import { ConstantService } from '../../../core/constant.service';
 
 @Component({
   selector: 'app-announcements-list',
@@ -18,6 +18,7 @@ import { ConstantService } from '../../core/constant.service';
 export class AnnouncementsListComponent implements OnInit {
   @Input() announcements: Observable<Announcement[]>;
   @Input() isFiltred: boolean;
+  @Input() pageTitle: string;
   @Input() searchText: string;
   @Input() searchClas: string;
   @Input() searchAuthor: string;
@@ -63,6 +64,4 @@ export class AnnouncementsListComponent implements OnInit {
       this.sortByKey = '-' + this.sortByField;
     }
   }
-
-  get searchtext(): string { return this.searchText; }
 }
