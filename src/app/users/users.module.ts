@@ -10,6 +10,7 @@ import { UserService } from './shared/users.service';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { UsersComponent } from './users.component';
 import { UsersRoutingModule } from './users-routing.module';
+import { MessagesPageComponent } from './messages-page/messages-page.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { UsersRoutingModule } from './users-routing.module';
     RegisterComponent,
     UsersComponent,
     UserDetailComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    MessagesPageComponent
   ],
   providers: [UserService]
 })
