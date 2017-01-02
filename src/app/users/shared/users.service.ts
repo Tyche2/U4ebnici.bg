@@ -16,11 +16,11 @@ export class UserService {
 
     createNewUser(user: any): Observable<any> {
         const userToSave = Object.assign({}, user);
-        const newUserKey = user.uid;//this.sdkDb.child('users').push().key;
+        const newUserKey = user.uid; // this.sdkDb.child('users').push().key;
 
         let dataToSave = {};
 
-        dataToSave["users/" + newUserKey] = userToSave;
+        dataToSave['users/' + newUserKey] = userToSave;
 
         return this.firebaseUpdate(dataToSave);
     }
@@ -49,7 +49,7 @@ export class UserService {
         delete(userToUpdate.$key);
 
         let dataToSave = {};
-        dataToSave["users/" + newUserKey] = userToUpdate;
+        dataToSave['users/' + newUserKey] = userToUpdate;
 
         return this.firebaseUpdate(dataToSave);
     }

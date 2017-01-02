@@ -6,3 +6,6 @@
     <p>Текст: {{message.msgText}}</p>
     <p>До: {{(message.touserid | getUser | async)?.name}}</p>
 </div>
+<div *ngIf="!(messages | async)?.length">
+    Няма съобщения за тази обява.
+</div>

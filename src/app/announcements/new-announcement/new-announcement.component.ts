@@ -67,8 +67,7 @@ export class NewAnnouncementComponent implements OnInit {
         .then(snapshot => {
             this.myDBForm.value.image = snapshot.downloadURL;
             this.announcementService.createAnnouncement(this.myDBForm.value)
-            .subscribe(
-                () => {
+            .subscribe(() => {
                     this.alertService.success('Обявата е записана', true);
                     this.myDBForm.reset();
                 },
