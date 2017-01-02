@@ -1,3 +1,7 @@
-<p>
-  messages-page works!
-</p>
+<div *ngFor="let message of (messages | async |msgFilter:'fromuserid':user)">
+
+    <p>От: {{(message.fromuserid | getUser | async)?.name}}</p>
+    <p>Дата: {{message.sent}}</p>
+    <p>Текст: {{message.msgText}}</p>
+    <p>До: {{(message.touserid | getUser | async)?.name}}</p>
+</div>

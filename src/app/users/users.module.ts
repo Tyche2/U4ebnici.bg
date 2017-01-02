@@ -11,6 +11,7 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { UsersComponent } from './users.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { MessagesPageComponent } from './messages-page/messages-page.component';
+import { MessagesComponent } from './messages-page/messages.component'
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { MessagesPageComponent } from './messages-page/messages-page.component';
     UsersComponent,
     UserDetailComponent,
     UserSettingsComponent,
-    MessagesPageComponent
+    MessagesPageComponent,
+    MessagesComponent
   ],
   providers: [UserService]
 })

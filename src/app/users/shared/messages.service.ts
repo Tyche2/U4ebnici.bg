@@ -15,11 +15,11 @@ export class MessagesService {
     }
 
     createNewMessage(msg: Message): Observable<any> {
-//        const msgToSave = Object.assign({}, msg);
+        //        const msgToSave = Object.assign({}, msg);
         const newMsgKey = this.sdkDb.child('messages').push(msg).key;
 
         let dataToSave = {};
-//        dataToSave['messages/' + newMsgKey] = msgToSave;
+        //        dataToSave['messages/' + newMsgKey] = msgToSave;
         dataToSave[`messagesPerAnnouncement/${msg.announcementid}/${newMsgKey}`] = true;
         dataToSave[`messagesPerUser/${msg.fromuserid}/${newMsgKey}`] = 'sent';
         dataToSave[`messagesPerUser/${msg.touserid}/${newMsgKey}`] = 'received';
@@ -44,5 +44,24 @@ export class MessagesService {
             );
 
         return subject.asObservable();
+    }
+
+    findMessageByKey(messageKey: string): Observable<Message> {
+        return this.db.object(`messages/${messageKey}`).map(Message.fromJson);
+    }
+
+    private findMessagesKeysByUserKey(userKey: string): Observable<string[]> {
+        return this.db.list(`messagesPerUser/${userKey}`)
+            .map(keys => keys.map(keyObj => keyObj.$key));
+    }
+
+    private findMessagesByKeys(messagesKeys$: Observable<string[]>): Observable<Message[]> {
+        return messagesKeys$
+            .map(keys => keys.map(key => this.findMessageByKey(key)))
+            .flatMap(fbojs => Observable.combineLatest(fbojs));
+    }
+
+    findMessagesByUserKey(userKey: string): Observable<Message[]> {
+        return this.findMessagesByKeys(this.findMessagesKeysByUserKey(userKey));
     }
 }

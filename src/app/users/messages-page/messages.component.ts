@@ -5,26 +5,21 @@ import { AuthService } from './../../core/auth/services/auth.service';
 import { MessagesService } from './../shared/messages.service';
 import { Message } from '../shared/message.model';
 
+
 @Component({
-  selector: 'app-messages-page',
-  templateUrl: './messages-page.component.html',
-  styleUrls: ['./messages-page.component.css'],
-  providers: [MessagesService]
+    selector: 'messages',
+    templateUrl: './messages.component.html'
 })
-export class MessagesPageComponent implements OnInit {
-messages: Observable<Message[]>;
-user: string; 
+export class MessagesComponent implements OnInit {
+    messages: Observable<Message[]>;
+    @Input() message: Message;
 
     constructor(
         private messagesService: MessagesService,
         private authService: AuthService) { }
-isAuthUid(){
-    return this.authService.id;
-  }
+
     ngOnInit() { 
     let userUID = this.authService.id;
-    
     this.messages = this.messagesService.findMessagesByUserKey(userUID);
-    this.user = userUID;
 }
 }

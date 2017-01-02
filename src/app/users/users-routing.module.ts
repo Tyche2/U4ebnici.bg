@@ -18,9 +18,9 @@ const usersRoutes: Routes = [
                     { path: ':adId/:id', component: UserDetailComponent }, // canActivate: [AuthGuard] },
                 ]
             },
+            { path: "messages", component: MessagesPageComponent},
             { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegisterComponent },
-            { path: "messages", component: MessagesPageComponent}
+            { path: 'register', component: RegisterComponent }
         ]
     }
 ];

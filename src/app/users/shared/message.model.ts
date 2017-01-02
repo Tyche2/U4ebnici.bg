@@ -4,7 +4,7 @@ export class Message {
     }
 
     static fromJson({$key, announcementid, answered,
-        fromuserid, read, sent, text, touserid}): Message {
+        fromuserid, read, sent, msgText, touserid}): Message {
         return new Message(
             $key,
             announcementid,
@@ -12,7 +12,7 @@ export class Message {
             fromuserid,
             read,
             sent,
-            text,
+            msgText,
             touserid);
     }
 
@@ -23,7 +23,7 @@ export class Message {
         public fromuserid: string,
         public read: boolean,
         public sent: string,
-        public text: string,
+        public msgText: string,
         public touserid: string) {
     }
 }
