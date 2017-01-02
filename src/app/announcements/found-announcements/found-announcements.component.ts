@@ -31,6 +31,7 @@ export class FoundAnnouncementsListComponent implements OnInit {
         this.searchClas = params['clas'] || '';
         this.searchAuthor = params['author'] || '';
       });
+
     this.announcements = this.announcementService.findAllAnnouncements();
   }
 }

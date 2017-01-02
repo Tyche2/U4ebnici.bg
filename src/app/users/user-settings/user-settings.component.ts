@@ -11,8 +11,7 @@ import { UserService } from '../shared/users.service';
 @Component({
   selector: 'app-user-settings',
   templateUrl: './user-settings.component.html',
-  styleUrls: ['./user-settings.component.css'],
-  providers: [UserService]
+  styleUrls: ['./user-settings.component.css']
 })
 
 export class UserSettingsComponent implements OnInit {
