@@ -13,6 +13,7 @@ import { AnnouncementsRoutingModule } from './announcements-routing.module';
 import { FoundAnnouncementsListComponent } from './found-announcements/found-announcements.component';
 import { LatestAnnouncementsComponent } from './latest-announcements/latest-announcements.component';
 import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';
+import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
 import { SharedModule } from '../shared/shared.module';
 import { UserAnnouncementsComponent } from './user-announcements/user-announcements.component';
 
@@ -34,6 +35,7 @@ import { UserAnnouncementsComponent } from './user-announcements/user-announceme
     FoundAnnouncementsListComponent,
     LatestAnnouncementsComponent,
     NewAnnouncementComponent,
+    EditAnnouncementComponent,
     UserAnnouncementsComponent
   ],
   providers: [AnnouncementService]

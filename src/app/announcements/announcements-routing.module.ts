@@ -6,6 +6,7 @@ import { AnnouncementsListComponent } from './announcements-list/announcements-l
 import { FoundAnnouncementsListComponent } from './found-announcements/found-announcements.component';
 import { LatestAnnouncementsComponent } from './latest-announcements/latest-announcements.component';
 import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';
+import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
 import { UserAnnouncementsComponent } from './user-announcements/user-announcements.component';
 
 const announcementsRoutes: Routes = [
@@ -15,6 +16,7 @@ const announcementsRoutes: Routes = [
     {
         path: 'announcement',
         children: [
+            { path: 'edit/:id', component: EditAnnouncementComponent },
             { path: 'new', component: NewAnnouncementComponent },
             { path: ':id', component: AnnouncementDetailComponent }
         ]
