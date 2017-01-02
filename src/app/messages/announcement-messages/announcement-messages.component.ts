@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AuthService } from './../../core/auth/services/auth.service';
 import { MessagesService } from './../shared/messages.service';
 import { Message } from '../shared/message.model';
 
@@ -12,20 +12,16 @@ import { Message } from '../shared/message.model';
 })
 export class AnnouncementMessagesComponent implements OnInit {
   messages: Observable<Message[]>;
-  announcementId: string;
+  announcementKey: string;
 
   constructor(
     private messagesService: MessagesService,
-    private authService: AuthService
+    private route: ActivatedRoute
   ) { }
 
-  isAuthUid() {
-    return this.authService.id;
-  }
-
   ngOnInit() {
-    this.announcementId = '-KZvCrt-9ENN2P-pwaJT';
-    this.messages = this.messagesService.findMessagesByAnnouncementKey(this.announcementId);
+    this.announcementKey = this.route.snapshot.params['id'];
+    this.messages = this.messagesService.findMessagesByAnnouncementKey(this.announcementKey);
     console.log(this.messages);
   }
 }

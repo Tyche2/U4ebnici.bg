@@ -14,6 +14,7 @@ import { AnnouncementsModule } from './announcements/announcements.module';
 import { firebaseConfig, authConfig } from './environments/firebase.config';
 import { AngularFireModule } from 'angularfire2/index';
 import { AppRoutingModule } from './app-routing.module';
+import { MessagesModule } from './messages/messages.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './users/shared/users.service';
 import { UsersModule } from './users/users.module';
@@ -27,6 +28,7 @@ import { UsersModule } from './users/users.module';
     CoreModule,
     HttpModule,
     AppRoutingModule,
+    MessagesModule,
     SharedModule,
     UsersModule,
     AngularFireModule.initializeApp(firebaseConfig, authConfig)

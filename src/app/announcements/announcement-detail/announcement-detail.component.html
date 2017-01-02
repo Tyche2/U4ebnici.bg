@@ -14,5 +14,6 @@
     <p name="condition">Състояние: {{(announcement$ | async)?.condition}}</p>
     <p name="username">Публикувано от: {{((announcement$ | async)?.userid | getUser | async)?.name}}</p>
     <p name="added">Публикувано на: {{(announcement$ | async)?.added | date : "short"}}</p>
+    <p><a [routerLink]="['/messages', 'announcement', announcementKey]">Виж съобщения за обявата</a></p>
     <!--<p name="username">Публикувано от: <a [routerLink]="['/user/', (announcement$ | async)?.userid]"> {{((announcement$ | async)?.userid | getUser | async)?.name}}</a></p>-->
 </div>
