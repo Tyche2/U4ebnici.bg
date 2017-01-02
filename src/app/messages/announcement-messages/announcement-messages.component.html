@@ -1,4 +1,5 @@
-<div *ngFor="let message of (messages | async)">
+<h2>Съобщения за обявата</h2>
+<div class="message-container" *ngFor="let message of (messages | async)">
 
     <p>От: {{(message.fromuserid | getUser | async)?.name}}</p>
     <p>Дата: {{message.sent}}</p>

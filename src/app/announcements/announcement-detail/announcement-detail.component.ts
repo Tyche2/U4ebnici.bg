@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -18,7 +18,6 @@ export class AnnouncementDetailComponent implements OnInit {
   announcementKey: string;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private announcementService: AnnouncementService) { }
 

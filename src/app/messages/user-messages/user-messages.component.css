@@ -1,0 +1,17 @@
+.message-container {
+    margin: 20px 0px;
+    padding: 20px;
+    background-color: #cecaca
+}
+
+.selected {
+    background-color: #5e5b5b;
+    color: #FFFFFF
+}
+
+button {
+    margin-right: 20px;
+    width: 170px;
+    height: 40px;
+    border: 1px solid black
+}
