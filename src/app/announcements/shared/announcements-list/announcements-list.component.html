@@ -41,9 +41,12 @@
                 <p name="authors"><strong>Автори:</strong> {{ad.authors}}</p>
                 <p><a [routerLink]="['/announcement', ad.$key]">Виж подробна информация &raquo;</a></p>
             </div>
-            <div class="col-md-1" *ngIf="isAuth()">
+            <div class="col-md-1" *ngIf="isAuth() && isActive">
                 <p><a [routerLink]="['/announcement/edit', ad.$key]">Редактирай</a></p>
                 <p><a (click)="unactivateAnnouncement(ad.$key)">Архивирай</a></p>
+            </div>
+            <div class="col-md-1" *ngIf="isAuth() && !isActive">
+                <p><a (click)="activateAnnouncement(ad.$key)">Активирай</a></p>
             </div>
         </div>
     </div>
