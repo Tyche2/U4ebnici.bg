@@ -6,7 +6,7 @@ export class Announcement {
         public active: boolean,
         public added: string,
         public authors: string,
-        public clas: number,
+        public clas: string,
         public condition: string,
         public description: string,
         public discipline: string,

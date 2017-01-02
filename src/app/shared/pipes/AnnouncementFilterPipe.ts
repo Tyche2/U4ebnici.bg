@@ -17,7 +17,7 @@ export class AnnouncementFilterByPipe implements PipeTransform {
 
             return announcements.filter(ad => (ad.title.toLowerCase().indexOf(filterByTitle.toLowerCase()) >= 0
             || ad.discipline.toLowerCase().indexOf(filterByTitle.toLowerCase()) >= 0)
-                && (filterByClas === '' || +ad.clas === +filterByClas)
+                && (filterByClas === '' || ad.clas === filterByClas)
             && ad.authors.toLowerCase().indexOf(filterByAuthor.toLowerCase()) >= 0);
         }
     }
