@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2';
 import { Observable, Subject } from 'rxjs/Rx';
 import { Announcement } from './announcement.model';
-import { Message } from '../../users/shared/message.model';
+import { Message } from '../../messages/shared/message.model';
 import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
 import { Http } from '@angular/http';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseRef } from 'angularfire2';
@@ -102,6 +102,25 @@ export class AnnouncementService {
 
     findAnnouncmentsByUserKey(userKey: string): Observable<Announcement[]> {
         return this.findAnnouncmentsByKeys(this.findAnnouncmentsKeysByUserKey(userKey));
+    }
+
+    changeAnnouncementStatus(announcementKey: string, active: boolean) {
+        console.log(announcementKey);
+        return new Promise((resolve, reject) => {
+            this.findAnnouncementByKey(announcementKey)
+                .subscribe(obj => {
+                    console.log(obj);
+                    obj.active = active;
+                    delete(obj.$key);
+                    console.log(obj);
+                    let dataToSave = {};
+                    dataToSave[`announcements/${announcementKey}`] = obj;
+
+                    this.firebaseUpdate(dataToSave)
+                    .subscribe(() => resolve(obj),
+                                err => reject(err));
+                });
+        });
     }
 
    // findAllMessagesForAnnouncement(announcementKey: string): Observable<Message[]> {

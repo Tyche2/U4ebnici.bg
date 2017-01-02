@@ -10,18 +10,20 @@ import { AuthService } from '../../core/auth/services/auth.service';
   templateUrl: './user-announcements.component.html',
   styleUrls: ['./user-announcements.component.css']
 })
+
 export class UserAnnouncementsComponent implements OnInit {
   announcements: Observable<Announcement[]>;
   isFiltred: boolean;
+  userUID: string;
 
   constructor(
     private announcementService: AnnouncementService,
-    private authService: AuthService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     this.isFiltred = false;
-    let userUID = this.authService.id;
-    this.announcements = this.announcementService.findAnnouncmentsByUserKey(userUID);
+    this.userUID = this.authService.id;
+    this.announcements = this.announcementService.findAnnouncmentsByUserKey(this.userUID);
   }
 }

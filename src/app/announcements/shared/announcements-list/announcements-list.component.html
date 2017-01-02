@@ -10,8 +10,8 @@
                 </div>
                 <div class="col-xs-6 col-sm-8">
                     <select class="form-control" id="sortBy" (change)="onSortByChange($event)">
-                  <option *ngFor="let sortBy of sortByOptions" [selected]="sortByOptions === sortBy" value="{{sortBy}}">{{sortBy}}</option>
-              </select>
+                        <option *ngFor="let sortBy of sortByOptions" [selected]="sortByOptions === sortBy" value="{{sortBy}}">{{sortBy}}</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -23,15 +23,27 @@
         </div>
     </div>
     <div *ngIf="!isFiltred">
-        <div class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | sort: sortByKey)">
+        <div class="row" *ngIf="isAuth()">
+            <button type="button" class="btn btn-secondary" (click)="onAnnouncementsTypeChange($event)" isActive="true">Активни</button>
+            <button type="button" class="btn btn-secondary" (click)="onAnnouncementsTypeChange($event)" isActive="false">Архивирани</button>
+        </div>
+        <div class="row">
+            <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true">
+            </pagination-controls>
+        </div>
+        <div class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | showActive: isActive | sort: sortByKey)">
             <div class="col-md-1">
                 <img src="{{ad.image}}" alt="{{ad.title}}">
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <p><strong>{{ad.title}} за {{ad.clas}} клас</strong></p>
                 <p name="publisher"><strong>Издателство:</strong> {{ad.publisher}}</p>
                 <p name="authors"><strong>Автори:</strong> {{ad.authors}}</p>
                 <p><a [routerLink]="['/announcement', ad.$key]">Виж подробна информация &raquo;</a></p>
+            </div>
+            <div class="col-md-1" *ngIf="isAuth()">
+                <p><a [routerLink]="['/announcement/edit', ad.$key]">Редактирай</a></p>
+                <p><a (click)="unactivateAnnouncement(ad.$key)">Архивирай</a></p>
             </div>
         </div>
     </div>

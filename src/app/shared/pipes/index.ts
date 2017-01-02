@@ -4,4 +4,4 @@ export { SortPipe } from './SortPipe';
 export { ToBGNMoneyPipe } from './ToBGNMoneyPipe';
 export { TopPipe } from './TopPipe';
 export { AnnouncementFilterByPipe } from './AnnouncementFilterPipe';
-
+export { AnnouncementFilterByStatusPipe } from './AnnouncementFilterByStatusPipe';

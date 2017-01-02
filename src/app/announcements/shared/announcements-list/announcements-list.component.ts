@@ -8,6 +8,9 @@ import { Observable } from 'rxjs/Rx';
 
 import { Announcement } from '../announcement.model';
 import { ConstantService } from '../../../core/constant.service';
+import { AuthService } from '../../../core/auth/services/auth.service';
+import { AnnouncementService } from '../../shared/announcement.service';
+import { AlertService } from '../../../core/alert/alert.service';
 
 @Component({
   selector: 'app-announcements-list',
@@ -22,13 +25,18 @@ export class AnnouncementsListComponent implements OnInit {
   @Input() searchText: string;
   @Input() searchClas: string;
   @Input() searchAuthor: string;
+  isActive: boolean;
   sortBy: string;
   sortByKey: string;
   sortByOptions: string[];
   order: string;
   sortByField: string;
+  page: number;
 
-  constructor(private constantService: ConstantService) { }
+  constructor(private constantService: ConstantService,
+            private authService: AuthService,
+            private announcementService: AnnouncementService,
+            private alertService: AlertService) { }
 
   ngOnInit() {
     this.sortByOptions = [this.constantService.LAST_ADDED, this.constantService.ALPHABETIC_ORDER,
@@ -37,6 +45,7 @@ export class AnnouncementsListComponent implements OnInit {
     this.sortByField = '$key';
     this.sortByKey = '-$key';
     this.order = 'desc';
+    this.isActive = true;
   }
 
   onSortByChange(e: any) {
@@ -63,5 +72,37 @@ export class AnnouncementsListComponent implements OnInit {
     if (this.order === 'desc') {
       this.sortByKey = '-' + this.sortByField;
     }
+  }
+
+  onAnnouncementsTypeChange(e: any) {
+    if (e.target.getAttribute('isActive') === 'true') {
+      this.isActive = true;
+    } else {
+      this.isActive = false;
+    }
+  }
+
+  isAuth() {
+    return this.authService.authenticated;
+  }
+
+  get searchtext(): string { return this.searchText; }
+
+  unactivateAnnouncement(announcementKey: string) {
+    this.announcementService.changeAnnouncementStatus(announcementKey, false)
+      .then(() => {
+        this.alertService.success('Обявата е архивирана успешно');
+      })
+      .catch((err) => {
+        this.alertService.error(`Грешка при архивиране на обява ${err}`);
+      });
+  }
+
+  activateAnnouncement(announcementKey: string) {
+    this.announcementService.changeAnnouncementStatus(announcementKey, true)
+      .then(() => {
+        this.alertService.success('Обявата е активирана успешно');
+      })
+      .catch((err) =>  this.alertService.error(`Грешка при активиране на обява ${err}`));
   }
 }

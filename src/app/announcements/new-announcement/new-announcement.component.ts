@@ -11,6 +11,7 @@ import { Announcement } from '../shared/announcement.model';
   templateUrl: './new-announcement.component.html',
   styleUrls: ['./new-announcement.component.css']
 })
+
 export class NewAnnouncementComponent implements OnInit {
   myForm: FormGroup;
   myDBForm: FormGroup;
@@ -71,7 +72,7 @@ export class NewAnnouncementComponent implements OnInit {
                     this.alertService.success('Обявата е записана', true);
                     this.myDBForm.reset();
                 },
-                err => alert(`Грешка при запис на обява ${err}`)
+                err => this.alertService.error(`Грешка при запис на обява ${err}`)
             );
           });
     } else {
@@ -81,7 +82,7 @@ export class NewAnnouncementComponent implements OnInit {
               this.alertService.success('Обявата е записана', true);
               this.myDBForm.reset();
           },
-          err => alert(`Грешка при запис на обява ${err}`)
+          err => this.alertService.error(`Грешка при запис на обява ${err}`)
       );
     }
   }

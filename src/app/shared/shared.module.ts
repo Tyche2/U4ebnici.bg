@@ -1,6 +1,14 @@
 import { NgModule } from '@angular/core';
 
-import { GetUserPipe, SortPipe, ToBGNMoneyPipe, TopPipe, AnnouncementFilterByPipe, MessageFilterPipe } from './pipes';
+import {
+    GetUserPipe,
+    SortPipe,
+    ToBGNMoneyPipe,
+    TopPipe,
+    AnnouncementFilterByPipe,
+    MessageFilterPipe,
+    AnnouncementFilterByStatusPipe
+} from './pipes';
 
 @NgModule({
     declarations: [
@@ -9,7 +17,8 @@ import { GetUserPipe, SortPipe, ToBGNMoneyPipe, TopPipe, AnnouncementFilterByPip
         ToBGNMoneyPipe,
         TopPipe,
         AnnouncementFilterByPipe,
-        MessageFilterPipe
+        MessageFilterPipe,
+        AnnouncementFilterByStatusPipe
     ],
     exports: [
         GetUserPipe,
@@ -17,7 +26,8 @@ import { GetUserPipe, SortPipe, ToBGNMoneyPipe, TopPipe, AnnouncementFilterByPip
         ToBGNMoneyPipe,
         TopPipe,
         AnnouncementFilterByPipe,
-        MessageFilterPipe
+        MessageFilterPipe,
+        AnnouncementFilterByStatusPipe
     ]
 })
 export class SharedModule { }
