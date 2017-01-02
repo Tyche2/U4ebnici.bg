@@ -1,13 +1,13 @@
-import { UserSettingsComponent } from './../user-settings/user-settings.component';
+import { UserSettingsComponent } from '../users/user-settings/user-settings.component';
 import { AuthGuard } from './../core/auth/guards/auth.guard';
 import { NewAnnouncementComponent } from '../announcements/new-announcement/new-announcement.component';
-import { RegisterComponent } from './../register/register.component';
+import { RegisterComponent } from '../users/register/register.component';
 import { AnnouncementDetailComponent } from '../announcements/announcement-detail/announcement-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../users/login/login.component';
 import { AnnouncementsComponent } from '../announcements/announcements.component';
-import { UserDetailComponent } from '../user-detail/user-detail.component';
+import { UserDetailComponent } from '../users/user-detail/user-detail.component';
 import { UserAnnouncementsComponent } from '../announcements/user-announcements/user-announcements.component';
 
 

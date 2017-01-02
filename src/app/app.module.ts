@@ -13,23 +13,16 @@ import { SharedModule } from './shared/shared.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
 import { firebaseConfig, authConfig } from './environments/firebase.config';
 import { AngularFireModule } from 'angularfire2/index';
-import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './routing/app-routing.module';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { UserService } from './shared/model/users.service';
-import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
-import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { UserService } from './users/shared/users.service';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    UserDetailComponent,
     FooterComponent,
-    UserSettingsComponent,
   ],
   imports: [
     AnnouncementsModule,
@@ -40,6 +33,7 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
     AppRoutingModule,
     ReactiveFormsModule,
     SharedModule,
+    UsersModule,
     AngularFireModule.initializeApp(firebaseConfig, authConfig)
   ],
   providers: [UserService],

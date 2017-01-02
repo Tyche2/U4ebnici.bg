@@ -1,26 +1,26 @@
-import { Message } from './message';
-import { Injectable, Inject } from '@angular/core';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseRef } from 'angularfire2';
+import { Injectable, Inject } from '@angular/core';
+import { Http } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
-import { Http } from "@angular/http";
+
 import { firebaseConfig } from '../../environments/firebase.config';
+import { Message } from './message.model';
 
 @Injectable()
 export class MessagesService {
-
-sdkDb: any;
+    sdkDb: any;
     constructor(private db: AngularFireDatabase, @Inject(FirebaseRef) fb,
         private http: Http) {
         this.sdkDb = fb.database().ref();
     }
- 
-createNewMessage(msg: any): Observable<any> {
+
+    createNewMessage(msg: any): Observable<any> {
         const msgToSave = Object.assign({}, msg);
         const newMsgKey = this.sdkDb.child('messages').push().key;
 
         let dataToSave = {};
 
-        dataToSave["messages/" + newMsgKey] = msgToSave;
+        dataToSave['messages/' + newMsgKey] = msgToSave;
 
         return this.firebaseUpdate(dataToSave);
     }

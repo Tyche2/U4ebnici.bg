@@ -1,14 +1,4 @@
 export class User {
-    constructor(
-        public $key: string,
-        public name: string,
-        public city: string,
-        public phone: string,
-        public dbemail: string,
-        public skype: number,
-        public uid: string,
-        ) { }
-
     static fromJsonList(array): User[] {
         return array.map(User.fromJson);
     }
@@ -24,4 +14,14 @@ export class User {
             skype,
             uid);
     }
+
+    constructor(
+        public $key: string,
+        public name: string,
+        public city: string,
+        public phone: string,
+        public dbemail: string,
+        public skype: number,
+        public uid: string,
+        ) { }
 }

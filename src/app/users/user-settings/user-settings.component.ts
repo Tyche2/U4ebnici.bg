@@ -1,11 +1,12 @@
-import { AlertService } from './../core/alert/alert.service';
-import { AuthService } from './../core/auth/services/auth.service';
-import { UserService } from './../shared/model/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../shared/model/user';
-import { Observable } from 'rxjs/Rx';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { AlertService } from '../../core/alert/alert.service';
+import { AuthService } from '../../core/auth/services/auth.service';
+import { User } from '../shared/user.model';
+import { UserService } from '../shared/users.service';
 
 @Component({
   selector: 'app-user-settings',

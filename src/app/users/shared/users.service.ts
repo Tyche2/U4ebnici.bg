@@ -1,9 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseRef } from 'angularfire2';
+import { Injectable, Inject } from '@angular/core';
+import { Http } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
-import { User } from './user';
-import { Http } from "@angular/http";
+
 import { firebaseConfig } from '../../environments/firebase.config';
+import { User } from './user.model';
 
 @Injectable()
 export class UserService {

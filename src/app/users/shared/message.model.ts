@@ -1,16 +1,4 @@
 export class Message {
-
-    constructor(
-        public $key: string,
-        public announcementid: string,
-        public answered: boolean,
-        public fromuserid: string,
-        public read: boolean,
-        public sent: string,
-        public text: string,
-        public touserid: string) {
-    }
-
     static fromJsonList(array): Message[] {
         return array.map(Message.fromJson);
     }
@@ -26,6 +14,17 @@ export class Message {
             sent,
             text,
             touserid);
+    }
+
+    constructor(
+        public $key: string,
+        public announcementid: string,
+        public answered: boolean,
+        public fromuserid: string,
+        public read: boolean,
+        public sent: string,
+        public text: string,
+        public touserid: string) {
     }
 }
 

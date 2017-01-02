@@ -1,17 +1,18 @@
-import { AlertService } from './../core/alert/alert.service';
-import { MessagesService } from './../shared/model/messages.service';
-import { Message } from './../shared/model/message';
-import { Announcement } from '../announcements/shared/announcement.model';
-import { AnnouncementService } from '../announcements/shared/announcement.service';
-import { database, initializeApp } from "firebase";
-import { UserService } from './../shared/model/users.service';
+import { animate, Component, OnInit, state, style, transition, trigger } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { User } from '../shared/model/user';
+import { database, initializeApp } from 'firebase';
 import { Observable } from 'rxjs/Rx';
-import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-var firebase = require('firebase');
+import { AlertService } from '../../core/alert/alert.service';
+import { Announcement } from '../../announcements/shared/announcement.model';
+import { AnnouncementService } from '../../announcements/shared/announcement.service';
+import { Message } from '../shared/message.model';
+import { MessagesService } from '../shared/messages.service';
+import { User } from '../shared/user.model';
+import { UserService } from '../shared/users.service';
+
+let firebase = require('firebase');
 
 @Component({
   selector: 'app-user-detail',
