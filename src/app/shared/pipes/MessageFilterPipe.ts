@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Message } from '../../users/shared/message.model';
+import { Message } from '../../messages/shared/message.model';
 
 @Pipe({
     name: 'msgFilter'
