@@ -36,10 +36,6 @@ export class AnnouncementsListComponent implements OnInit {
     this.sortByField = '$key';
     this.sortByKey = '-$key';
     this.order = 'desc';
-
-    console.log(this.searchText);
-    console.log(this.searchClas);
-    console.log(this.searchAuthor);
   }
 
   onSortByChange(e: any) {

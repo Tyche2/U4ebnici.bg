@@ -11,7 +11,7 @@ import { UserAnnouncementsComponent } from './user-announcements/user-announceme
 
 const announcementsRoutes: Routes = [
     { path: 'home', component: LatestAnnouncementsComponent },
-    // { path: 'announcements', component: FoundAnnouncementsListComponent }, TODO (query)
+    { path: 'announcements', component: FoundAnnouncementsListComponent }, // TODO (query)
     { path: 'user-announcements', component: UserAnnouncementsComponent },
     {
         path: 'announcement',

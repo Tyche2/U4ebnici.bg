@@ -1,12 +1,10 @@
-import {
-  Component,
-  OnInit,
-  Input
-} from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Rx';
 
 import { Announcement } from '../shared/announcement.model';
+import { AnnouncementService } from '../shared/announcement.service';
 import { ConstantService } from '../../core/constant.service';
 
 @Component({
@@ -16,10 +14,10 @@ import { ConstantService } from '../../core/constant.service';
 })
 
 export class FoundAnnouncementsListComponent implements OnInit {
-  @Input() announcements: Observable<Announcement[]>;
-  @Input() searchText: string = 'Book';
-  @Input() searchClas: string;
-  @Input() searchAuthor: string;
+  announcements: Observable<Announcement[]>;
+  searchText: string;
+  searchClas: string;
+  searchAuthor: string;
   sortBy: string;
   sortByKey: string;
   sortByOptions: string[];
@@ -27,18 +25,29 @@ export class FoundAnnouncementsListComponent implements OnInit {
   sortByField: string;
   isFiltred: boolean;
 
-  constructor(private constantService: ConstantService) {
-  }
+  constructor(
+    private announcementService: AnnouncementService,
+    private constantService: ConstantService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.route.params
+      .subscribe((params: Params) => {
+        this.searchText = params['text'] || '';
+        this.searchClas = params['clas'] || '';
+        this.searchAuthor = params['author'] || '';
+      });
+
+    this.announcements = this.announcementService.findAllAnnouncements();
+
     this.sortByOptions = [this.constantService.LAST_ADDED, this.constantService.ALPHABETIC_ORDER,
-                    this.constantService.CLASS, this.constantService.PRICE];
+    this.constantService.CLASS, this.constantService.PRICE];
     this.sortBy = this.constantService.LAST_ADDED;
     this.sortByField = '$key';
     this.sortByKey = '-$key';
     this.order = 'desc';
     this.isFiltred = true;
-    console.log(this.searchText);
   }
 
   onSortByChange(e: any) {

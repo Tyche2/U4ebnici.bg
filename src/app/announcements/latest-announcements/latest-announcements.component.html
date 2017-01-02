@@ -15,7 +15,6 @@
         <button type="button" class="btn btn-secondary" (click)="findRecords()">Намери</button>
     </div>
 </div>
-
 <div>
     <h2>Последно добавени обяви</h2>
     <div class="col-md-3" *ngFor="let ad of (announcements | async | sort:'-$key' | top:12)">
