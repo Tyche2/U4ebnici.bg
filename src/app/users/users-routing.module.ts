@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { MessagesPageComponent } from './messages-page/messages-page.component';
 
 const usersRoutes: Routes = [
     {
@@ -18,7 +19,8 @@ const usersRoutes: Routes = [
                 ]
             },
             { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegisterComponent }
+            { path: 'register', component: RegisterComponent },
+            { path: "messages", component: MessagesPageComponent}
         ]
     }
 ];
