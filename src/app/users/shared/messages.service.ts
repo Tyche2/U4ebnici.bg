@@ -14,13 +14,15 @@ export class MessagesService {
         this.sdkDb = fb.database().ref();
     }
 
-    createNewMessage(msg: any): Observable<any> {
-        const msgToSave = Object.assign({}, msg);
-        const newMsgKey = this.sdkDb.child('messages').push().key;
+    createNewMessage(msg: Message): Observable<any> {
+//        const msgToSave = Object.assign({}, msg);
+        const newMsgKey = this.sdkDb.child('messages').push(msg).key;
 
         let dataToSave = {};
-
-        dataToSave['messages/' + newMsgKey] = msgToSave;
+//        dataToSave['messages/' + newMsgKey] = msgToSave;
+        dataToSave[`messagesPerAnnouncement/${msg.announcementid}/${newMsgKey}`] = true;
+        dataToSave[`messagesPerUser/${msg.fromuserid}/${newMsgKey}`] = 'sent';
+        dataToSave[`messagesPerUser/${msg.touserid}/${newMsgKey}`] = 'received';
 
         return this.firebaseUpdate(dataToSave);
     }

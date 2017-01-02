@@ -1,34 +1,36 @@
 import { AlertService } from '../../alert/alert.service';
 import { firebaseConfig } from './../../../environments/firebase.config';
 import { Http, Headers, Response } from '@angular/http';
-import { database, initializeApp } from "firebase";
-import { Injectable } from "@angular/core";
-import { Observable, Subject, BehaviorSubject } from "rxjs/Rx";
-import { AuthProviders, AuthMethods, FirebaseAuth, FirebaseAuthState } from "angularfire2";
-import { AuthInfo } from "../guards/auth-info";
+import { database, initializeApp } from 'firebase';
+import { Injectable } from '@angular/core';
+import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
+import { AuthProviders, AuthMethods, FirebaseAuth, FirebaseAuthState } from 'angularfire2';
+import { AuthInfo } from '../guards/auth-info';
 
 export interface User {
   email: string;
   password: string;
   confirmPassword?: string;
 }
-var firebase = require('firebase');
+let firebase = require('firebase');
 firebase.initializeApp(firebaseConfig);
 
 @Injectable()
 export class AuthService {
-  private authState: FirebaseAuthState = null;
   static UNKNOWN_USER = new AuthInfo(null);
   static USER_DATA;
+  private authState: FirebaseAuthState = null;
+  currentUser: any;
   authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOWN_USER);
   userData$: BehaviorSubject<any> = new BehaviorSubject<any>(AuthService.USER_DATA);
-  //loading = false;
+
+  // loading = false;
   constructor(private alertService: AlertService, public auth: FirebaseAuth) {
     auth.subscribe((state: FirebaseAuthState) => {
       this.authState = state;
-    })
+    });
   }
-  currentUser: any;
+
   get authenticated(): boolean {
     return this.authState !== null;
   }
@@ -65,5 +67,4 @@ export class AuthService {
         this.authInfo$.next(AuthService.UNKNOWN_USER);
       });
   }
-
 }

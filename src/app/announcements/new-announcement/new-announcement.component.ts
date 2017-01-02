@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AlertService } from '../../core/alert/alert.service';
 import { AnnouncementService } from '../shared/announcement.service';
 import { Announcement } from '../shared/announcement.model';
 
@@ -9,14 +10,16 @@ import { Announcement } from '../shared/announcement.model';
   selector: 'app-new-announcement',
   templateUrl: './new-announcement.component.html',
   styleUrls: ['./new-announcement.component.css'],
-
+  providers: [ AlertService ]
 })
 export class NewAnnouncementComponent implements OnInit {
   myForm: FormGroup;
   myDBForm: FormGroup;
   selectedFile: any;
 
-  constructor(private fb: FormBuilder, private announcementService: AnnouncementService) { }
+  constructor(private fb: FormBuilder,
+    private announcementService: AnnouncementService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.myForm = this.fb.group({
@@ -63,12 +66,24 @@ export class NewAnnouncementComponent implements OnInit {
       imageRef.put(this.selectedFile)
         .then(snapshot => {
             this.myDBForm.value.image = snapshot.downloadURL;
-            this.announcementService.createAnnouncement(this.myDBForm.value);
-            this.myDBForm.reset();
+            this.announcementService.createAnnouncement(this.myDBForm.value)
+            .subscribe(
+                () => {
+                    this.alertService.success('Обявата е записана', true);
+                    this.myDBForm.reset();
+                },
+                err => alert(`Грешка при запис на обява ${err}`)
+            );
           });
     } else {
-      this.announcementService.createAnnouncement(this.myDBForm.value);
-      this.myDBForm.reset();
+      this.announcementService.createAnnouncement(this.myDBForm.value)
+      .subscribe(
+          () => {
+              this.alertService.success('Обявата е записана', true);
+              this.myDBForm.reset();
+          },
+          err => alert(`Грешка при запис на обява ${err}`)
+      );
     }
   }
 }

@@ -39,7 +39,7 @@ let firebase = require('firebase');
 export class UserDetailComponent implements OnInit {
   myMessageForm: FormGroup;
   user$: Observable<User>;
-  announcement$: Observable<Announcement>
+  announcement$: Observable<Announcement>;
   userKey: string;
   adKey: string;
   public userUID: any;
@@ -59,21 +59,21 @@ export class UserDetailComponent implements OnInit {
     this.myMessageForm.patchValue({answered: false});
     this.myMessageForm.patchValue({read: false});
     this.myMessageForm.patchValue({sent: new Date()});
-    //console.log(this.myMessageForm.value);
+    // console.log(this.myMessageForm.value);
     this.messagesService.createNewMessage(this.myMessageForm.value)
     .subscribe(
               () => {
                   this.alertService.success('Съобщението е изпратено', true);
               },
-              err => alert(`error saving lesson ${err}`)
+              err => alert(`Грешка при изпращане на съобщение ${err}`)
           );
   }
 
   ngOnInit() {
     this.userKey = this.route.snapshot.params['id'];
     this.adKey = this.route.snapshot.params['adId'];
-    //console.log(this.userKey);
-    //console.log(this.adKey);
+    // console.log(this.userKey);
+    // console.log(this.adKey);
     this.user$ = this.userService.getUserByKey(this.userKey);
     this.announcement$ = this.announcementService.findAnnouncementByKey(this.adKey);
 

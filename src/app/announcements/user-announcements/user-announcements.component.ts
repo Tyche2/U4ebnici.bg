@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Announcement } from '../shared/announcement.model';
 import { AnnouncementService } from '../shared/announcement.service';
 import { ConstantService } from '../../core/constant.service';
+import { AuthService } from '../../core/auth/services/auth.service';
 
 @Component({
   selector: 'app-user-announcements',
@@ -22,11 +23,13 @@ export class UserAnnouncementsComponent implements OnInit {
 
   constructor(
     private announcementService: AnnouncementService,
-    private constantService: ConstantService
+    private constantService: ConstantService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
-    this.announcements = this.announcementService.findAnnouncmentsByUserKey('wnsuJuKI0DNdXbVcPN9wYlMzmfZ2'); // TODO
+    let userUID = this.authService.id;
+    this.announcements = this.announcementService.findAnnouncmentsByUserKey(userUID);
     this.sortByOptions = [this.constantService.LAST_ADDED, this.constantService.ALPHABETIC_ORDER,
     this.constantService.CLASS, this.constantService.PRICE];
     this.sortBy = this.constantService.LAST_ADDED;

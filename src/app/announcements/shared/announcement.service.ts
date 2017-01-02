@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 import { Announcement } from './announcement.model';
 import { Message } from '../../users/shared/message.model';
 import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
@@ -28,24 +28,43 @@ export class AnnouncementService {
             .flatMap(fbojs => Observable.combineLatest(fbojs));
     }
 
-    private findMessagesKeysPerAnnouncementKey(announcementKey: string,
-                               query: FirebaseListFactoryOpts = {}): Observable<string[]> {
-        return this.findAnnouncementByKey(announcementKey)
-            .do(val => console.log('announcement', val))
-            .filter(announcement => !!announcement)
-            .switchMap(announcement => this.db.list(`messagesPerAnnouncement/${announcement.$key}`, query))
-            .map( mspa => mspa.map(mpc => mpc.$key) );
+// private findMessagesKeysPerAnnouncementKey(announcementKey: string,
+//                            query: FirebaseListFactoryOpts = {}): Observable<string[]> {
+//     return this.findAnnouncementByKey(announcementKey)
+//         .do(val => console.log('announcement', val))
+//         .filter(announcement => !!announcement)
+//         .switchMap(announcement => this.db.list(`messagesPerAnnouncement/${announcement.$key}`, query))
+//         .map( mspa => mspa.map(mpc => mpc.$key) );
+// }
+// 
+
+//   private findMessagesForMessageKeys(messageKeys$: Observable<string[]>): Observable<Message[]> {
+//       return messageKeys$
+//           .map(mspa => mspa.map(messageKey => this.db.object('messages/' + messageKey)) )
+//           .flatMap(fbojs => Observable.combineLatest(fbojs) );
+//
+//   }
+
+    private firebaseUpdate(dataToSave) {
+        const subject = new Subject();
+
+        this.sdkDb.update(dataToSave)
+            .then(
+                val => {
+                    subject.next(val);
+                    subject.complete();
+
+                },
+                err => {
+                    subject.error(err);
+                    subject.complete();
+                }
+            );
+
+        return subject.asObservable();
     }
 
-
-    private findMessagesForMessageKeys(messageKeys$: Observable<string[]>): Observable<Message[]> {
-        return messageKeys$
-            .map(mspa => mspa.map(messageKey => this.db.object('messages/' + messageKey)) )
-            .flatMap(fbojs => Observable.combineLatest(fbojs) );
-
-    }
-
-    createAnnouncement(announcement: Announcement) {
+    createAnnouncement(announcement: Announcement): Observable<any> {
         // Set user, added on and active
         let firebase = require('firebase');
         let currentdate = new Date();
@@ -56,24 +75,23 @@ export class AnnouncementService {
                 + currentdate.getMinutes() + ':'
                 + currentdate.getSeconds();
 
-        announcement.userid = firebase.auth().currentUser.uid;
+        let userUID = firebase.auth().currentUser.uid;
+        announcement.userid = userUID;
         announcement.added = datetime;
         announcement.active = true;
 
-        return new Promise((resolve, reject) => {
-            let newRef = this.sdkDb
-                .child('announcements')
-                .push(announcement);
-            if (newRef) {
-                resolve(newRef);
-            } else {
-                reject('Announcement is not added');
-            }
-        });
+        let newAnnouncementKey = this.sdkDb
+            .child('announcements')
+            .push(announcement)
+            .key;
+
+        console.log(newAnnouncementKey);
+        let dataToSave = {};
+        dataToSave[`announcementsPerUser/${userUID}/${newAnnouncementKey}`] = true;
+        return this.firebaseUpdate(dataToSave);
     }
 
     findAllAnnouncements(): Observable<Announcement[]> {
-
         return this.db.list('announcements')
             .map(Announcement.fromJsonArray);
     }
@@ -86,7 +104,7 @@ export class AnnouncementService {
         return this.findAnnouncmentsByKeys(this.findAnnouncmentsKeysByUserKey(userKey));
     }
 
-    findAllMessagesForAnnouncement(announcementKey: string): Observable<Message[]> {
-        return this.findMessagesForMessageKeys(this.findMessagesKeysPerAnnouncementKey(announcementKey));
-    }
+   // findAllMessagesForAnnouncement(announcementKey: string): Observable<Message[]> {
+   //     return this.findMessagesForMessageKeys(this.findMessagesKeysPerAnnouncementKey(announcementKey));
+   // }
 }
