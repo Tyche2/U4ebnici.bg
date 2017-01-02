@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
 import { firebaseConfig, authConfig } from './environments/firebase.config';
 import { AngularFireModule } from 'angularfire2/index';
-import { AppRoutingModule } from './routing/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './users/shared/users.service';
 import { UsersModule } from './users/users.module';

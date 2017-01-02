@@ -15,7 +15,7 @@ import { ConstantService } from '../../core/constant.service';
   styleUrls: ['./found-announcements.component.css']
 })
 
-export class FoundannouncementsListComponent implements OnInit {
+export class FoundAnnouncementsListComponent implements OnInit {
   @Input() announcements: Observable<Announcement[]>;
   @Input() searchText: string = 'Book';
   @Input() searchClas: string;

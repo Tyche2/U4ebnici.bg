@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { GetUserPipe, SortPipe, ToBGNMoneyPipe, TopPipe, AnnouncementFilterByPipe } from './pipes';
 
 @NgModule({
-    imports: [],
     declarations: [
         GetUserPipe,
         SortPipe,

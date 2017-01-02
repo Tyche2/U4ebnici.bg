@@ -26,7 +26,7 @@ export class UserAnnouncementsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.announcements = this.announcementService.findAnnouncmentsByUserKey('wnsuJuKI0DNdXbVcPN9wYlMzmfZ2');
+    this.announcements = this.announcementService.findAnnouncmentsByUserKey('wnsuJuKI0DNdXbVcPN9wYlMzmfZ2'); // TODO
     this.sortByOptions = [this.constantService.LAST_ADDED, this.constantService.ALPHABETIC_ORDER,
     this.constantService.CLASS, this.constantService.PRICE];
     this.sortBy = this.constantService.LAST_ADDED;

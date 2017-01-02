@@ -26,13 +26,6 @@ import { UsersRoutingModule } from './users-routing.module';
     UserDetailComponent,
     UserSettingsComponent
   ],
-  exports: [
-    LoginComponent,
-    RegisterComponent,
-    UsersComponent,
-    UserDetailComponent,
-    UserSettingsComponent
-  ],
   providers: [UserService]
 })
 export class UsersModule { }

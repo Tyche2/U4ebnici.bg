@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-6 col-sm-5">
-            <h2>Обяви на "Потребител"</h2>
+            <h2>Вашите обяви</h2>
         </div>
         <div class="col-xs-6 col-sm-4">
             <div class="row" style="padding-top: 20px">
@@ -31,16 +31,13 @@
                 <p><strong>{{ad.title}} за {{ad.clas}} клас</strong></p>
                 <p name="publisher"><strong>Издателство:</strong> {{ad.publisher}}</p>
                 <p name="authors"><strong>Автори:</strong> {{ad.authors}}</p>
-                <p><a [routerLink]="['/detail', ad.$key]">Виж подробна информация &raquo;</a></p>
+                <p><a [routerLink]="['/announcement', ad.$key]">Виж подробна информация &raquo;</a></p>
             </div>
         </div>
     </div>
     <div *ngIf="isFiltred">
         <div class="row">
-            <pagination-controls (pageChange)="page = $event" id="1"
-                maxSize="5"
-                directionLinks="true"
-                autoHide="true">
+            <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true">
             </pagination-controls>
         </div>
         <div class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | filterBy: searchText:searchClas:searchAuthor | sort: sortByKey | paginate: {itemsPerPage: 5, currentPage:page, id: '1'})">
@@ -51,7 +48,7 @@
                 <p><strong>{{ad.title}} за {{ad.clas}} клас</strong></p>
                 <p name="publisher"><strong>Издателство:</strong> {{ad.publisher}}</p>
                 <p name="authors"><strong>Автори:</strong> {{ad.authors}}</p>
-                <p><a [routerLink]="['/detail', ad.$key]">Виж подробна информация &raquo;</a></p>
+                <p><a [routerLink]="['/announcement', ad.$key]">Виж подробна информация &raquo;</a></p>
             </div>
         </div>
     </div>
