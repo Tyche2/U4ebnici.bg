@@ -25,30 +25,29 @@ export class UserSettingsComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private alertService: AlertService)
-  { }
-onUpdate(){
-  //console.log(this.myUpdateForm.value);
-  this.userService.updateUser(this.user$.$key, this.myUpdateForm.value)
-          .subscribe(
-              () => {
-                  this.alertService.success('Промените за записани', true);
-              },
-              err => alert(`error saving lesson ${err}`)
-          );
-}
+    private alertService: AlertService) { }
+
+  onUpdate() {
+    this.userService.updateUser(this.user$.$key, this.myUpdateForm.value)
+            .subscribe(
+                () => {
+                    this.alertService.success('Промените за записани', true);
+                },
+                err => alert(`error saving lesson ${err}`)
+            );
+  }
+
   ngOnInit() {
     this.userKey = this.route.snapshot.params['id'];
 
     this.user$ = this.userService.getUserByKey(this.userKey);
-            
-this.myUpdateForm = this.fb.group({
+    this.myUpdateForm = this.fb.group({
             name: '',
             city: '',
             phone: '',
             skype: '',
             dbemail: '',
             uid: ''
-        }); 
+        });
   }
 }

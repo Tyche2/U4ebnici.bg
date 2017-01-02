@@ -33,37 +33,37 @@ export class AnnouncementService {
             .flatMap(fbojs => Observable.combineLatest(fbojs));
     }
 
-    // private findMessagesKeysPerAnnouncementKey(announcementKey: string,
-    //                            query: FirebaseListFactoryOpts = {}): Observable<string[]> {
-    //     return this.findAnnouncementByKey(announcementKey)
-    //         .do(val => console.log('announcement', val))
-    //         .filter(announcement => !!announcement)
-    //         .switchMap(announcement => this.db.list(`messagesPerAnnouncement/${announcement.$key}`, query))
-    //         .map( mspa => mspa.map(mpc => mpc.$key) );
-    // }
-    // 
+// private findMessagesKeysPerAnnouncementKey(announcementKey: string,
+//                            query: FirebaseListFactoryOpts = {}): Observable<string[]> {
+//     return this.findAnnouncementByKey(announcementKey)
+//         .do(val => console.log('announcement', val))
+//         .filter(announcement => !!announcement)
+//         .switchMap(announcement => this.db.list(`messagesPerAnnouncement/${announcement.$key}`, query))
+//         .map( mspa => mspa.map(mpc => mpc.$key) );
+// }
+// 
 
-    //   private findMessagesForMessageKeys(messageKeys$: Observable<string[]>): Observable<Message[]> {
-    //       return messageKeys$
-    //           .map(mspa => mspa.map(messageKey => this.db.object('messages/' + messageKey)) )
-    //           .flatMap(fbojs => Observable.combineLatest(fbojs) );
-    //
-    //   }
+//   private findMessagesForMessageKeys(messageKeys$: Observable<string[]>): Observable<Message[]> {
+//       return messageKeys$
+//           .map(mspa => mspa.map(messageKey => this.db.object('messages/' + messageKey)) )
+//           .flatMap(fbojs => Observable.combineLatest(fbojs) );
+//
+//   }
 
     private firebaseUpdate(dataToSave) {
         const subject = new Subject();
 
         this.sdkDb.update(dataToSave)
             .then(
-            val => {
-                subject.next(val);
-                subject.complete();
+                val => {
+                    subject.next(val);
+                    subject.complete();
 
-            },
-            err => {
-                subject.error(err);
-                subject.complete();
-            }
+                },
+                err => {
+                    subject.error(err);
+                    subject.complete();
+                }
             );
 
         return subject.asObservable();
@@ -74,11 +74,11 @@ export class AnnouncementService {
         let firebase = require('firebase');
         let currentdate = new Date();
         let datetime = currentdate.getDate() + '/'
-            + (currentdate.getMonth() + 1) + '/'
-            + currentdate.getFullYear() + ' @ '
-            + currentdate.getHours() + ':'
-            + currentdate.getMinutes() + ':'
-            + currentdate.getSeconds();
+                + (currentdate.getMonth() + 1) + '/'
+                + currentdate.getFullYear() + ' @ '
+                + currentdate.getHours() + ':'
+                + currentdate.getMinutes() + ':'
+                + currentdate.getSeconds();
 
         let userUID = firebase.auth().currentUser.uid;
         return this.userService.getUserByKey(userUID)
@@ -120,20 +120,44 @@ export class AnnouncementService {
             this.findAnnouncementByKey(announcementKey)
                 .subscribe(obj => {
                     console.log(obj);
-                    obj.active = active;
-                    delete (obj.$key);
-                    console.log(obj);
+                    const announcementToUpdate = Object.assign({}, obj);
+                    announcementToUpdate.active = active;
+                    delete(announcementToUpdate.$key);
+                    console.log(announcementToUpdate);
                     let dataToSave = {};
-                    dataToSave[`announcements/${announcementKey}`] = obj;
+                    dataToSave[`announcements/${announcementKey}`] = announcementToUpdate;
 
                     this.firebaseUpdate(dataToSave)
-                        .subscribe(() => resolve(obj),
-                        err => reject(err));
+                    .subscribe(() => resolve(announcementToUpdate),
+                                err => reject(err));
                 });
         });
     }
 
-    // findAllMessagesForAnnouncement(announcementKey: string): Observable<Message[]> {
-    //     return this.findMessagesForMessageKeys(this.findMessagesKeysPerAnnouncementKey(announcementKey));
-    // }
+    updateAnnouncement(announcementKey: string, announcement) {
+        return new Promise((resolve, reject) => {
+            const announcementToUpdate = Object.assign({}, announcement);
+            this.findAnnouncementByKey(announcementKey)
+                .subscribe(currAnnouncement => {
+                    announcementToUpdate.added = currAnnouncement.added;
+                    announcementToUpdate.username = currAnnouncement.username;
+                    announcementToUpdate.image = announcementToUpdate.image || currAnnouncement.image;
+                    announcementToUpdate.active = currAnnouncement.active;
+                    announcementToUpdate.userid = currAnnouncement.userid;
+                    announcementToUpdate.condition = announcementToUpdate.condition || currAnnouncement.condition;
+
+                    let dataToSave = {};
+                    dataToSave[`announcements/${announcementKey}`] = announcementToUpdate;
+
+                    this.firebaseUpdate(dataToSave)
+                    .subscribe(() => resolve(announcementToUpdate),
+                                    err => reject(err));
+                });
+        });
+    }
+
+
+   // findAllMessagesForAnnouncement(announcementKey: string): Observable<Message[]> {
+   //     return this.findMessagesForMessageKeys(this.findMessagesKeysPerAnnouncementKey(announcementKey));
+   // }
 }

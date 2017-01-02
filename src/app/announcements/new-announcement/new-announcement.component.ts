@@ -13,7 +13,6 @@ import { Announcement } from '../shared/announcement.model';
 })
 
 export class NewAnnouncementComponent implements OnInit {
-  myForm: FormGroup;
   myDBForm: FormGroup;
   selectedFile: any;
 
@@ -22,25 +21,17 @@ export class NewAnnouncementComponent implements OnInit {
     private alertService: AlertService) { }
 
   ngOnInit() {
-    this.myForm = this.fb.group({
+    this.myDBForm = this.fb.group({
             title: ['', Validators.required],
             discipline: ['', Validators.required],
             clas: ['', Validators.required],
-            authors: ['', Validators.required],
-            price: ['', Validators.required]
-        });
-
-    this.myDBForm = this.fb.group({
-            title: '',
-            discipline: '',
-            clas: '',
             image: '',
             publisher: '',
-            authors: '',
+            authors: ['', Validators.required],
             year: '',
             description: '',
             condition: '',
-            price: 0
+            price: [0, Validators.required]
         });
   }
 
@@ -53,7 +44,6 @@ export class NewAnnouncementComponent implements OnInit {
   }
 
   CreateAnnouncement() {
-    console.log(this.myDBForm.value);
     if (this.selectedFile) {
       let firebase = require('firebase');
 
@@ -76,8 +66,7 @@ export class NewAnnouncementComponent implements OnInit {
           });
     } else {
       this.announcementService.createAnnouncement(this.myDBForm.value)
-      .subscribe(
-          () => {
+      .subscribe(() => {
               this.alertService.success('Обявата е записана', true);
               this.myDBForm.reset();
           },
