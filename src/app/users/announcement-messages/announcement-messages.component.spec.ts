@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { MessagesPageComponent } from './messages-page.component';
+import { AnnouncementMessagesComponent } from './announcement-messages.component';
 
-describe('MessagesPageComponent', () => {
-  let component: MessagesPageComponent;
-  let fixture: ComponentFixture<MessagesPageComponent>;
+describe('AnnouncementMessagesComponent', () => {
+  let component: AnnouncementMessagesComponent;
+  let fixture: ComponentFixture<AnnouncementMessagesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessagesPageComponent ]
+      declarations: [ AnnouncementMessagesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MessagesPageComponent);
+    fixture = TestBed.createComponent(AnnouncementMessagesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

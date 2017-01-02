@@ -1,0 +1,21 @@
+<button (click)="onMessagesTypeChange($event)" data="received">Получени</button>
+<button (click)="onMessagesTypeChange($event)" data="send">Изпратени</button>
+
+<div *ngIf="messagesType === 'received'">
+    <div *ngFor="let message of (messages | async |msgFilter:'fromuserid':user)">
+
+        <p>От: {{(message.fromuserid | getUser | async)?.name}}</p>
+        <p>Дата: {{message.sent}}</p>
+        <p>Текст: {{message.msgText}}</p>
+        <p>До: {{(message.touserid | getUser | async)?.name}}</p>
+    </div>
+</div>
+<div *ngIf="messagesType === 'send'">
+    <div *ngFor="let message of (messages | async |msgFilter:'touserid':user)">
+
+        <p>От: {{(message.fromuserid | getUser | async)?.name}}</p>
+        <p>Дата: {{message.sent}}</p>
+        <p>Текст: {{message.msgText}}</p>
+        <p>До: {{(message.touserid | getUser | async)?.name}}</p>
+    </div>
+</div>

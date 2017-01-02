@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AnnouncementDetailComponent } from './announcement-detail/announcement-detail.component';
-import { AnnouncementsListComponent } from './announcements-list/announcements-list.component';
+import { AnnouncementsListComponent } from './shared/announcements-list/announcements-list.component';
 import { FoundAnnouncementsListComponent } from './found-announcements/found-announcements.component';
 import { LatestAnnouncementsComponent } from './latest-announcements/latest-announcements.component';
 import { NewAnnouncementComponent } from './new-announcement/new-announcement.component';

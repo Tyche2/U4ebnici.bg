@@ -1,4 +1,4 @@
-<div *ngFor="let message of (messages | async |msgFilter:'fromuserid':user)">
+<div *ngFor="let message of (messages | async)">
 
     <p>От: {{(message.fromuserid | getUser | async)?.name}}</p>
     <p>Дата: {{message.sent}}</p>

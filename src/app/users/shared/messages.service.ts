@@ -55,6 +55,11 @@ export class MessagesService {
             .map(keys => keys.map(keyObj => keyObj.$key));
     }
 
+    private findMessagesKeysByAnnouncementKey(announcementKey: string): Observable<string[]> {
+        return this.db.list(`messagesPerAnnouncement/${announcementKey}`)
+            .map(keys => keys.map(keyObj => keyObj.$key));
+    }
+
     private findMessagesByKeys(messagesKeys$: Observable<string[]>): Observable<Message[]> {
         return messagesKeys$
             .map(keys => keys.map(key => this.findMessageByKey(key)))
@@ -63,5 +68,9 @@ export class MessagesService {
 
     findMessagesByUserKey(userKey: string): Observable<Message[]> {
         return this.findMessagesByKeys(this.findMessagesKeysByUserKey(userKey));
+    }
+
+    findMessagesByAnnouncementKey(announcementKey: string): Observable<Message[]> {
+        return this.findMessagesByKeys(this.findMessagesKeysByAnnouncementKey(announcementKey));
     }
 }

@@ -1,7 +1,6 @@
-import { MessageFilterPipe } from './pipes/MessageFilterPipe';
 import { NgModule } from '@angular/core';
 
-import { GetUserPipe, SortPipe, ToBGNMoneyPipe, TopPipe, AnnouncementFilterByPipe } from './pipes';
+import { GetUserPipe, SortPipe, ToBGNMoneyPipe, TopPipe, AnnouncementFilterByPipe, MessageFilterPipe } from './pipes';
 
 @NgModule({
     declarations: [
