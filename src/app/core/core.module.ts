@@ -7,6 +7,7 @@ import { AuthService } from './auth/services/auth.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
 import { ConstantService } from './constant.service';
+import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
@@ -17,10 +18,12 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
     ],
     exports: [
         AlertComponent,
+        FooterComponent,
         NavbarComponent
     ],
     declarations: [
         AlertComponent,
+        FooterComponent,
         NavbarComponent
     ],
     providers: [

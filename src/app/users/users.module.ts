@@ -6,16 +6,18 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { UsersComponent } from './users.component';
-import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { UserService } from './shared/users.service';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { UsersComponent } from './users.component';
+import { UsersRoutingModule } from './users-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    UsersRoutingModule
   ],
   declarations: [
     LoginComponent,

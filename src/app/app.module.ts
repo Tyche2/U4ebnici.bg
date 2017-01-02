@@ -15,23 +15,17 @@ import { firebaseConfig, authConfig } from './environments/firebase.config';
 import { AngularFireModule } from 'angularfire2/index';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FooterComponent } from './footer/footer.component';
 import { UserService } from './users/shared/users.service';
 import { UsersModule } from './users/users.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     AnnouncementsModule,
     BrowserModule,
     CoreModule,
-    FormsModule,
     HttpModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     SharedModule,
     UsersModule,
     AngularFireModule.initializeApp(firebaseConfig, authConfig)

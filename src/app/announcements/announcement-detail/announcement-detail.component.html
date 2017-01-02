@@ -1,17 +1,17 @@
-
-    <h2>{{(announcement$ | async)?.title}} за {{(announcement$ | async)?.clas}} клас</h2>
-    <div class="col-md-3">
-        <img src="{{(announcement$ | async)?.image}}" alt="{{(announcement$ | async)?.title}}">
-    </div>
-    <div class="col-md-5">
-        <p name="discipline">Учебен предмет: {{(announcement$ | async)?.discipline}}</p>
-        <p name="authors">Автори: {{(announcement$ | async)?.authors}}</p>
-        <p name="publisher">Издателство: {{(announcement$ | async)?.publisher}}</p>
-        <p name="year">Година на издаване: {{(announcement$ | async)?.year}}</p>
-        <p name="price">Цена: {{(announcement$ | async)?.price | toBGNMoney}}</p>
-        <p name="description">Описание: {{(announcement$ | async)?.description}}</p>
-        <p name="condition">Състояние: {{(announcement$ | async)?.condition}}</p>
-        <p name="username">Публикувано от: {{((announcement$ | async)?.userid | getUser | async)?.name}}</p>
-        <p name="added">Публикувано на: {{(announcement$ | async)?.added | date : "short"}}</p>
-        <!--<p name="username">Публикувано от: <a [routerLink]="['/userdetail', (announcement$ | async)?.userid]"> {{((announcement$ | async)?.userid | getUser | async)?.name}}</a></p>-->
-    </div>
+<h2>
+    {{(announcement$ | async)?.title}} за {{(announcement$ | async)?.clas}} клас</h2>
+<div class="col-md-3">
+    <img src="{{(announcement$ | async)?.image}}" alt="{{(announcement$ | async)?.title}}">
+</div>
+<div class="col-md-5">
+    <p name="discipline">Учебен предмет: {{(announcement$ | async)?.discipline}}</p>
+    <p name="authors">Автори: {{(announcement$ | async)?.authors}}</p>
+    <p name="publisher">Издателство: {{(announcement$ | async)?.publisher}}</p>
+    <p name="year">Година на издаване: {{(announcement$ | async)?.year}}</p>
+    <p name="price">Цена: {{(announcement$ | async)?.price | toBGNMoney}}</p>
+    <p name="description">Описание: {{(announcement$ | async)?.description}}</p>
+    <p name="condition">Състояние: {{(announcement$ | async)?.condition}}</p>
+    <p name="username">Публикувано от: {{((announcement$ | async)?.userid | getUser | async)?.name}}</p>
+    <p name="added">Публикувано на: {{(announcement$ | async)?.added | date : "short"}}</p>
+    <!--<p name="username">Публикувано от: <a [routerLink]="['/user/', (announcement$ | async)?.userid]"> {{((announcement$ | async)?.userid | getUser | async)?.name}}</a></p>-->
+</div>

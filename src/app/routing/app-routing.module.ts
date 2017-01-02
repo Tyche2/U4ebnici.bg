@@ -15,12 +15,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: AnnouncementsComponent },
   { path: 'user-announcements', component: UserAnnouncementsComponent },
-  { path: 'userdetail/:id', component: UserSettingsComponent },//, canActivate: [AuthGuard] },
   { path: 'detail/new', component: NewAnnouncementComponent },
-  { path: 'detail/:id', component: AnnouncementDetailComponent },
-  { path: 'detail/:adId/:id', component: UserDetailComponent },//, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'detail/:id', component: AnnouncementDetailComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

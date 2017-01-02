@@ -24,7 +24,6 @@ export class AnnouncementDetailComponent implements OnInit {
 
   ngOnInit() {
     this.announcementKey = this.route.snapshot.params['id'];
-    console.log(this.announcementKey);
     this.announcement$ = this.announcementService.findAnnouncementByKey(this.announcementKey);
   }
 }
