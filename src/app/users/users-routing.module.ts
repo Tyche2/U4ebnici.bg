@@ -5,8 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
-import { UserMessagesComponent } from './user-messages/user-messages.component';
-import { AnnouncementMessagesComponent } from './announcement-messages/announcement-messages.component';
 
 const usersRoutes: Routes = [
     {
@@ -19,8 +17,6 @@ const usersRoutes: Routes = [
                     { path: ':adId/:id', component: UserDetailComponent }, // canActivate: [AuthGuard] },
                 ]
             },
-            { path: 'messages', component: UserMessagesComponent },
-            { path: 'messages/announcement', component: AnnouncementMessagesComponent },
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent }
         ]

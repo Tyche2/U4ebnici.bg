@@ -10,9 +10,6 @@ import { UserService } from './shared/users.service';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { UsersComponent } from './users.component';
 import { UsersRoutingModule } from './users-routing.module';
-import { MessagesService } from './shared/messages.service';
-import { UserMessagesComponent } from './user-messages/user-messages.component';
-import { AnnouncementMessagesComponent } from './announcement-messages/announcement-messages.component';
 
 @NgModule({
   imports: [
@@ -28,9 +25,7 @@ import { AnnouncementMessagesComponent } from './announcement-messages/announcem
     UsersComponent,
     UserDetailComponent,
     UserSettingsComponent,
-    UserMessagesComponent,
-    AnnouncementMessagesComponent
   ],
-  providers: [UserService, MessagesService]
+  providers: [UserService]
 })
 export class UsersModule { }

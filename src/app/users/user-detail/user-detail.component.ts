@@ -7,8 +7,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AlertService } from '../../core/alert/alert.service';
 import { Announcement } from '../../announcements/shared/announcement.model';
 import { AnnouncementService } from '../../announcements/shared/announcement.service';
-import { Message } from '../shared/message.model';
-import { MessagesService } from '../shared/messages.service';
+import { Message } from '../../messages/shared/message.model';
+import { MessagesService } from '../../messages/shared/messages.service';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/users.service';
 
@@ -33,7 +33,7 @@ let firebase = require('firebase');
     ])
   ],
   host: { '[@routerTransition]': '' },
-  providers: [UserService, AnnouncementService, MessagesService]
+  providers: [AnnouncementService, MessagesService]
 })
 
 export class UserDetailComponent implements OnInit {
