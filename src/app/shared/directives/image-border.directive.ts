@@ -21,7 +21,7 @@ export class ImageBorderDirective {
     }
 
     private addBorder() {
-        this.element.nativeElement.style.border = 'solid gray 5px';
+        this.element.nativeElement.style.border = 'solid lightgray 3px';
     }
 
     private removeBorder() {
