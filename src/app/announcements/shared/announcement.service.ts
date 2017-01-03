@@ -83,7 +83,7 @@ export class AnnouncementService {
         let userUID = firebase.auth().currentUser.uid;
         return this.userService.getUserByKey(userUID)
             .map(user => user.name)
-            .flatMap(username => {
+            .map(username => {
                 announcement.userid = userUID;
                 announcement.username = username;
                 announcement.added = datetime;
