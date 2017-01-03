@@ -115,15 +115,12 @@ export class AnnouncementService {
     }
 
     changeAnnouncementStatus(announcementKey: string, active: boolean) {
-        console.log(announcementKey);
         return new Promise((resolve, reject) => {
             this.findAnnouncementByKey(announcementKey)
                 .subscribe(obj => {
-                    console.log(obj);
                     const announcementToUpdate = Object.assign({}, obj);
                     announcementToUpdate.active = active;
                     delete(announcementToUpdate.$key);
-                    console.log(announcementToUpdate);
                     let dataToSave = {};
                     dataToSave[`announcements/${announcementKey}`] = announcementToUpdate;
 

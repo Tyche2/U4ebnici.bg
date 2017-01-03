@@ -59,7 +59,6 @@ export class UserDetailComponent implements OnInit {
     this.myMessageForm.patchValue({answered: false});
     this.myMessageForm.patchValue({read: false});
     this.myMessageForm.patchValue({sent: new Date()});
-    // console.log(this.myMessageForm.value);
     this.messagesService.createNewMessage(this.myMessageForm.value)
     .subscribe(
               () => {
@@ -72,8 +71,6 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.userKey = this.route.snapshot.params['id'];
     this.adKey = this.route.snapshot.params['adId'];
-    // console.log(this.userKey);
-    // console.log(this.adKey);
     this.user$ = this.userService.getUserByKey(this.userKey);
     this.announcement$ = this.announcementService.findAnnouncementByKey(this.adKey);
 

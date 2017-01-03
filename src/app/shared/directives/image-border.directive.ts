@@ -6,17 +6,13 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 export class ImageBorderDirective {
 
-    constructor(private element: ElementRef) {
-        console.log('here');
-    }
+    constructor(private element: ElementRef) { }
 
     @HostListener('mouseenter') onMouseEnter() {
-         console.log('mouseenter');
         this.addBorder();
     }
 
     @HostListener('mouseleave') onMouseLeave() {
-        console.log('mouseleave');
         this.removeBorder();
     }
 

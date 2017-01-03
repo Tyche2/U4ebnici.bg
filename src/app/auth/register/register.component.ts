@@ -28,9 +28,7 @@ export class RegisterComponent implements OnInit {
     onSignup() {
         this.authService.signupUser(this.myForm.value)
         this.authService.userData$.subscribe((val) => {
-            if (val === undefined) {
-                //  console.log(val);
-            } else {
+            if (val !== undefined) {
                 this.myDBForm.patchValue({
                     uid: val.uid
                 });
