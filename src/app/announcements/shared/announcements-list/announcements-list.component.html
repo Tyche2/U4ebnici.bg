@@ -57,6 +57,7 @@
         </div>
         <div appMarkReviewedAnnouncement class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | showActive: true | filterBy: searchText:searchClas:searchAuthor | sort: sortByKey | paginate: {itemsPerPage: 5, currentPage:page, id: '1'})"
             [attr.data-id]="ad.$key">
+            <span class="reviewed-announcement-span hidden"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></span>
             <div class="col-md-1">
                 <img src="{{ad.image}}" alt="{{ad.title}}">
             </div>
