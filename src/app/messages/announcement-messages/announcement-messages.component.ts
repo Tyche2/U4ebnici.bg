@@ -22,6 +22,5 @@ export class AnnouncementMessagesComponent implements OnInit {
   ngOnInit() {
     this.announcementKey = this.route.snapshot.params['id'];
     this.messages = this.messagesService.findMessagesByAnnouncementKey(this.announcementKey);
-    console.log(this.messages);
   }
 }

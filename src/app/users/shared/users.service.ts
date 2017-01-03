@@ -16,11 +16,10 @@ export class UserService {
 
     createNewUser(user: any): Observable<any> {
         const userToSave = Object.assign({}, user);
-        const newUserKey = user.uid;//this.sdkDb.child('users').push().key;
+        const newUserKey = user.uid;
 
         let dataToSave = {};
-
-        dataToSave["users/" + newUserKey] = userToSave;
+        dataToSave['users/' + newUserKey] = userToSave;
 
         return this.firebaseUpdate(dataToSave);
     }
@@ -40,29 +39,27 @@ export class UserService {
                 subject.complete();
             }
             );
-
         return subject.asObservable();
     }
-    updateUser(uid:string, user): Observable<any> {
+
+    updateUser(uid: string, user): Observable<any> {
         const newUserKey = user.uid;
         const userToUpdate = Object.assign({}, user);
         delete(userToUpdate.$key);
 
         let dataToSave = {};
-        dataToSave["users/" + newUserKey] = userToUpdate;
+        dataToSave['users/' + newUserKey] = userToUpdate;
 
         return this.firebaseUpdate(dataToSave);
     }
 
-    deleteUser(uid:string): Observable<any> {
+    deleteUser(uid: string): Observable<any> {
         const url = firebaseConfig.databaseURL + '/users/' + uid + '.json';
 
         return this.http.delete(url);
     }
 
-
     getUserByKey(userKey: string): Observable<User> {
         return this.db.object(`users/${userKey}`).map(User.fromJson);
     }
-
 }

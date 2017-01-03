@@ -6,7 +6,7 @@ export class Announcement {
         public active: boolean,
         public added: string,
         public authors: string,
-        public clas: number,
+        public clas: string,
         public condition: string,
         public description: string,
         public discipline: string,
@@ -14,6 +14,7 @@ export class Announcement {
         public price: number,
         public publisher: string,
         public title: string,
+        public username: string,
         public userid: string,
         public year: number) { }
 
@@ -25,7 +26,7 @@ export class Announcement {
         return json.map(Announcement.fromJson);
     }
 
-    static fromJson({$key, active, added, authors, clas, condition, description, discipline, image, price, publisher, title,
+    static fromJson({$key, active, added, authors, clas, condition, description, discipline, image, price, publisher, title, username,
         userid, year}): Announcement {
         return new Announcement(
             $key,
@@ -40,6 +41,7 @@ export class Announcement {
             price,
             publisher,
             title,
+            username,
             userid,
             year);
     }

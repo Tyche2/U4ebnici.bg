@@ -7,13 +7,18 @@ import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
 import { Http } from '@angular/http';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseRef } from 'angularfire2';
 import { database } from 'firebase';
+import { UserService } from '../../users/shared/users.service';
 
 @Injectable()
 export class AnnouncementService {
     sdkDb: any;
 
-    constructor(private db: AngularFireDatabase, @Inject(FirebaseRef) fb,
-        private http: Http) {
+    constructor(
+        private db: AngularFireDatabase,
+        @Inject(FirebaseRef) fb,
+        private http: Http,
+        private userService: UserService
+    ) {
         this.sdkDb = fb.database().ref();
     }
 
@@ -76,19 +81,24 @@ export class AnnouncementService {
                 + currentdate.getSeconds();
 
         let userUID = firebase.auth().currentUser.uid;
-        announcement.userid = userUID;
-        announcement.added = datetime;
-        announcement.active = true;
+        return this.userService.getUserByKey(userUID)
+            .map(user => user.name)
+            .flatMap(username => {
+                announcement.userid = userUID;
+                announcement.username = username;
+                announcement.added = datetime;
+                announcement.active = true;
 
-        let newAnnouncementKey = this.sdkDb
-            .child('announcements')
-            .push(announcement)
-            .key;
-
-        console.log(newAnnouncementKey);
-        let dataToSave = {};
-        dataToSave[`announcementsPerUser/${userUID}/${newAnnouncementKey}`] = true;
-        return this.firebaseUpdate(dataToSave);
+                return this.sdkDb
+                    .child('announcements')
+                    .push(announcement)
+                    .key;
+            })
+            .map(newAnnouncementKey => {
+                let dataToSave = {};
+                dataToSave[`announcementsPerUser/${userUID}/${newAnnouncementKey}`] = true;
+                return this.firebaseUpdate(dataToSave);
+            });
     }
 
     findAllAnnouncements(): Observable<Announcement[]> {
@@ -110,18 +120,42 @@ export class AnnouncementService {
             this.findAnnouncementByKey(announcementKey)
                 .subscribe(obj => {
                     console.log(obj);
-                    obj.active = active;
-                    delete(obj.$key);
-                    console.log(obj);
+                    const announcementToUpdate = Object.assign({}, obj);
+                    announcementToUpdate.active = active;
+                    delete(announcementToUpdate.$key);
+                    console.log(announcementToUpdate);
                     let dataToSave = {};
-                    dataToSave[`announcements/${announcementKey}`] = obj;
+                    dataToSave[`announcements/${announcementKey}`] = announcementToUpdate;
 
                     this.firebaseUpdate(dataToSave)
-                    .subscribe(() => resolve(obj),
+                    .subscribe(() => resolve(announcementToUpdate),
                                 err => reject(err));
                 });
         });
     }
+
+    updateAnnouncement(announcementKey: string, announcement) {
+        return new Promise((resolve, reject) => {
+            const announcementToUpdate = Object.assign({}, announcement);
+            this.findAnnouncementByKey(announcementKey)
+                .subscribe(currAnnouncement => {
+                    announcementToUpdate.added = currAnnouncement.added;
+                    announcementToUpdate.username = currAnnouncement.username;
+                    announcementToUpdate.image = announcementToUpdate.image || currAnnouncement.image;
+                    announcementToUpdate.active = currAnnouncement.active;
+                    announcementToUpdate.userid = currAnnouncement.userid;
+                    announcementToUpdate.condition = announcementToUpdate.condition || currAnnouncement.condition;
+
+                    let dataToSave = {};
+                    dataToSave[`announcements/${announcementKey}`] = announcementToUpdate;
+
+                    this.firebaseUpdate(dataToSave)
+                    .subscribe(() => resolve(announcementToUpdate),
+                                    err => reject(err));
+                });
+        });
+    }
+
 
    // findAllMessagesForAnnouncement(announcementKey: string): Observable<Message[]> {
    //     return this.findMessagesForMessageKeys(this.findMessagesKeysPerAnnouncementKey(announcementKey));
