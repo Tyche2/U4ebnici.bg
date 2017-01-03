@@ -1,9 +1,7 @@
 import { AlertService } from './../alert/alert.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AuthInfo } from '../auth/guards/auth-info';
 import { AuthService } from '../auth/services/auth.service';
-
 
 @Component({
   selector: 'app-navbar',
@@ -13,15 +11,13 @@ import { AuthService } from '../auth/services/auth.service';
 
 export class NavbarComponent implements OnInit {
 
-  authInfo: AuthInfo;
-
   constructor(private authService: AuthService,
   private router: Router,
   private alertService: AlertService) {
   }
 
   ngOnInit() {
-    this.authService.authInfo$.subscribe(authInfo => this.authInfo = authInfo);
+   
   }
 
   isAuth() {

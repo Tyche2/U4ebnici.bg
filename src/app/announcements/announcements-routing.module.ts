@@ -1,3 +1,4 @@
+import { AuthGuard } from './../core/auth/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -12,12 +13,12 @@ import { UserAnnouncementsComponent } from './user-announcements/user-announceme
 const announcementsRoutes: Routes = [
     { path: 'home', component: LatestAnnouncementsComponent },
     { path: 'announcements', component: FoundAnnouncementsListComponent }, // TODO (query)
-    { path: 'user-announcements', component: UserAnnouncementsComponent },
+    { path: 'user-announcements', component: UserAnnouncementsComponent, canActivate: [AuthGuard] },
     {
         path: 'announcement',
         children: [
-            { path: 'edit/:id', component: EditAnnouncementComponent },
-            { path: 'new', component: NewAnnouncementComponent },
+            { path: 'edit/:id', component: EditAnnouncementComponent, canActivate: [AuthGuard] },
+            { path: 'new', component: NewAnnouncementComponent, canActivate: [AuthGuard] },
             { path: ':id', component: AnnouncementDetailComponent }
         ]
     }

@@ -14,7 +14,7 @@
             <div class="cols-sm-10">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                    <input formControlName="name" #name type="text" class="form-control" name="InputName" id="InputName" [ngModel]="(isAuthUid() | getUser | async)?.name" (ngModelChange)="name.value = $event">
+                    <input formControlName="name" #name type="text" class="form-control" name="InputName" id="InputName" [ngModel]="(isAuthUid() | getUser | async)?.name || 'Въведете име'" (ngModelChange)="name.value = $event">
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <div class="cols-sm-10">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
-                    <input formControlName="dbemail" #dbemail type="text" class="form-control" name="InputName" id="InputName" [ngModel]="(isAuthUid() | getUser | async)?.dbemail" (ngModelChange)="dbemail.value = $event">
+                    <input formControlName="dbemail" #dbemail type="text" class="form-control" name="InputName" id="InputName" [ngModel]="(isAuthUid() | getUser | async)?.dbemail || 'Въведете e-mail'" (ngModelChange)="dbemail.value = $event">
                 </div>
             </div>
         </div>

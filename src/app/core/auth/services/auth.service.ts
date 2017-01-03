@@ -5,7 +5,6 @@ import { database, initializeApp } from 'firebase';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
 import { AuthProviders, AuthMethods, FirebaseAuth, FirebaseAuthState } from 'angularfire2';
-import { AuthInfo } from '../guards/auth-info';
 
 export interface User {
   email: string;
@@ -17,11 +16,11 @@ firebase.initializeApp(firebaseConfig);
 
 @Injectable()
 export class AuthService {
-  static UNKNOWN_USER = new AuthInfo(null);
+  
   static USER_DATA;
   private authState: FirebaseAuthState = null;
   currentUser: any;
-  authInfo$: BehaviorSubject<AuthInfo> = new BehaviorSubject<AuthInfo>(AuthService.UNKNOWN_USER);
+  
   userData$: BehaviorSubject<any> = new BehaviorSubject<any>(AuthService.USER_DATA);
 
   // loading = false;
@@ -53,8 +52,7 @@ export class AuthService {
   signinUser(user: User) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
       .then((data) => {
-        const authInfo = new AuthInfo(firebase.auth().currentUser);
-        this.authInfo$.next(authInfo);
+        
       })
       .catch((error) => {
         this.alertService.error(error);
@@ -64,7 +62,7 @@ export class AuthService {
   logout() {
     firebase.auth().signOut()
       .then((data) => {
-        this.authInfo$.next(AuthService.UNKNOWN_USER);
+       
       });
   }
 }
