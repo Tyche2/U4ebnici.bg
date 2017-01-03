@@ -1,3 +1,4 @@
+import { AuthGuard } from './../core/auth/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -8,8 +9,8 @@ const messagesRoutes: Routes = [
     {
         path: 'messages',
         children: [
-            { path: 'user', component: UserMessagesComponent },
-            { path: 'announcement/:id', component: AnnouncementMessagesComponent }
+            { path: 'user', component: UserMessagesComponent, canActivate: [AuthGuard] },
+            { path: 'announcement/:id', component: AnnouncementMessagesComponent, canActivate: [AuthGuard] }
         ]
     }
 ];

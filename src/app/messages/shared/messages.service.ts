@@ -26,7 +26,24 @@ export class MessagesService {
 
         return this.firebaseUpdate(dataToSave);
     }
+    createNewContactmessage(msg: any): Observable<any> {
+        const subject = new Subject();
+        this.sdkDb.child('contactmessages').push(msg)
+        .then(
+            val => {
+                subject.next(val);
+                subject.complete();
 
+            },
+            err => {
+                subject.error(err);
+                subject.complete();
+            }
+            );
+return subject.asObservable();
+       
+    }
+    
     firebaseUpdate(dataToSave) {
         const subject = new Subject();
 

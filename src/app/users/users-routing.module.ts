@@ -1,3 +1,4 @@
+import { AuthGuard } from './../core/auth/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -13,8 +14,8 @@ const usersRoutes: Routes = [
             {
                 path: 'details',
                 children: [
-                    { path: 'settings/:id', component: UserSettingsComponent }, // canActivate: [AuthGuard] },}
-                    { path: ':adId/:id', component: UserDetailComponent }, // canActivate: [AuthGuard] },
+                    { path: 'settings/:id', component: UserSettingsComponent, canActivate: [AuthGuard] }, // canActivate: [AuthGuard] },}
+                    { path: ':adId/:id', component: UserDetailComponent,canActivate: [AuthGuard]  }, // canActivate: [AuthGuard] },
                 ]
             },
             { path: 'login', component: LoginComponent },
