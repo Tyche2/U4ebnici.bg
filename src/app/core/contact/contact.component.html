@@ -1,27 +1,41 @@
-<div class="container">
-    <div class="row">
-        <form role="form">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="InputName">Име</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="InputName" id="InputName" [value]="(isAuthUid() | getUser | async)?.name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="InputEmail">E-mail</label>
-                        <div class="input-group">
-                            <input type="email" class="form-control" id="InputEmail" name="InputEmail" [value]="(isAuthUid() | getUser | async)?.dbemail" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="InputMessage">Message</label>
-                        <div class="input-group">
-                            <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" required></textarea>
-                        </div>
-                        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
-                    </div>
+<div class="panel-heading">
+    <div class="panel-title text-center">
+        <h1 class="title">Контакти</h1>
+        <h4>Ако имате затруднения или проблем в използването на сайта,</h4>
+        <h4>можете да се свържете с нас на e-mail: TycheTeam2@gmail.com</h4>
+        <h4>или да ни пишете чрез формуляра по-долу</h4>
+        <hr />
+    </div>
+</div>
+<div class="center col-md-6">
+    <form [formGroup]="myForm" class="form-horizontal" (ngSubmit)="onSent()">
+        <div class="form-group">
+            <label for="name">Име</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                    <input formControlName="name" #name type="text" class="form-control" name="InputName" id="InputName" [ngModel]="(isAuthUid() | getUser | async)?.name" (ngModelChange)="name.value = $event">
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+                    <input formControlName="dbemail" #dbemail type="text" class="form-control" name="InputName" id="InputName" [ngModel]="(isAuthUid() | getUser | async)?.dbemail" (ngModelChange)="dbemail.value = $event">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="InputMessage">Message</label>
+            <div class="cols-sm-10">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></span>
+                <textarea formControlName="notes" #notes name="InputMessage" id="InputMessage" class="form-control" rows="5" required></textarea>
+            </div>
+        </div>
+        <div class="form-group ">
+            <button class="btn btn-primary btn-lg btn-block login-button" type="submit">Изпрати</button>
+        </div>
+    </form>
 </div>

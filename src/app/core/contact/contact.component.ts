@@ -1,5 +1,8 @@
+import { MessagesService } from './../../messages/shared/messages.service';
+import { AlertService } from './../alert/alert.service';
 import { AuthService } from './../auth/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -7,12 +10,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  myForm: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private fb: FormBuilder, private alertService: AlertService, private messagesService: MessagesService) {
+  }
 
   ngOnInit() {
+    this.myForm = this.fb.group({
+      name: '',
+      dbemail: '',
+      notes: ''
+    });
   }
-isAuthUid(){
+
+  isAuthUid() {
     return this.authService.id;
   }
+  onSent() {
+    this.messagesService.createNewContactmessage(this.myForm.value)
+    .subscribe(
+              () => {
+                  this.alertService.success('Съобщението е изпратено', true);
+              },
+              err => alert(`Грешка при изпращане на съобщение ${err}`)
+          );
+          
+  }
+
 }
