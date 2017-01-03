@@ -7,6 +7,7 @@ import { MessagesService } from './shared/messages.service';
 import { MessagesRoutingModule } from './messages-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { UserMessagesComponent } from './user-messages/user-messages.component';
+import { MessageAnswerComponent } from './message-answer/message-answer.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { UserMessagesComponent } from './user-messages/user-messages.component';
   declarations: [
     AnnouncementMessagesComponent,
     MessagesComponent,
-    UserMessagesComponent
+    UserMessagesComponent,
+    MessageAnswerComponent
   ],
   providers: [MessagesService]
 })

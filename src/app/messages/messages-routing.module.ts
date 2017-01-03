@@ -4,12 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AnnouncementMessagesComponent } from './announcement-messages/announcement-messages.component';
 import { UserMessagesComponent } from './user-messages/user-messages.component';
+import { MessageAnswerComponent } from './message-answer/message-answer.component';
 
 const messagesRoutes: Routes = [
     {
         path: 'messages',
         children: [
             { path: 'user', component: UserMessagesComponent, canActivate: [AuthGuard] },
+            { path: 'answer/:id', component: MessageAnswerComponent, canActivate: [AuthGuard] },
             { path: 'announcement/:id', component: AnnouncementMessagesComponent, canActivate: [AuthGuard] }
         ]
     }
