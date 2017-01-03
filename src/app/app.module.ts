@@ -10,6 +10,7 @@ import 'rxjs/add/operator/switchMap';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
+import { AuthModule } from './auth/auth.module';
 import { firebaseConfig, authConfig } from './environments/firebase.config';
 import { AngularFireModule } from 'angularfire2/index';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,7 @@ import { UsersModule } from './users/users.module';
   declarations: [AppComponent],
   imports: [
     AnnouncementsModule,
+    AuthModule,
     MessagesModule,
     BrowserModule,
     CoreModule,

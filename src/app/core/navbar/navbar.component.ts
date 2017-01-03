@@ -1,6 +1,6 @@
 import { AlertService } from './../alert/alert.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../auth/services/auth.service';
 
 @Component({
@@ -9,15 +9,11 @@ import { AuthService } from '../auth/services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   constructor(private authService: AuthService,
   private router: Router,
   private alertService: AlertService) {
-  }
-
-  ngOnInit() {
-   
   }
 
   isAuth() {
