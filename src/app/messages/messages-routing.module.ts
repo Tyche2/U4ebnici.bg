@@ -11,7 +11,7 @@ const messagesRoutes: Routes = [
         path: 'messages',
         children: [
             { path: 'user', component: UserMessagesComponent, canActivate: [AuthGuard] },
-            { path: 'answer/:id', component: MessageAnswerComponent, canActivate: [AuthGuard] },
+            { path: 'answer/:id/:uid', component: MessageAnswerComponent, canActivate: [AuthGuard] },
             { path: 'announcement/:id', component: AnnouncementMessagesComponent, canActivate: [AuthGuard] }
         ]
     }

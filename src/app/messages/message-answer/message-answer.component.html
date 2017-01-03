@@ -1,3 +1,35 @@
-<p>
-  message-answer works!
-</p>
+<div class="panel-heading">
+    <div class="panel-title text-center">
+        <h1 class="title">Изпрати отговор</h1>
+        <hr />
+    </div>
+</div>
+<div class="center col-md-6">
+    <form [formGroup]="myMessageForm" (ngSubmit)="onSent()">
+        <div class="form-group hidden">
+            <input formControlName="answered" #answered type="text" id="answered" class="form-control">
+        </div>
+        <div class="form-group hidden">
+            <input formControlName="fromuserid" #fromuserid type="text" id="fromuserid" class="form-control">
+        </div>
+        <div class="form-group hidden">
+            <input formControlName="read" type="text" #read id="read" class="form-control">
+        </div>
+        <div class="form-group hidden">
+            <input formControlName="sent" type="text" #sent id="sent" class="form-control">
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-12" for="inputBody">Съобщение</label>
+                <div class="col-sm-12">
+                    <textarea formControlName="msgText" #msgText class="form-control" id="inputBody" rows="8" placeholder="Твоето съобщение..."></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="form-group ">
+                <button class="btn btn-primary btn-lg btn-block login-button" type="submit">Отговори</button>
+            </div>
+        </div>
+    </form>
+</div>

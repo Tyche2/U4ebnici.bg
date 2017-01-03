@@ -9,7 +9,7 @@
         <p>Текст: {{message.msgText}}</p>
         <p>До: {{(message.touserid | getUser | async)?.name}}</p>
         <p><a [routerLink]="['/announcement', message.announcementid]">Към обявата</a></p>
-        <p><a [routerLink]="['/messages/answer', message.announcementid]">Изпрати отговор</a></p>
+        <p><a [routerLink]="['/messages/answer', message.announcementid, message.fromuserid]">Изпрати отговор</a></p>
     </div>
 </div>
 <div *ngIf="messagesType === 'send'">
@@ -20,6 +20,5 @@
         <p>Текст: {{message.msgText}}</p>
         <p>До: {{(message.touserid | getUser | async)?.name}}</p>
         <p><a [routerLink]="['/announcement', message.announcementid]">Към обявата</a></p>
-        <p><a [routerLink]="['/messages/answer', message.announcementid]">Изпрати отговор</a></p>
     </div>
 </div>

@@ -12,7 +12,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 export class ContactComponent implements OnInit {
   myForm: FormGroup;
 
-  constructor(private authService: AuthService, private fb: FormBuilder, private alertService: AlertService, private messagesService: MessagesService) {
+  constructor(private authService: AuthService,
+      private fb: FormBuilder,
+      private alertService: AlertService,
+      private messagesService: MessagesService) {
   }
 
   ngOnInit() {
@@ -32,9 +35,7 @@ export class ContactComponent implements OnInit {
               () => {
                   this.alertService.success('Съобщението е изпратено', true);
               },
-              err => alert(`Грешка при изпращане на съобщение ${err}`)
+              err => this.alertService.error(`Грешка при изпращане на съобщение ${err}`)
           );
-          
   }
-
 }

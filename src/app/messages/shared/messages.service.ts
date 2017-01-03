@@ -15,11 +15,8 @@ export class MessagesService {
     }
 
     createNewMessage(msg: Message): Observable<any> {
-        //        const msgToSave = Object.assign({}, msg);
         const newMsgKey = this.sdkDb.child('messages').push(msg).key;
-
         let dataToSave = {};
-        //        dataToSave['messages/' + newMsgKey] = msgToSave;
         dataToSave[`messagesPerAnnouncement/${msg.announcementid}/${newMsgKey}`] = true;
         dataToSave[`messagesPerUser/${msg.fromuserid}/${newMsgKey}`] = 'sent';
         dataToSave[`messagesPerUser/${msg.touserid}/${newMsgKey}`] = 'received';
@@ -40,10 +37,9 @@ export class MessagesService {
                 subject.complete();
             }
             );
-return subject.asObservable();
-       
+        return subject.asObservable();
     }
-    
+
     firebaseUpdate(dataToSave) {
         const subject = new Subject();
 

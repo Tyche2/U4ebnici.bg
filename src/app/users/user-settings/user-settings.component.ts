@@ -33,7 +33,7 @@ export class UserSettingsComponent implements OnInit {
                 () => {
                     this.alertService.success('Промените за записани', true);
                 },
-                err => alert(`error saving lesson ${err}`)
+                err => this.alertService.error(`Грешка при запис ${err}`)
             );
   }
 
