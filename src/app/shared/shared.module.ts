@@ -9,6 +9,7 @@ import {
     MessageFilterPipe,
     AnnouncementFilterByStatusPipe
 } from './pipes';
+import { MarkReviewedAnnouncementDirective } from './directives/mark-reviewed-announcement.directive';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import {
         TopPipe,
         AnnouncementFilterByPipe,
         MessageFilterPipe,
-        AnnouncementFilterByStatusPipe
+        AnnouncementFilterByStatusPipe,
+        MarkReviewedAnnouncementDirective
     ],
     exports: [
         GetUserPipe,
@@ -27,7 +29,8 @@ import {
         TopPipe,
         AnnouncementFilterByPipe,
         MessageFilterPipe,
-        AnnouncementFilterByStatusPipe
+        AnnouncementFilterByStatusPipe,
+        MarkReviewedAnnouncementDirective
     ]
 })
 export class SharedModule { }

@@ -8,6 +8,7 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
 import { ConstantService } from './constant.service';
 import { FooterComponent } from './footer/footer.component';
+import { LocalStorageService } from './local-storage.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { ContactComponent } from './contact/contact.component';
@@ -35,7 +36,8 @@ import { SharedModule } from './../shared/shared.module';
         AuthGuard,
         AuthService,
         AlertService,
-        ConstantService
+        ConstantService,
+        LocalStorageService
     ]
 })
 export class CoreModule {
