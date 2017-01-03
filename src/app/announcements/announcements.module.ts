@@ -17,7 +17,7 @@ import { EditAnnouncementComponent } from './edit-announcement/edit-announcement
 import { SharedModule } from '../shared/shared.module';
 import { SearchAnnouncementsComponent } from './shared/search-announcements/search-announcements.component';
 import { UserAnnouncementsComponent } from './user-announcements/user-announcements.component';
-
+import { ImageBorderDirective } from '../shared/directives/image-border.directive';
 
 @NgModule({
   imports: [
@@ -38,7 +38,8 @@ import { UserAnnouncementsComponent } from './user-announcements/user-announceme
     NewAnnouncementComponent,
     EditAnnouncementComponent,
     UserAnnouncementsComponent,
-    SearchAnnouncementsComponent
+    SearchAnnouncementsComponent,
+    ImageBorderDirective
   ],
   providers: [AnnouncementService]
 })
