@@ -27,10 +27,6 @@
             <button [class.selected]="announcementType === 'active'"  (click)="onAnnouncementsTypeChange($event)" isActive="true" data="active">Активни</button>
             <button [class.selected]="announcementType === 'arhiv'"  (click)="onAnnouncementsTypeChange($event)" isActive="false" data="arhiv">Архивирани</button>
         </div>
-        <div class="row">
-            <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true">
-            </pagination-controls>
-        </div>
         <div class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | showActive: isActive | sort: sortByKey)">
             <div class="col-md-1">
                 <img src="{{ad.image}}" alt="{{ad.title}}">
@@ -43,10 +39,10 @@
             </div>
             <div class="col-md-1" *ngIf="isAuth() && isActive">
                 <p><a [routerLink]="['/announcement/edit', ad.$key]">Редактирай</a></p>
-                <p><a (click)="unactivateAnnouncement(ad.$key)">Архивирай</a></p>
+                <p><a (click)="unactivateAnnouncement(ad.$key)" style="cursor: pointer;">Архивирай</a></p>
             </div>
             <div class="col-md-1" *ngIf="isAuth() && !isActive">
-                <p><a (click)="activateAnnouncement(ad.$key)">Активирай</a></p>
+                <p><a (click)="activateAnnouncement(ad.$key)" style="cursor: pointer;">Активирай</a></p>
             </div>
         </div>
     </div>
