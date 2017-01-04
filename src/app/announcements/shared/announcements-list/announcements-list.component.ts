@@ -32,6 +32,7 @@ export class AnnouncementsListComponent implements OnInit {
   order: string;
   sortByField: string;
   page: number;
+  announcementType : string;
 
   constructor(private constantService: ConstantService,
             private authService: AuthService,
@@ -46,6 +47,7 @@ export class AnnouncementsListComponent implements OnInit {
     this.sortByKey = '-$key';
     this.order = 'desc';
     this.isActive = true;
+    this.announcementType = 'active';
   }
 
   onSortByChange(e: any) {
@@ -75,6 +77,7 @@ export class AnnouncementsListComponent implements OnInit {
   }
 
   onAnnouncementsTypeChange(e: any) {
+     this.announcementType = e.target.getAttribute('data');
     if (e.target.getAttribute('isActive') === 'true') {
       this.isActive = true;
     } else {

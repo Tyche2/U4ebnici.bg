@@ -24,8 +24,8 @@
     </div>
     <div *ngIf="!isFiltred">
         <div class="row" *ngIf="isAuth()">
-            <button type="button" class="btn btn-secondary" (click)="onAnnouncementsTypeChange($event)" isActive="true">Активни</button>
-            <button type="button" class="btn btn-secondary" (click)="onAnnouncementsTypeChange($event)" isActive="false">Архивирани</button>
+            <button [class.selected]="announcementType === 'active'"  (click)="onAnnouncementsTypeChange($event)" isActive="true" data="active">Активни</button>
+            <button [class.selected]="announcementType === 'arhiv'"  (click)="onAnnouncementsTypeChange($event)" isActive="false" data="arhiv">Архивирани</button>
         </div>
         <div class="row">
             <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true">
