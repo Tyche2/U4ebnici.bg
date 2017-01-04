@@ -2,7 +2,9 @@
 <div>
     <h2>Последно добавени обяви</h2>
     <div class="col-md-3" *ngFor="let ad of (announcements | async | showActive: true | sort:'-$key' | top:12)">
+	<a [routerLink]="['/announcement', ad.$key]">
         <img appImageBorder src="{{ad.image}}" alt="{{ad.title}}">
+		</a>
         <p><strong>{{ad.title}}</strong> за {{ad.clas}} клас</p>
         <p name="username">Свържи се с: <a [routerLink]="['/user/details', ad.$key, ad.userid]"> {{ad.username}}</a></p>
         <p name="publisher">Издателство: {{ad.publisher}}</p>
