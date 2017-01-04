@@ -114,21 +114,12 @@ export class AnnouncementService {
         return this.findAnnouncmentsByKeys(this.findAnnouncmentsKeysByUserKey(userKey));
     }
 
-    changeAnnouncementStatus(announcementKey: string, active: boolean) {
-        return new Promise((resolve, reject) => {
-            this.findAnnouncementByKey(announcementKey)
-                .subscribe(obj => {
-                    const announcementToUpdate = Object.assign({}, obj);
-                    announcementToUpdate.active = active;
-                    delete(announcementToUpdate.$key);
+    changeAnnouncementStatus(data: Announcement):Observable<any> {
+                    let key = data.$key;
+                    delete(data.$key);
                     let dataToSave = {};
-                    dataToSave[`announcements/${announcementKey}`] = announcementToUpdate;
-
-                    this.firebaseUpdate(dataToSave)
-                    .subscribe(() => resolve(announcementToUpdate),
-                                err => reject(err));
-                });
-        });
+                    dataToSave[`announcements/` + key] = data;
+                   return this.firebaseUpdate(dataToSave)                
     }
 
     updateAnnouncement(announcementKey: string, announcement) {
