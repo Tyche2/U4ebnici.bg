@@ -1,5 +1,7 @@
 body {
     margin-top: 50px;
+    height: 100%;
+    min-height: 100%;
     /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
@@ -33,5 +35,5 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center
 }
