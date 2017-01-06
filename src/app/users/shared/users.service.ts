@@ -53,12 +53,6 @@ export class UserService {
         return this.firebaseUpdate(dataToSave);
     }
 
-    deleteUser(uid: string): Observable<any> {
-        const url = firebaseConfig.databaseURL + '/users/' + uid + '.json';
-
-        return this.http.delete(url);
-    }
-
     getUserByKey(userKey: string): Observable<User> {
         return this.db.object(`users/${userKey}`).map(User.fromJson);
     }

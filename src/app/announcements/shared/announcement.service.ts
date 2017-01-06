@@ -114,12 +114,12 @@ export class AnnouncementService {
         return this.findAnnouncmentsByKeys(this.findAnnouncmentsKeysByUserKey(userKey));
     }
 
-    changeAnnouncementStatus(data: Announcement):Observable<any> {
-                    let key = data.$key;
-                    delete(data.$key);
-                    let dataToSave = {};
-                    dataToSave[`announcements/` + key] = data;
-                   return this.firebaseUpdate(dataToSave)                
+    changeAnnouncementStatus(data: Announcement): Observable<any> {
+        let key = data.$key;
+        delete(data.$key);
+        let dataToSave = {};
+        dataToSave[`announcements/` + key] = data;
+        return this.firebaseUpdate(dataToSave);
     }
 
     updateAnnouncement(announcementKey: string, announcement) {
