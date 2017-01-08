@@ -12,22 +12,22 @@ import { AuthService } from '../../auth/shared/auth.service';
 export class NavbarComponent {
 
   constructor(private authService: AuthService,
-  private router: Router,
-  private alertService: AlertService) {
+    private router: Router,
+    private alertService: AlertService) {
   }
 
   isAuth() {
-     return this.authService.authenticated;
+    return this.authService.isAuthenticated;
   }
 
-  isAuthUid(){
-    return this.authService.id;
+  isAuthUid() {
+    return this.authService.userId;
   }
 
   logout() {
     this.authService.logout();
-            this.alertService.success('Успешен изход', true);
-            this.router.navigate(['home']);
+    this.alertService.success('Успешен изход', true);
+    this.router.navigate(['home']);
   }
 
 }

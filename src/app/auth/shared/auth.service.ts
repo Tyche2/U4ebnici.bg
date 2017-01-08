@@ -1,68 +1,35 @@
-import { AlertService } from '../../core/alert/alert.service';
-import { firebaseConfig } from '../../environments/firebase.config';
-import { Http, Headers, Response } from '@angular/http';
-import { database, initializeApp } from 'firebase';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
-import { AuthProviders, AuthMethods, FirebaseAuth, FirebaseAuthState } from 'angularfire2';
+import { AngularFireAuth, FirebaseAuthState } from 'angularfire2';
 
-export interface User {
-  email: string;
-  password: string;
-  confirmPassword?: string;
-}
-let firebase = require('firebase');
-firebase.initializeApp(firebaseConfig);
+import { AuthUser } from './authUser.model';
 
 @Injectable()
 export class AuthService {
-  
-  static USER_DATA;
   private authState: FirebaseAuthState = null;
-  currentUser: any;
-  
-  userData$: BehaviorSubject<any> = new BehaviorSubject<any>(AuthService.USER_DATA);
 
-  // loading = false;
-  constructor(private alertService: AlertService, public auth: FirebaseAuth) {
-    auth.subscribe((state: FirebaseAuthState) => {
+  constructor(public firebaseAuth: AngularFireAuth) {
+    firebaseAuth.subscribe((state: FirebaseAuthState) => {
       this.authState = state;
     });
   }
 
-  get authenticated(): boolean {
+  get isAuthenticated(): boolean {
     return this.authState !== null;
   }
 
-  get id(): string {
-    return this.authenticated ? this.authState.uid : '';
-  }
-  signupUser(user: User) {
-
-    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-      .then((data) => {
-        const userData = new BehaviorSubject(data);
-        this.userData$.next(data);
-      })
-      .catch((error) => {
-        this.alertService.error(error);
-      });
+  get userId(): string {
+    return this.isAuthenticated ? this.authState.uid : '';
   }
 
-  signinUser(user: User) {
-    firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-      .then((data) => {
-        
-      })
-      .catch((error) => {
-        this.alertService.error(error);
-      });
+  signUpUser(user: AuthUser): firebase.Promise<FirebaseAuthState> {
+    return this.firebaseAuth.createUser({ email: user.email, password: user.password });
   }
 
-  logout() {
-    firebase.auth().signOut()
-      .then((data) => {
-       
-      });
+  signInUser(user: AuthUser): firebase.Promise<FirebaseAuthState> {
+    return this.firebaseAuth.login({ email: user.email, password: user.password });
+  }
+
+  logout(): void {
+    return this.firebaseAuth.logout();
   }
 }

@@ -23,7 +23,7 @@ export class UserAnnouncementsComponent implements OnInit {
 
   ngOnInit() {
     this.isFiltred = false;
-    this.userUID = this.authService.id;
+    this.userUID = this.authService.userId;
     this.announcements = this.announcementService.findAnnouncmentsByUserKey(this.userUID);
   }
 }

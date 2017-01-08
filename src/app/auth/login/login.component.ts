@@ -33,9 +33,14 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    onSignin(user) {
-        this.authService.signinUser(this.myForm.value);
-        this.alertService.success('Успешен вход', true);
-        this.router.navigate([this.returnUrl]);
+    onSignIn(user) {
+        this.authService.signInUser(this.myForm.value)
+            .then(() => {
+                this.alertService.success('Успешен вход', true);
+                this.router.navigate([this.returnUrl]);
+            })
+            .catch(() => {
+                this.alertService.error('Неуспешен вход', true);
+            });
     }
 }

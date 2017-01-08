@@ -21,12 +21,12 @@ export class UserMessagesComponent implements OnInit {
   ) { }
 
   isAuthUid() {
-    return this.authService.id;
+    return this.authService.userId;
   }
 
   ngOnInit() {
     this.messagesType = 'received';
-    let userUID = this.authService.id;
+    let userUID = this.authService.userId;
 
     this.messages = this.messagesService.findMessagesByUserKey(userUID);
     this.user = userUID;

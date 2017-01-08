@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Injectable()
 export class DataService {
-    firebaseDb: FirebaseDatabase;
 
-    constructor(private af: AngularFire) {
-        this.firebaseDb = af.database;
-    }
+    constructor(private firebaseDb: AngularFireDatabase) {}
 
     getItem(url: string): FirebaseObjectObservable<any> {
         return this.firebaseDb.object(url);

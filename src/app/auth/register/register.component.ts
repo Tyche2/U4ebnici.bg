@@ -25,18 +25,19 @@ export class RegisterComponent implements OnInit {
         private alertService: AlertService,
         private router: Router) { }
 
-    onSignup() {
-        this.authService.signupUser(this.myForm.value)
-        this.authService.userData$.subscribe((val) => {
-            if (val !== undefined) {
-                this.myDBForm.patchValue({
-                    uid: val.uid
-                });
+    onSignUp() {
+        this.authService.signUpUser(this.myForm.value)
+            .then(data => {
+                this.myDBForm.patchValue({ uid: data.uid });
                 this.userService.createNewUser(this.myDBForm.value);
-            }
-        });
-        this.alertService.success('Регистрацията е успешна', true);
-        this.router.navigate(['/login']);
+            })
+            .then(() => {
+                this.alertService.success('Регистрацията е успешна', true);
+                this.router.navigate(['/login']);
+            })
+            .catch(err => {
+                this.alertService.error(err.toString());
+            });
     }
 
     ngOnInit(): any {

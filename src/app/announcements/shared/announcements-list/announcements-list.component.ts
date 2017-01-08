@@ -87,7 +87,7 @@ export class AnnouncementsListComponent implements OnInit {
   }
 
   isAuth() {
-    return this.authService.authenticated;
+    return this.authService.isAuthenticated;
   }
 
   get searchtext(): string { return this.searchText; }

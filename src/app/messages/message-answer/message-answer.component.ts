@@ -44,7 +44,7 @@ export class MessageAnswerComponent implements OnInit {
   }
 
   onSent() {
-    this.userUID = this.authService.id;
+    this.userUID = this.authService.userId;
     let currentdate = new Date();
     let datetime = currentdate.getDate() + '/'
                 + (currentdate.getMonth() + 1) + '/'

@@ -27,7 +27,7 @@ export class ContactComponent implements OnInit {
   }
 
   isAuthUid() {
-    return this.authService.id;
+    return this.authService.userId;
   }
   onSent() {
     this.messagesService.createNewContactmessage(this.myForm.value)

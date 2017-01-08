@@ -22,17 +22,17 @@ export class NewAnnouncementComponent implements OnInit {
 
   ngOnInit() {
     this.myDBForm = this.fb.group({
-            title: ['', Validators.required],
-            discipline: ['', Validators.required],
-            clas: ['', Validators.required],
-            image: '',
-            publisher: '',
-            authors: ['', Validators.required],
-            year: '',
-            description: '',
-            condition: '',
-            price: [0, Validators.required]
-        });
+      title: ['', Validators.required],
+      discipline: ['', Validators.required],
+      clas: ['', Validators.required],
+      image: '',
+      publisher: '',
+      authors: ['', Validators.required],
+      year: '',
+      description: '',
+      condition: '',
+      price: [0, Validators.required]
+    });
   }
 
   onConditionChange(e: any) {
@@ -55,23 +55,23 @@ export class NewAnnouncementComponent implements OnInit {
 
       imageRef.put(this.selectedFile)
         .then(snapshot => {
-            this.myDBForm.value.image = snapshot.downloadURL;
-            this.announcementService.createAnnouncement(this.myDBForm.value)
+          this.myDBForm.value.image = snapshot.downloadURL;
+          this.announcementService.createAnnouncement(this.myDBForm.value)
             .subscribe(() => {
-                    this.alertService.success('Обявата е записана', true);
-                    this.myDBForm.reset();
-                },
-                err => this.alertService.error(`Грешка при запис на обява ${err}`)
-            );
-          });
-    } else {
-      this.announcementService.createAnnouncement(this.myDBForm.value)
-      .subscribe(() => {
               this.alertService.success('Обявата е записана', true);
               this.myDBForm.reset();
-          },
-          err => this.alertService.error(`Грешка при запис на обява ${err}`)
-      );
+            },
+            err => this.alertService.error(`Грешка при запис на обява ${err}`)
+            );
+        });
+    } else {
+      this.announcementService.createAnnouncement(this.myDBForm.value)
+        .subscribe(() => {
+          this.alertService.success('Обявата е записана', true);
+          this.myDBForm.reset();
+        },
+        err => this.alertService.error(`Грешка при запис на обява ${err}`)
+        );
     }
   }
 }
