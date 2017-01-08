@@ -39,11 +39,11 @@ export class DataService {
         }
     }
 
-    addItemToCollection(collection: string | FirebaseListObservable<any>, item: Object): firebase.Promise<void> {
+    addItemToCollection(collection: string | FirebaseListObservable<any>, item: Object): firebase.database.ThenableReference {
         if (typeof (collection) === 'string') {
             collection = this.getCollection(collection);
         }
-        return collection.push(item);
+        return collection.push(item); 
     }
 
     updateItemFromCollection(collection: string | FirebaseListObservable<any>, itemKey: string, newData: Object): firebase.Promise<void> {

@@ -57,23 +57,19 @@ export class UserDetailComponent implements OnInit {
     this.userUID = firebase.auth().currentUser.uid;
     let currentdate = new Date();
     let datetime = currentdate.getDate() + '/'
-                + (currentdate.getMonth() + 1) + '/'
-                + currentdate.getFullYear() + ' @ '
-                + currentdate.getHours() + ':'
-                + currentdate.getMinutes() + ':'
-                + currentdate.getSeconds();
-    this.myMessageForm.patchValue({fromuserid: this.userUID});
-    this.myMessageForm.patchValue({answered: false});
-    this.myMessageForm.patchValue({read: false});
-    this.myMessageForm.patchValue({sent: datetime});
+      + (currentdate.getMonth() + 1) + '/'
+      + currentdate.getFullYear() + ' @ '
+      + currentdate.getHours() + ':'
+      + currentdate.getMinutes() + ':'
+      + currentdate.getSeconds();
+    this.myMessageForm.patchValue({ fromuserid: this.userUID });
+    this.myMessageForm.patchValue({ answered: false });
+    this.myMessageForm.patchValue({ read: false });
+    this.myMessageForm.patchValue({ sent: datetime });
 
     this.messagesService.createNewMessage(this.myMessageForm.value)
-    .subscribe(
-              () => {
-                  this.alertService.success('Съобщението е изпратено', true);
-              },
-              err => this.alertService.error(`Грешка при изпращане на съобщение ${err}`)
-          );
+      .then(() => this.alertService.success('Съобщението е изпратено', true))
+      .catch(err => this.alertService.error(`Грешка при изпращане на съобщение ${err}`));
   }
 
   ngOnInit() {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { database } from 'firebase';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AlertService } from '../../core/alert/alert.service';
@@ -19,26 +18,13 @@ export class RegisterComponent implements OnInit {
     error = false;
     errorMessage = '';
 
-    constructor(private fb: FormBuilder,
+    constructor(
+        private fb: FormBuilder,
         private authService: AuthService,
         private userService: UserService,
         private alertService: AlertService,
-        private router: Router) { }
-
-    onSignUp() {
-        this.authService.signUpUser(this.myForm.value)
-            .then(data => {
-                this.myDBForm.patchValue({ uid: data.uid });
-                this.userService.createNewUser(this.myDBForm.value);
-            })
-            .then(() => {
-                this.alertService.success('Регистрацията е успешна', true);
-                this.router.navigate(['/login']);
-            })
-            .catch(err => {
-                this.alertService.error(err.toString());
-            });
-    }
+        private router: Router
+    ) { }
 
     ngOnInit(): any {
         this.myForm = this.fb.group({
@@ -60,7 +46,21 @@ export class RegisterComponent implements OnInit {
             dbemail: '',
             uid: ''
         });
+    }
 
+    onSignUp() {
+        this.authService.signUpUser(this.myForm.value)
+            .then(data => {
+                this.myDBForm.patchValue({ uid: data.uid });
+                this.userService.createNewUser(this.myDBForm.value);
+            })
+            .then(() => {
+                this.alertService.success('Регистрацията е успешна', true);
+                this.router.navigate(['/login']);
+            })
+            .catch(err => {
+                this.alertService.error(err.toString());
+            });
     }
 
     isEmail(control: FormControl): { [s: string]: boolean } {

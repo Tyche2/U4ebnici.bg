@@ -1,4 +1,5 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+
 import { AlertService } from './alert.service';
 
 @Component({
