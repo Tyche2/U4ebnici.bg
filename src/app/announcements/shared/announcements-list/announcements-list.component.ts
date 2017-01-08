@@ -7,8 +7,8 @@ import {
 import { Observable } from 'rxjs/Rx';
 
 import { Announcement } from '../announcement.model';
-import { ConstantService } from '../../../core/constant.service';
-import { AuthService } from '../../../core/auth/services/auth.service';
+import { ConstantService } from '../../../core/services/constant.service';
+import { AuthService } from '../../../auth/shared/auth.service';
 import { AnnouncementService } from '../../shared/announcement.service';
 import { AlertService } from '../../../core/alert/alert.service';
 

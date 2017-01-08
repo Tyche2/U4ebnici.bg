@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AlertService } from '../../core/alert/alert.service';
-import { AuthService } from '../../core/auth/services/auth.service';
+import { AuthService } from '../../auth/shared/auth.service';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/users.service';
 

@@ -5,12 +5,12 @@
     <div class="arrow-div arrow-div-right" *ngFor="let message of (messages | async |msgFilter:'touserid':user)">
 
         <p>От: {{(message.fromuserid | getUser | async)?.name}}</p>
-        <p>Дата: {{(message.sent | date: 'HH:mm dd/MM/yyyy')}}</p>
+        <p>Дата: {{message.sent}}</p>
         <p>Текст: {{message.msgText}}</p>
         <p>До: {{(message.touserid | getUser | async)?.name}}</p>
         <div class="control">
-        <a [routerLink]="['/announcement', message.announcementid]">Към обявата</a>
-        <a [routerLink]="['/messages/answer', message.announcementid, message.fromuserid]">Изпрати отговор</a>
+            <a [routerLink]="['/announcement', message.announcementid]">Към обявата</a>
+            <a [routerLink]="['/messages/answer', message.announcementid, message.fromuserid]">Изпрати отговор</a>
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
     <div class="arrow-div arrow-div-left" *ngFor="let message of (messages | async |msgFilter:'fromuserid':user)">
 
         <p>От: {{(message.fromuserid | getUser | async)?.name}}</p>
-        <p>Дата: {{(message.sent | date: 'HH:mm dd/MM/yyyy')}}</p>
+        <p>Дата: {{message.sent}}</p>
         <p>Текст: {{message.msgText}}</p>
         <p>До: {{(message.touserid | getUser | async)?.name}}</p>
         <p><a [routerLink]="['/announcement', message.announcementid]">Към обявата</a></p>

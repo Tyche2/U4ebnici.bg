@@ -1,5 +1,5 @@
-import { AlertService } from '../../alert/alert.service';
-import { firebaseConfig } from './../../../environments/firebase.config';
+import { AlertService } from '../../core/alert/alert.service';
+import { firebaseConfig } from '../../environments/firebase.config';
 import { Http, Headers, Response } from '@angular/http';
 import { database, initializeApp } from 'firebase';
 import { Injectable } from '@angular/core';

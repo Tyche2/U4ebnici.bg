@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 import { AlertService } from '../../core/alert/alert.service';
-import { AuthService } from '../../core/auth/services/auth.service';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
     selector: 'app-login',

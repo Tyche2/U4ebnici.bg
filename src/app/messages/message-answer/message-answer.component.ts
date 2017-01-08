@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AlertService } from '../../core/alert/alert.service';
 import { Message } from '../../messages/shared/message.model';
 import { MessagesService } from '../../messages/shared/messages.service';
-import { AuthService } from '../../core/auth/services/auth.service';
+import { AuthService } from '../../auth/shared/auth.service';
 
 @Component({
   selector: 'app-message-answer',

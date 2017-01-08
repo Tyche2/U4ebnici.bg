@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { Announcement } from '../shared/announcement.model';
 import { AnnouncementService } from '../shared/announcement.service';
-import { AuthService } from '../../core/auth/services/auth.service';
+import { AuthService } from '../../auth/shared/auth.service';
 
 @Component({
   selector: 'app-user-announcements',

@@ -9,7 +9,7 @@ import {
     MessageFilterPipe,
     AnnouncementFilterByStatusPipe
 } from './pipes';
-import { MarkReviewedAnnouncementDirective } from './directives/mark-reviewed-announcement.directive';
+import { ImageBorderDirective, MarkReviewedAnnouncementDirective } from './directives';
 
 @NgModule({
     declarations: [
@@ -20,6 +20,7 @@ import { MarkReviewedAnnouncementDirective } from './directives/mark-reviewed-an
         AnnouncementFilterByPipe,
         MessageFilterPipe,
         AnnouncementFilterByStatusPipe,
+        ImageBorderDirective,
         MarkReviewedAnnouncementDirective
     ],
     exports: [
@@ -30,7 +31,8 @@ import { MarkReviewedAnnouncementDirective } from './directives/mark-reviewed-an
         AnnouncementFilterByPipe,
         MessageFilterPipe,
         AnnouncementFilterByStatusPipe,
-        MarkReviewedAnnouncementDirective
+        MarkReviewedAnnouncementDirective,
+        ImageBorderDirective
     ]
 })
 export class SharedModule { }

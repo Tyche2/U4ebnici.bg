@@ -1,6 +1,6 @@
 import { MessagesService } from './../../messages/shared/messages.service';
 import { AlertService } from './../alert/alert.service';
-import { AuthService } from './../auth/services/auth.service';
+import { AuthService } from '../../auth/shared/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 

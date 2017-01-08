@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { AnnouncementService } from '../shared/announcement.service';
 import { Announcement } from '../shared/announcement.model';
-import { LocalStorageService } from '../../core/local-storage.service';
+import { LocalStorageService } from '../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-announcement-detail',

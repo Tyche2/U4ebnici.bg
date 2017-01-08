@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AuthService } from './../../core/auth/services/auth.service';
+import { AuthService } from '../../auth/shared/auth.service';
 import { MessagesService } from './../shared/messages.service';
 import { Message } from '../shared/message.model';
 
