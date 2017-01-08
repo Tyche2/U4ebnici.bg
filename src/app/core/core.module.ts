@@ -8,6 +8,7 @@ import { AuthService } from './auth/services/auth.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
 import { ConstantService } from './constant.service';
+import { DataService } from './services/data.service';
 import { FooterComponent } from './footer/footer.component';
 import { LocalStorageService } from './local-storage.service';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -40,6 +41,7 @@ import { SharedModule } from './../shared/shared.module';
         AuthService,
         AlertService,
         ConstantService,
+        DataService,
         LocalStorageService
     ]
 })
