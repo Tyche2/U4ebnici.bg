@@ -43,7 +43,7 @@ export class DataService {
         if (typeof (collection) === 'string') {
             collection = this.getCollection(collection);
         }
-        return collection.push(item); 
+        return collection.push(item);
     }
 
     updateItemFromCollection(collection: string | FirebaseListObservable<any>, itemKey: string, newData: Object): firebase.Promise<void> {

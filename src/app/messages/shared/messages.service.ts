@@ -26,7 +26,7 @@ export class MessagesService {
             .map(keys => keys.map(keyObj => keyObj.$key));
     }
 
-    createNewMessage(msg: Message) {
+    createNewMessage(msg: Message): firebase.Thenable<any> {
         let newMsgKey;
         return this.db.addItemToCollection('messages', msg)
             .then(dbMsg => newMsgKey = dbMsg.key)
@@ -47,7 +47,7 @@ export class MessagesService {
             });
     }
 
-    createNewContactmessage(msg: any) {
+    createNewContactMessage(msg: any): firebase.database.ThenableReference {
         return this.db.addItemToCollection('contactmessages', msg);
     }
 

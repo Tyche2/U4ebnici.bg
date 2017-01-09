@@ -2,7 +2,7 @@
 <div class="message-container" *ngFor="let message of (messages | async)">
 
     <p>От: {{(message.fromuserid | getUser | async)?.name}}</p>
-    <p>Дата: {{message.sent}}</p>
+    <p>Дата: {{(message.sent | date: 'HH:mm dd/MM/yyyy')}}</p>
     <p>Текст: {{message.msgText}}</p>
     <p>До: {{(message.touserid | getUser | async)?.name}}</p>
 </div>

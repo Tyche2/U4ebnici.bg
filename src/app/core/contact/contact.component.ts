@@ -33,7 +33,7 @@ export class ContactComponent implements OnInit {
   }
 
   onSent() {
-    this.messagesService.createNewContactmessage(this.myForm.value)
+    this.messagesService.createNewContactMessage(this.myForm.value)
       .then(() => this.alertService.success('Съобщението е изпратено', true))
       .catch(err => this.alertService.error(`Грешка при изпращане на съобщение ${err}`));
   }

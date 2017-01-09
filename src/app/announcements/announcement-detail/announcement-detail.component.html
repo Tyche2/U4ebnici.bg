@@ -13,6 +13,6 @@
     <p name="description">Описание: {{(announcement$ | async)?.description}}</p>
     <p name="condition">Състояние: {{(announcement$ | async)?.condition}}</p>
     <p name="username">Публикувано от: {{((announcement$ | async)?.username)}}</p>
-    <p name="added">Публикувано на: {{(announcement$ | async)?.added}}</p>
+    <p name="added">Публикувано на: {{(announcement$ | async)?.added | date : "short"}}</p>
     <p><a [routerLink]="['/messages', 'announcement', announcementKey]">Виж съобщения за обявата</a></p>
 </div>
