@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { Inject, Injectable } from '@angular/core';
+import { AngularFireDatabase, FirebaseApp, FirebaseDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class DataService {
+    private storageRef: firebase.storage.Reference;
 
-    constructor(private firebaseDb: AngularFireDatabase) {}
+    constructor(private firebaseDb: AngularFireDatabase, @Inject(FirebaseApp) firebaseApp: firebase.app.App) {
+        this.storageRef = firebaseApp.storage().ref();
+    }
 
     getItem(url: string): FirebaseObjectObservable<any> {
         return this.firebaseDb.object(url);
@@ -29,6 +33,17 @@ export class DataService {
             item = this.getItem(item);
         }
         return item.remove();
+    }
+
+    getStorageItemRef(name: string): firebase.storage.Reference {
+        return this.storageRef.child(name);
+    }
+
+    saveStorageItem(fileRef: string | firebase.storage.Reference, file: any): firebase.storage.UploadTask {
+        if (typeof(fileRef) === 'string') {
+            fileRef = this.getStorageItemRef(fileRef);
+        }
+        return  fileRef.put(file);
     }
 
     getCollection(url: string, query?: Object): FirebaseListObservable<any> {
