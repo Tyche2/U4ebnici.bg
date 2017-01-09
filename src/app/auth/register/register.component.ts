@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
             })
             .then(() => {
                 this.alertService.success('Регистрацията е успешна', true);
-                this.router.navigate(['/login']);
+                setTimeout(() => this.router.navigate(['/home']), 2000);
             })
             .catch(err => {
                 this.alertService.error(err.toString());

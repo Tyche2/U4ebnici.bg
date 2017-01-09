@@ -5,15 +5,14 @@
     </div>
 </div>
 <div class="center col-md-6">
-    <form class="form-horizontal" #announcementForm="ngForm" (ngSubmit)="UpdateAnnouncement()">
+    <form class="form-horizontal" #announcementForm="ngForm" (ngSubmit)="onUpdateAnnouncement()">
         <form [formGroup]="myDBForm">
             <div class="form-group">
                 <label for="title">Заглавие</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <input formControlName="title" type="text" id="title" #title class="form-control"
-                              [ngModel]="(announcement$ | async)?.title" (ngModelChange)="announcement$.title = $event">
+                        <input formControlName="title" type="text" id="title" #title class="form-control" [ngModel]="(announcement$ | async)?.title" (ngModelChange)="announcement$.title = $event">
                     </div>
                 </div>
             </div>
@@ -22,8 +21,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <input formControlName="discipline" type="text" id="discipline" #discipline class="form-control"
-                              [ngModel]="(announcement$ | async)?.discipline" (ngModelChange)="announcement$.discipline = $event">
+                        <input formControlName="discipline" type="text" id="discipline" #discipline class="form-control" [ngModel]="(announcement$ | async)?.discipline" (ngModelChange)="announcement$.discipline = $event">
                     </div>
                 </div>
             </div>
@@ -32,8 +30,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <input formControlName="clas" type="text" id="clas" #clas class="form-control"
-                              [ngModel]="(announcement$ | async)?.clas" (ngModelChange)="announcement$.clas = $event">
+                        <input formControlName="clas" type="text" id="clas" #clas class="form-control" [ngModel]="(announcement$ | async)?.clas" (ngModelChange)="announcement$.clas = $event">
                     </div>
                 </div>
             </div>
@@ -52,8 +49,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <input formControlName="publisher" type="text" id="publisher" #publisher class="form-control"
-                              [ngModel]="(announcement$ | async)?.publisher" (ngModelChange)="announcement$.publisher = $event">
+                        <input formControlName="publisher" type="text" id="publisher" #publisher class="form-control" [ngModel]="(announcement$ | async)?.publisher" (ngModelChange)="announcement$.publisher = $event">
                     </div>
                 </div>
             </div>
@@ -62,8 +58,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <input formControlName="authors" type="text" id="authors" #authors class="form-control"
-                              [ngModel]="(announcement$ | async)?.authors" (ngModelChange)="announcement$.authors = $event">
+                        <input formControlName="authors" type="text" id="authors" #authors class="form-control" [ngModel]="(announcement$ | async)?.authors" (ngModelChange)="announcement$.authors = $event">
                     </div>
                 </div>
             </div>
@@ -72,8 +67,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <input formControlName="year" type="text" id="year" #year class="form-control"
-                              [ngModel]="(announcement$ | async)?.year" (ngModelChange)="announcement$.year = $event">
+                        <input formControlName="year" type="text" id="year" #year class="form-control" [ngModel]="(announcement$ | async)?.year" (ngModelChange)="announcement$.year = $event">
                     </div>
                 </div>
             </div>
@@ -82,8 +76,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <textarea formControlName="description" rows="5" id="description" #description class="form-control"
-                              [ngModel]="(announcement$ | async)?.description" (ngModelChange)="announcement$.description = $event"></textarea>
+                        <textarea formControlName="description" rows="5" id="description" #description class="form-control" [ngModel]="(announcement$ | async)?.description" (ngModelChange)="announcement$.description = $event"></textarea>
                     </div>
                 </div>
             </div>
@@ -104,8 +97,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"></span>
-                        <input formControlName="price" type="text" id="price" #price class="form-control"
-                              [ngModel]="(announcement$ | async)?.price" (ngModelChange)="announcement$.price = $event">
+                        <input formControlName="price" type="text" id="price" #price class="form-control" [ngModel]="(announcement$ | async)?.price" (ngModelChange)="announcement$.price = $event">
                     </div>
                 </div>
             </div>

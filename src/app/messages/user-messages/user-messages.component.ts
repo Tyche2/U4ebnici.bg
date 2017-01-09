@@ -20,10 +20,6 @@ export class UserMessagesComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  isAuthUid() {
-    return this.authService.userId;
-  }
-
   ngOnInit() {
     this.messagesType = 'received';
     let userUID = this.authService.userId;

@@ -10,6 +10,9 @@ export class DataService {
         this.storageRef = firebaseApp.storage().ref();
     }
 
+
+    // Database objects
+
     getItem(url: string): FirebaseObjectObservable<any> {
         return this.firebaseDb.object(url);
     }
@@ -35,16 +38,8 @@ export class DataService {
         return item.remove();
     }
 
-    getStorageItemRef(name: string): firebase.storage.Reference {
-        return this.storageRef.child(name);
-    }
 
-    saveStorageItem(fileRef: string | firebase.storage.Reference, file: any): firebase.storage.UploadTask {
-        if (typeof(fileRef) === 'string') {
-            fileRef = this.getStorageItemRef(fileRef);
-        }
-        return  fileRef.put(file);
-    }
+    // Database collections
 
     getCollection(url: string, query?: Object): FirebaseListObservable<any> {
         if (query) {
@@ -73,5 +68,19 @@ export class DataService {
             collection = this.getCollection(collection);
         }
         return collection.remove(itemKey);
+    }
+
+
+    // Storage files
+
+    getStorageItemRef(name: string): firebase.storage.Reference {
+        return this.storageRef.child(name);
+    }
+
+    saveStorageItem(fileRef: string | firebase.storage.Reference, file: any): firebase.storage.UploadTask {
+        if (typeof (fileRef) === 'string') {
+            fileRef = this.getStorageItemRef(fileRef);
+        }
+        return fileRef.put(file);
     }
 }

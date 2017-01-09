@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { AnnouncementService } from '../shared/announcement.service';
 import { Announcement } from '../shared/announcement.model';
+import { AnnouncementService } from '../shared/announcement.service';
 import { LocalStorageService } from '../../core/services/local-storage.service';
 
 @Component({
@@ -14,7 +13,6 @@ import { LocalStorageService } from '../../core/services/local-storage.service';
 })
 
 export class AnnouncementDetailComponent implements OnInit {
-
   announcement$: Observable<Announcement>;
   announcementKey: string;
 
