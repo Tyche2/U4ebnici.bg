@@ -11,11 +11,11 @@ import { Announcement } from '../shared/announcement.model';
   styleUrls: ['./latest-announcements.component.css']
 })
 export class LatestAnnouncementsComponent implements OnInit {
-  announcements: Observable<Announcement[]>;
+  announcements$: Observable<Announcement[]>;
 
   constructor(private announcementService: AnnouncementService) { }
 
   ngOnInit() {
-    this.announcements = this.announcementService.findAllAnnouncements();
+    this.announcements$ = this.announcementService.findLastestAnnouncements();
   }
 }

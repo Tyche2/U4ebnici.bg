@@ -1,12 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+
 import { Announcement } from './announcement.model';
+import { AuthService } from '../../auth/shared/auth.service';
+import { DataService } from '../../core/services/data.service';
 import { Message } from '../../messages/shared/message.model';
-import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
-import { Http } from '@angular/http';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseRef } from 'angularfire2';
-import { database } from 'firebase';
 import { UserService } from '../../users/shared/users.service';
 
 @Injectable()
@@ -14,18 +12,10 @@ export class AnnouncementService {
     sdkDb: any;
 
     constructor(
-        private db: AngularFireDatabase,
-        @Inject(FirebaseRef) fb,
-        private http: Http,
+        private authService: AuthService,
+        private db: DataService,
         private userService: UserService
-    ) {
-        this.sdkDb = fb.database().ref();
-    }
-
-    private findAnnouncmentsKeysByUserKey(userKey: string): Observable<string[]> {
-        return this.db.list(`announcementsPerUser/${userKey}`)
-            .map(keys => keys.map(keyObj => keyObj.$key));
-    }
+    ) { }
 
     private findAnnouncmentsByKeys(announcementsKeys$: Observable<string[]>): Observable<Announcement[]> {
         return announcementsKeys$
@@ -33,113 +23,99 @@ export class AnnouncementService {
             .flatMap(fbojs => Observable.combineLatest(fbojs));
     }
 
-// private findMessagesKeysPerAnnouncementKey(announcementKey: string,
-//                            query: FirebaseListFactoryOpts = {}): Observable<string[]> {
-//     return this.findAnnouncementByKey(announcementKey)
-//         .do(val => console.log('announcement', val))
-//         .filter(announcement => !!announcement)
-//         .switchMap(announcement => this.db.list(`messagesPerAnnouncement/${announcement.$key}`, query))
-//         .map( mspa => mspa.map(mpc => mpc.$key) );
-// }
-// 
-
-//   private findMessagesForMessageKeys(messageKeys$: Observable<string[]>): Observable<Message[]> {
-//       return messageKeys$
-//           .map(mspa => mspa.map(messageKey => this.db.object('messages/' + messageKey)) )
-//           .flatMap(fbojs => Observable.combineLatest(fbojs) );
-//
-//   }
-
-    private firebaseUpdate(dataToSave) {
-        const subject = new Subject();
-
-        this.sdkDb.update(dataToSave)
-            .then(
-                val => {
-                    subject.next(val);
-                    subject.complete();
-
-                },
-                err => {
-                    subject.error(err);
-                    subject.complete();
-                }
-            );
-
-        return subject.asObservable();
+    private findAnnouncmentsKeysByUserKey(userKey: string): Observable<string[]> {
+        return this.db.getCollection(`announcementsPerUser/${userKey}`)
+            .map(keys => keys.map(keyObj => keyObj.$key));
     }
 
-    createAnnouncement(announcement: Announcement): Observable<any> {
-        // Set user, added on and active
-        let firebase = require('firebase');
+    private saveAnnouncement(announcement: Announcement) {
+        let userUID = this.authService.userId;
         let currentdate = new Date().toString();
 
-        let userUID = firebase.auth().currentUser.uid;
         return this.userService.getUserByKey(userUID)
+            .first()
             .map(user => user.name)
             .map(username => {
                 announcement.userid = userUID;
                 announcement.username = username;
                 announcement.added = currentdate;
                 announcement.active = true;
-
-                return this.sdkDb
-                    .child('announcements')
-                    .push(announcement)
-                    .key;
             })
-            .map(newAnnouncementKey => {
-                let dataToSave = {};
-                dataToSave[`announcementsPerUser/${userUID}/${newAnnouncementKey}`] = true;
-                return this.firebaseUpdate(dataToSave);
-            });
+            .map(() => this.db.addItemToCollection('announcements', announcement))
+            .map(newAnnouncement => {
+                let newAnnouncementKey = newAnnouncement.key;
+                let annPerUser = {};
+                annPerUser[`${newAnnouncementKey}`] = true;
+
+                this.db.updateItemFromCollection('announcementsPerUser', userUID, annPerUser);
+            })
+            .toPromise();
+    }
+
+    private saveAnnouncementImage(image) {
+        return this.db.saveStorageItem(image.name, image)
+            .then(dbImage => dbImage.downloadURL);
+    }
+
+    createAnnouncement(announcement: Announcement, image: any): firebase.Promise<void> {
+        if (image) {
+            return this.saveAnnouncementImage(image)
+                .then(imageURL => announcement.image = imageURL)
+                .then(() => this.saveAnnouncement(announcement));
+        } else {
+            return this.saveAnnouncement(announcement);
+        }
+    }
+
+    updateAnnouncement(announcement: any, newData: any, newImage?: Object) {
+        if (newImage) {
+            return this.saveAnnouncementImage(newImage)
+                .then(imageURL => newData['image'] = imageURL)
+                .then(() => this.db.updateItem(announcement, newData));
+        } else {
+            delete newData.image;
+            return this.db.updateItem(announcement, newData);
+        }
+    };
+
+    findAnnouncementByKey(announcementKey: string): Observable<Announcement> {
+        return this.db.getItem(`announcements/${announcementKey}`)
+            .map(Announcement.fromJson);
     }
 
     findAllAnnouncements(): Observable<Announcement[]> {
-        return this.db.list('announcements')
+        return this.db.getCollection('announcements')
             .map(Announcement.fromJsonArray);
     }
 
-    findAnnouncementByKey(announcementKey: string): Observable<Announcement> {
-        return this.db.object(`announcements/${announcementKey}`).map(Announcement.fromJson);
+    findActiveAnnouncements() {
+        let query = {
+            orderByChild: 'active',
+            equalTo: true
+        };
+        return this.db.getCollection('announcements', { query })
+            .map(Announcement.fromJsonArray);
+    }
+
+    findLastestAnnouncements(count = 12) {
+        let query = {
+            limitToLast: count,
+            orderByChild: 'active',
+            equalTo: true,
+        };
+        return this.db.getCollection('announcements', { query })
+            .map(Announcement.fromJsonArray);
     }
 
     findAnnouncmentsByUserKey(userKey: string): Observable<Announcement[]> {
         return this.findAnnouncmentsByKeys(this.findAnnouncmentsKeysByUserKey(userKey));
     }
 
-    changeAnnouncementStatus(data: Announcement): Observable<any> {
-        let key = data.$key;
-        delete(data.$key);
-        let dataToSave = {};
-        dataToSave[`announcements/` + key] = data;
-        return this.firebaseUpdate(dataToSave);
+    activateAnnouncement(announcementKey: string): firebase.Promise<void> {
+        return this.db.updateItem(`announcements/${announcementKey}`, { active: true });
     }
 
-    updateAnnouncement(announcementKey: string, announcement) {
-        return new Promise((resolve, reject) => {
-            const announcementToUpdate = Object.assign({}, announcement);
-            this.findAnnouncementByKey(announcementKey)
-                .subscribe(currAnnouncement => {
-                    announcementToUpdate.added = currAnnouncement.added;
-                    announcementToUpdate.username = currAnnouncement.username;
-                    announcementToUpdate.image = announcementToUpdate.image || currAnnouncement.image;
-                    announcementToUpdate.active = currAnnouncement.active;
-                    announcementToUpdate.userid = currAnnouncement.userid;
-                    announcementToUpdate.condition = announcementToUpdate.condition || currAnnouncement.condition;
-
-                    let dataToSave = {};
-                    dataToSave[`announcements/${announcementKey}`] = announcementToUpdate;
-
-                    this.firebaseUpdate(dataToSave)
-                    .subscribe(() => resolve(announcementToUpdate),
-                                    err => reject(err));
-                });
-        });
+    unactivateAnnouncement(announcementKey: string): firebase.Promise<void> {
+        return this.db.updateItem(`announcements/${announcementKey}`, { active: false });
     }
-
-
-   // findAllMessagesForAnnouncement(announcementKey: string): Observable<Message[]> {
-   //     return this.findMessagesForMessageKeys(this.findMessagesKeysPerAnnouncementKey(announcementKey));
-   // }
 }

@@ -12,7 +12,7 @@ import { AnnouncementService } from '../shared/announcement.service';
 })
 
 export class FoundAnnouncementsListComponent implements OnInit {
-  announcements: Observable<Announcement[]>;
+  announcements$: Observable<Announcement[]>;
   searchText: string;
   searchClas: string;
   searchAuthor: string;
@@ -32,6 +32,6 @@ export class FoundAnnouncementsListComponent implements OnInit {
         this.searchAuthor = params['author'] || '';
       });
 
-    this.announcements = this.announcementService.findAllAnnouncements();
+    this.announcements$ = this.announcementService.findActiveAnnouncements();
   }
 }

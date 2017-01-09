@@ -3,7 +3,6 @@ import {
   OnInit,
   Input
 } from '@angular/core';
-
 import { Observable } from 'rxjs/Rx';
 
 import { Announcement } from '../announcement.model';
@@ -32,13 +31,13 @@ export class AnnouncementsListComponent implements OnInit {
   order: string;
   sortByField: string;
   page: number;
-  announcementType : string;
+  announcementType: string;
   announcementToUpdate: Announcement;
 
   constructor(private constantService: ConstantService,
-            private authService: AuthService,
-            private announcementService: AnnouncementService,
-            private alertService: AlertService) { }
+    private authService: AuthService,
+    private announcementService: AnnouncementService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.sortByOptions = [this.constantService.LAST_ADDED, this.constantService.ALPHABETIC_ORDER,
@@ -77,7 +76,7 @@ export class AnnouncementsListComponent implements OnInit {
     }
   }
 
-  onAnnouncementsTypeChange(e: any) {  
+  onAnnouncementsTypeChange(e: any) {
     if (e.target.getAttribute('isActive') === 'true') {
       this.isActive = true;
     } else {
@@ -92,44 +91,16 @@ export class AnnouncementsListComponent implements OnInit {
 
   get searchtext(): string { return this.searchText; }
 
-  unactivateAnnouncement(announcementKey: string) {
-    this.announcementService.findAnnouncementByKey(announcementKey)
-      .subscribe(obj => {
-        this.announcementToUpdate = Object.assign({}, obj);
-        this.announcementToUpdate.active = false;
-        //console.log(announcementToUpdate);
-         })        
-        this.announcementService.changeAnnouncementStatus(this.announcementToUpdate)
-          .subscribe(
-          () => {
-            this.alertService.success('Обявата е архивирана успешно', true);
-          },
-          err => this.alertService.error(`Грешка при архивиране на обява ${err}`)
-          );
-        // this.announcementService.changeAnnouncementStatus(announcementKey, false)
-        //   .then(() => {
-        //     this.alertService.success('Обявата е архивирана успешно');
-        //   })
-        //   .catch((err) => {
-        //     this.alertService.error(`Грешка при архивиране на обява ${err}`);
-        //   });
-      }
-  
+  onUnactivateAnnouncement(announcementKey: string) {
+    this.announcementService.unactivateAnnouncement(announcementKey)
+      .then(() => this.alertService.success('Обявата е архивирана успешно', true))
+      .catch(err => this.alertService.error(`Грешка при архивиране на обява ${err}`));
+  }
 
-  activateAnnouncement(announcementKey: string) {
-    this.announcementService.findAnnouncementByKey(announcementKey)
-      .subscribe(obj => {
-        this.announcementToUpdate = Object.assign({}, obj);
-        this.announcementToUpdate.active = true;  
-       // console.log(this.announcementToUpdate);  
-      })
-        this.announcementService.changeAnnouncementStatus(this.announcementToUpdate)
-          .subscribe(
-          () => {
-            this.alertService.success('Обявата е активирана успешно', true);    
-          },
-          err => this.alertService.error(`Грешка при активиране на обява ${err}`)
-          );
-          
+
+  onActivateAnnouncement(announcementKey: string) {
+    this.announcementService.activateAnnouncement(announcementKey)
+      .then(() => this.alertService.success('Обявата е активирана успешно', true))
+      .catch(err => this.alertService.error(`Грешка при активиране на обява ${err}`));
   }
 }

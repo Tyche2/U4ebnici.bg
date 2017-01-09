@@ -24,8 +24,8 @@
     </div>
     <div *ngIf="!isFiltred">
         <div class="row" *ngIf="isAuth()">
-            <button [class.selected]="announcementType === 'active'"  (click)="onAnnouncementsTypeChange($event)" isActive="true" data="active">Активни</button>
-            <button [class.selected]="announcementType === 'arhiv'"  (click)="onAnnouncementsTypeChange($event)" isActive="false" data="arhiv">Архивирани</button>
+            <button [class.selected]="announcementType === 'active'" (click)="onAnnouncementsTypeChange($event)" isActive="true" data="active">Активни</button>
+            <button [class.selected]="announcementType === 'arhiv'" (click)="onAnnouncementsTypeChange($event)" isActive="false" data="arhiv">Архивирани</button>
         </div>
         <div class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | showActive: isActive | sort: sortByKey)">
             <div class="col-md-1">
@@ -39,10 +39,10 @@
             </div>
             <div class="col-md-1" *ngIf="isAuth() && isActive">
                 <p><a [routerLink]="['/announcement/edit', ad.$key]">Редактирай</a></p>
-                <p><a (click)="unactivateAnnouncement(ad.$key)" style="cursor: pointer;">Архивирай</a></p>
+                <p><a (click)="onUnactivateAnnouncement(ad.$key)" style="cursor: pointer;">Архивирай</a></p>
             </div>
             <div class="col-md-1" *ngIf="isAuth() && !isActive">
-                <p><a (click)="activateAnnouncement(ad.$key)" style="cursor: pointer;">Активирай</a></p>
+                <p><a (click)="onActivateAnnouncement(ad.$key)" style="cursor: pointer;">Активирай</a></p>
             </div>
         </div>
     </div>
@@ -51,8 +51,7 @@
             <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true">
             </pagination-controls>
         </div>
-        <div appMarkReviewedAnnouncement class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | showActive: true | filterBy: searchText:searchClas:searchAuthor | sort: sortByKey | paginate: {itemsPerPage: 5, currentPage:page, id: '1'})"
-            [attr.data-id]="ad.$key">
+        <div appMarkReviewedAnnouncement class="container bordercontainer col-md-11" *ngFor="let ad of (announcements | async | filterBy: searchText:searchClas:searchAuthor | sort: sortByKey | paginate: {itemsPerPage: 5, currentPage:page, id: '1'})" [attr.data-id]="ad.$key">
             <span class="reviewed-announcement-span hidden"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></span>
             <div class="col-md-1">
                 <img src="{{ad.image}}" alt="{{ad.title}}">

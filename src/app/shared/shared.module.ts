@@ -4,7 +4,6 @@ import {
     GetUserPipe,
     SortPipe,
     ToBGNMoneyPipe,
-    TopPipe,
     AnnouncementFilterByPipe,
     MessageFilterPipe,
     AnnouncementFilterByStatusPipe
@@ -16,7 +15,6 @@ import { ImageBorderDirective, MarkReviewedAnnouncementDirective } from './direc
         GetUserPipe,
         SortPipe,
         ToBGNMoneyPipe,
-        TopPipe,
         AnnouncementFilterByPipe,
         MessageFilterPipe,
         AnnouncementFilterByStatusPipe,
@@ -27,7 +25,6 @@ import { ImageBorderDirective, MarkReviewedAnnouncementDirective } from './direc
         GetUserPipe,
         SortPipe,
         ToBGNMoneyPipe,
-        TopPipe,
         AnnouncementFilterByPipe,
         MessageFilterPipe,
         AnnouncementFilterByStatusPipe,

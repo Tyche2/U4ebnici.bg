@@ -42,33 +42,9 @@ export class EditAnnouncementComponent implements OnInit {
   }
 
   onUpdateAnnouncement() {
-    if (this.selectedFile) {
-      let firebase = require('firebase');
-
-      // Create a root reference
-      let storageRef = firebase.storage().ref();
-
-      // Create a reference to image name
-      let imageRef = storageRef.child(this.selectedFile.name);
-
-      imageRef.put(this.selectedFile)
-        .then(snapshot => {
-          this.myDBForm.value.image = snapshot.downloadURL;
-          this.announcementService.updateAnnouncement(this.announcementKey, this.myDBForm.value)
-            .then(
-            () => {
-              this.alertService.success('Обявата е редактирана', true);
-            })
-            .catch((err) => this.alertService.error(`Грешка при редакция на обява ${err}`));
-        });
-    } else {
-      this.announcementService.updateAnnouncement(this.announcementKey, this.myDBForm.value)
-        .then(
-        () => {
-          this.alertService.success('Обявата е редактирана', true);
-        })
-        .catch((err) => this.alertService.error(`Грешка при редакция на обява ${err}`));
-    }
+    this.announcementService.updateAnnouncement(this.announcement$, this.myDBForm.value, this.selectedFile)
+      .then(() => this.alertService.success('Обявата е редактирана', true))
+      .catch(err => this.alertService.error(`Грешка при редакция на обява ${err}`));
   }
 
   onConditionChange(e: any) {

@@ -1,22 +1,6 @@
 import { Observable } from 'rxjs/Rx';
 
 export class Announcement {
-    constructor(
-        public $key: string,
-        public active: boolean,
-        public added: string,
-        public authors: string,
-        public clas: string,
-        public condition: string,
-        public description: string,
-        public discipline: string,
-        public image: string,
-        public price: number,
-        public publisher: string,
-        public title: string,
-        public username: string,
-        public userid: string,
-        public year: number) { }
 
     static fromJsonList(array): Announcement[] {
         return array.map(Announcement.fromJson);
@@ -45,4 +29,21 @@ export class Announcement {
             userid,
             year);
     }
+
+    constructor(
+        public $key: string,
+        public active: boolean,
+        public added: string,
+        public authors: string,
+        public clas: string,
+        public condition: string,
+        public description: string,
+        public discipline: string,
+        public image: string,
+        public price: number,
+        public publisher: string,
+        public title: string,
+        public username: string,
+        public userid: string,
+        public year: number) { }
 }

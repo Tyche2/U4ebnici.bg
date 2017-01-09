@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AlertService } from '../../core/alert/alert.service';
 import { AnnouncementService } from '../shared/announcement.service';
@@ -18,7 +19,8 @@ export class NewAnnouncementComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private announcementService: AnnouncementService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private router: Router) { }
 
   ngOnInit() {
     this.myDBForm = this.fb.group({
@@ -43,36 +45,13 @@ export class NewAnnouncementComponent implements OnInit {
     this.selectedFile = e.target.files[0];
   }
 
-  CreateAnnouncement() {
-    if (this.selectedFile) {
-      let firebase = require('firebase');
-
-      // Create a root reference
-      let storageRef = firebase.storage().ref();
-
-      // Create a reference to image name
-      let imageRef = storageRef.child(this.selectedFile.name);
-
-      imageRef.put(this.selectedFile)
-        .then(snapshot => {
-          this.myDBForm.value.image = snapshot.downloadURL;
-          this.announcementService.createAnnouncement(this.myDBForm.value)
-            .subscribe(() => {
-              this.alertService.success('Обявата е записана', true);
-              this.myDBForm.reset();
-            },
-            err => this.alertService.error(`Грешка при запис на обява ${err}`)
-            );
-        });
-    } else {
-      this.announcementService.createAnnouncement(this.myDBForm.value)
-        .subscribe(() => {
-          this.alertService.success('Обявата е записана', true);
-          this.myDBForm.reset();
-        },
-        err => this.alertService.error(`Грешка при запис на обява ${err}`)
-        );
-    }
+  onCreateAnnouncement() {
+    this.announcementService.createAnnouncement(this.myDBForm.value, this.selectedFile)
+      .then(() => {
+        this.alertService.success('Обявата е записана', true);
+        this.router.navigate(['home']);
+      })
+      .catch(err => this.alertService.error(`Грешка при запис на обява ${err}`));
   }
 }
 
