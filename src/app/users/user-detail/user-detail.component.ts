@@ -55,17 +55,12 @@ export class UserDetailComponent implements OnInit {
 
   onSent() {
     this.userUID = firebase.auth().currentUser.uid;
-    let currentdate = new Date();
-    let datetime = currentdate.getDate() + '/'
-      + (currentdate.getMonth() + 1) + '/'
-      + currentdate.getFullYear() + ' @ '
-      + currentdate.getHours() + ':'
-      + currentdate.getMinutes() + ':'
-      + currentdate.getSeconds();
+    let currentdate = new Date().toString();
+
     this.myMessageForm.patchValue({ fromuserid: this.userUID });
     this.myMessageForm.patchValue({ answered: false });
     this.myMessageForm.patchValue({ read: false });
-    this.myMessageForm.patchValue({ sent: datetime });
+    this.myMessageForm.patchValue({ sent: currentdate });
 
     this.messagesService.createNewMessage(this.myMessageForm.value)
       .then(() => this.alertService.success('Съобщението е изпратено', true))

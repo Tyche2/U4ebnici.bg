@@ -72,13 +72,7 @@ export class AnnouncementService {
     createAnnouncement(announcement: Announcement): Observable<any> {
         // Set user, added on and active
         let firebase = require('firebase');
-        let currentdate = new Date();
-        let datetime = currentdate.getDate() + '/'
-                + (currentdate.getMonth() + 1) + '/'
-                + currentdate.getFullYear() + ' @ '
-                + currentdate.getHours() + ':'
-                + currentdate.getMinutes() + ':'
-                + currentdate.getSeconds();
+        let currentdate = new Date().toString();
 
         let userUID = firebase.auth().currentUser.uid;
         return this.userService.getUserByKey(userUID)
@@ -86,7 +80,7 @@ export class AnnouncementService {
             .map(username => {
                 announcement.userid = userUID;
                 announcement.username = username;
-                announcement.added = datetime;
+                announcement.added = currentdate;
                 announcement.active = true;
 
                 return this.sdkDb
