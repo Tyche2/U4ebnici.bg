@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { Observable } from 'rxjs/Rx';
 
 import { AlertService } from '../../core/alert/alert.service';
-import { AnnouncementService } from '../shared/announcement.service';
 import { Announcement } from '../shared/announcement.model';
+import { AnnouncementService } from '../shared/announcement.service';
 
 @Component({
   selector: 'app-edit-announcement',
@@ -29,47 +28,23 @@ export class EditAnnouncementComponent implements OnInit {
     this.announcementKey = this.route.snapshot.params['id'];
     this.announcement$ = this.announcementService.findAnnouncementByKey(this.announcementKey);
     this.myDBForm = this.fb.group({
-            title: ['', Validators.required],
-            discipline: ['', Validators.required],
-            clas: ['', Validators.required],
-            image: '',
-            publisher: '',
-            authors: ['', Validators.required],
-            year: '',
-            description: '',
-            condition: '',
-            price: [0, Validators.required]
-        });
+      title: ['', Validators.required],
+      discipline: ['', Validators.required],
+      clas: ['', Validators.required],
+      image: '',
+      publisher: '',
+      authors: ['', Validators.required],
+      year: '',
+      description: '',
+      condition: '',
+      price: [0, Validators.required]
+    });
   }
 
-  UpdateAnnouncement() {
-    if (this.selectedFile) {
-      let firebase = require('firebase');
-
-      // Create a root reference
-      let storageRef = firebase.storage().ref();
-
-      // Create a reference to image name
-      let imageRef = storageRef.child(this.selectedFile.name);
-
-      imageRef.put(this.selectedFile)
-        .then(snapshot => {
-            this.myDBForm.value.image = snapshot.downloadURL;
-            this.announcementService.updateAnnouncement(this.announcementKey, this.myDBForm.value)
-            .then(
-                () => {
-                    this.alertService.success('Обявата е редактирана', true);
-            })
-            .catch((err) => this.alertService.error(`Грешка при редакция на обява ${err}`));
-          });
-    } else {
-        this.announcementService.updateAnnouncement(this.announcementKey, this.myDBForm.value)
-            .then(
-                () => {
-                    this.alertService.success('Обявата е редактирана', true);
-            })
-            .catch((err) => this.alertService.error(`Грешка при редакция на обява ${err}`));
-    }
+  onUpdateAnnouncement() {
+    this.announcementService.updateAnnouncement(this.announcement$, this.myDBForm.value, this.selectedFile)
+      .then(() => this.alertService.success('Обявата е редактирана', true))
+      .catch(err => this.alertService.error(`Грешка при редакция на обява ${err}`));
   }
 
   onConditionChange(e: any) {

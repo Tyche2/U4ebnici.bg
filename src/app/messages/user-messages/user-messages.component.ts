@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AuthService } from './../../core/auth/services/auth.service';
+import { AuthService } from '../../auth/shared/auth.service';
 import { MessagesService } from './../shared/messages.service';
 import { Message } from '../shared/message.model';
 
@@ -20,13 +20,9 @@ export class UserMessagesComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  isAuthUid() {
-    return this.authService.id;
-  }
-
   ngOnInit() {
     this.messagesType = 'received';
-    let userUID = this.authService.id;
+    let userUID = this.authService.userId;
 
     this.messages = this.messagesService.findMessagesByUserKey(userUID);
     this.user = userUID;

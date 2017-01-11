@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,15 +6,12 @@ import { Router } from '@angular/router';
   templateUrl: './search-announcements.component.html',
   styleUrls: ['./search-announcements.component.css']
 })
-export class SearchAnnouncementsComponent implements OnInit {
+export class SearchAnnouncementsComponent {
   searchText: string;
   searchClas: string;
   searchAuthor: string;
 
   constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
 
   onInput(e: any) {
     if (e.target.name === 'title') {

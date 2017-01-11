@@ -4,33 +4,32 @@ import {
     GetUserPipe,
     SortPipe,
     ToBGNMoneyPipe,
-    TopPipe,
     AnnouncementFilterByPipe,
     MessageFilterPipe,
     AnnouncementFilterByStatusPipe
 } from './pipes';
-import { MarkReviewedAnnouncementDirective } from './directives/mark-reviewed-announcement.directive';
+import { ImageBorderDirective, MarkReviewedAnnouncementDirective } from './directives';
 
 @NgModule({
     declarations: [
         GetUserPipe,
         SortPipe,
         ToBGNMoneyPipe,
-        TopPipe,
         AnnouncementFilterByPipe,
         MessageFilterPipe,
         AnnouncementFilterByStatusPipe,
+        ImageBorderDirective,
         MarkReviewedAnnouncementDirective
     ],
     exports: [
         GetUserPipe,
         SortPipe,
         ToBGNMoneyPipe,
-        TopPipe,
         AnnouncementFilterByPipe,
         MessageFilterPipe,
         AnnouncementFilterByStatusPipe,
-        MarkReviewedAnnouncementDirective
+        MarkReviewedAnnouncementDirective,
+        ImageBorderDirective
     ]
 })
 export class SharedModule { }

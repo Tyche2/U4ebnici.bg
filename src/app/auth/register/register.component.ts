@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { database } from 'firebase';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AlertService } from '../../core/alert/alert.service';
-import { AuthService } from '../../core/auth/services/auth.service';
+import { AuthService } from '../shared/auth.service';
 import { UserService } from '../../users/shared/users.service';
 
 @Component({
@@ -19,25 +18,13 @@ export class RegisterComponent implements OnInit {
     error = false;
     errorMessage = '';
 
-    constructor(private fb: FormBuilder,
+    constructor(
+        private fb: FormBuilder,
         private authService: AuthService,
         private userService: UserService,
         private alertService: AlertService,
-        private router: Router) { }
-
-    onSignup() {
-        this.authService.signupUser(this.myForm.value)
-        this.authService.userData$.subscribe((val) => {
-            if (val !== undefined) {
-                this.myDBForm.patchValue({
-                    uid: val.uid
-                });
-                this.userService.createNewUser(this.myDBForm.value);
-            }
-        });
-        this.alertService.success('Регистрацията е успешна', true);
-        this.router.navigate(['/login']);
-    }
+        private router: Router
+    ) { }
 
     ngOnInit(): any {
         this.myForm = this.fb.group({
@@ -59,7 +46,21 @@ export class RegisterComponent implements OnInit {
             dbemail: '',
             uid: ''
         });
+    }
 
+    onSignUp() {
+        this.authService.signUpUser(this.myForm.value)
+            .then(data => {
+                this.myDBForm.patchValue({ uid: data.uid });
+                this.userService.createNewUser(this.myDBForm.value);
+            })
+            .then(() => {
+                this.alertService.success('Регистрацията е успешна', true);
+                setTimeout(() => this.router.navigate(['/home']), 2000);
+            })
+            .catch(err => {
+                this.alertService.error(err.toString());
+            });
     }
 
     isEmail(control: FormControl): { [s: string]: boolean } {

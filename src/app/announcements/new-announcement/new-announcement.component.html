@@ -5,7 +5,7 @@
     </div>
 </div>
 <div class="center col-md-6">
-    <form class="form-horizontal" #announcementForm="ngForm" (ngSubmit)="CreateAnnouncement()">
+    <form class="form-horizontal" #announcementForm="ngForm" (ngSubmit)="onCreateAnnouncement()">
         <form [formGroup]="myDBForm">
             <div class="form-group">
                 <label for="title">Заглавие</label>

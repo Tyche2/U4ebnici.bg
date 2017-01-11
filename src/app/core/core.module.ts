@@ -1,19 +1,21 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { AuthGuard } from './auth/guards/auth.guard';
-import { AuthService } from './auth/services/auth.service';
+import { AuthGuard } from '../auth/shared/auth.guard';
+import { AuthService } from '../auth/shared/auth.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
-import { ConstantService } from './constant.service';
-import { FooterComponent } from './footer/footer.component';
-import { LocalStorageService } from './local-storage.service';
-import { NavbarComponent } from './navbar/navbar.component';
-import { throwIfAlreadyLoaded } from './module-import-guard';
 import { ContactComponent } from './contact/contact.component';
+import { ConstantService } from './services/constant.service';
+import { DataService } from './services/data.service';
+import { FooterComponent } from './footer/footer.component';
+import { LocalStorageService } from './services/local-storage.service';
+import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from './../shared/shared.module';
+import { throwIfAlreadyLoaded } from './module-import-guard';
+import { UserService } from '../users/shared/users.service';
 
 @NgModule({
     imports: [
@@ -40,7 +42,9 @@ import { SharedModule } from './../shared/shared.module';
         AuthService,
         AlertService,
         ConstantService,
-        LocalStorageService
+        DataService,
+        LocalStorageService,
+        UserService
     ]
 })
 export class CoreModule {

@@ -23,7 +23,7 @@
                         <li><a routerLink=""><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Доставка</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a [routerLink]="['/user/details/settings', isAuthUid()]"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Настройки</a></li>
-                        <li><a (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Изход</a></li>
+                        <li><a class="logout" (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Изход</a></li>
                     </ul>
                 </li>
                 <li *ngIf="isAuth()">

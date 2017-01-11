@@ -7,3 +7,15 @@ img {
     padding-top: 10px;
     border-bottom: solid 1px lightgray;
 }
+
+button {
+    margin-right: 20px;
+    width: 170px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.selected {
+    background-color: #5e5b5b;
+    color: #FFFFFF
+}

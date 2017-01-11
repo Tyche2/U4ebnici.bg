@@ -5,21 +5,21 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../services/auth.service';
+import { AngularFireAuth, FirebaseAuthState } from 'angularfire2';
 
 
 @Injectable()
 // The auth guard is used to prevent unauthenticated users from accessing restricted routes
 export class AuthGuard implements CanActivate {
-    constructor(private authService: AuthService, private router: Router) { }
+  constructor(private auth: AngularFireAuth, private router: Router) { }
 
-     canActivate(): Observable<boolean> {
-    return this.authService.auth
+  canActivate(): Observable<boolean> {
+    return this.auth
       .take(1)
-      .map(authState => !!authState)
+      .map((authState: FirebaseAuthState) => !!authState)
       .do(authenticated => {
         if (!authenticated) {
-          this.router.navigate(['/user/login']);
+          this.router.navigate(['login']);
         }
       });
   }

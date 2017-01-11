@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { AngularFireModule } from 'angularfire2';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -12,11 +12,9 @@ import { CoreModule } from './core/core.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
 import { AuthModule } from './auth/auth.module';
 import { firebaseConfig, authConfig } from './environments/firebase.config';
-import { AngularFireModule } from 'angularfire2/index';
 import { AppRoutingModule } from './app-routing.module';
 import { MessagesModule } from './messages/messages.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserService } from './users/shared/users.service';
 import { UsersModule } from './users/users.module';
 
 
@@ -28,12 +26,10 @@ import { UsersModule } from './users/users.module';
     MessagesModule,
     BrowserModule,
     CoreModule,
-    HttpModule,
     AppRoutingModule,
     UsersModule,
     AngularFireModule.initializeApp(firebaseConfig, authConfig)
   ],
-  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AlertService } from '../../core/alert/alert.service';
 import { Message } from '../../messages/shared/message.model';
 import { MessagesService } from '../../messages/shared/messages.service';
-import { AuthService } from '../../core/auth/services/auth.service';
+import { AuthService } from '../../auth/shared/auth.service';
 
 @Component({
   selector: 'app-message-answer',
@@ -44,29 +44,20 @@ export class MessageAnswerComponent implements OnInit {
   }
 
   onSent() {
-    this.userUID = this.authService.id;
-    let currentdate = new Date();
-    let datetime = currentdate.getDate() + '/'
-                + (currentdate.getMonth() + 1) + '/'
-                + currentdate.getFullYear() + ' @ '
-                + currentdate.getHours() + ':'
-                + currentdate.getMinutes() + ':'
-                + currentdate.getSeconds();
-    this.myMessageForm.patchValue({fromuserid: this.userUID});
-    this.myMessageForm.patchValue({touserid: this.toUserID});
-    this.myMessageForm.patchValue({answered: false});
-    this.myMessageForm.patchValue({read: false});
-    this.myMessageForm.patchValue({sent: datetime});
-    this.myMessageForm.patchValue({announcementid: this.announcementKey});
+    this.userUID = this.authService.userId;
+    let currentdate = new Date().toString();
+    this.myMessageForm.patchValue({ fromuserid: this.userUID });
+    this.myMessageForm.patchValue({ touserid: this.toUserID });
+    this.myMessageForm.patchValue({ answered: false });
+    this.myMessageForm.patchValue({ read: false });
+    this.myMessageForm.patchValue({ sent: currentdate });
+    this.myMessageForm.patchValue({ announcementid: this.announcementKey });
 
     this.messagesService.createNewMessage(this.myMessageForm.value)
-    .subscribe(
-              () => {
-                  this.alertService.success('Съобщението е изпратено', true);
-              },
-              err => {
-                  this.alertService.error(`Грешка при изпращане на съобщение ${err}`);
-                }
-          );
+      .then(() => {
+        this.alertService.success('Съобщението е изпратено', true);
+        this.router.navigate(['messages', 'user']);
+      })
+      .catch(err => this.alertService.error(`Грешка при изпращане на съобщение ${err}`));
   }
 }
