@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth, FirebaseAuthState } from 'angularfire2';
+import { AngularFireAuth, AuthMethods, AuthProviders, FirebaseAuthState } from 'angularfire2';
 
 import { AuthUser } from './authUser.model';
 
@@ -27,6 +27,13 @@ export class AuthService {
 
   signInUser(user: AuthUser): firebase.Promise<FirebaseAuthState> {
     return this.firebaseAuth.login({ email: user.email, password: user.password });
+  }
+
+  signInWithFacebook(): firebase.Promise<FirebaseAuthState> {
+    return this.firebaseAuth.login({
+      provider: AuthProviders.Facebook,
+      method: AuthMethods.Popup
+    });
   }
 
   logout(): void {
